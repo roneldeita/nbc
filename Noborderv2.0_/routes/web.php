@@ -13,6 +13,16 @@
 
 Auth::routes();
 
+Route::get('/connection_opt', function () {
+   $url = parse_url(getenv("DATABASE_URL"));
+
+   $host = $url["host"];
+   $username = $url["user"];
+   $password = $url["pass"];
+   $database = substr($url["path"], 1);
+   return json_encode(array("host" => $host, "username" => $username, "password" => $password, "database" => $database));
+});
+
 Route::get('/home', function () {
     return redirect('/');
 });
