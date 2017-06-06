@@ -118,7 +118,7 @@
             "progressBar": true,
         };
 
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('http://noborderbclubnode.herokuapp.com');
 
         socket.on('new contract', function (details) {
             if (details.clientId == "{{Auth::user()->id}}") {

@@ -110,7 +110,7 @@
 
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
     <script >
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('http://noborderbclubnode.herokuapp.com/');
 
         toastr.options = {
             "timeOut": "5000",

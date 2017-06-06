@@ -109,7 +109,7 @@
     <script src="{{asset('js/footable.all.min.js')}}"></script>
 
     <script type="text/javascript">
-    var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://noborderbclubnode.herokuapp.com/');
     toastr.options = {
         "timeOut": "5000",
         "positionClass" : "toast-top-right",
