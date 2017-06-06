@@ -37,7 +37,7 @@ return [
     'facebook' => [
         'client_id' => '1811487592512782',
         'client_secret' => '2d12823f36c11b06aa57d49da28889a3',
-        'redirect' => 'http://localhost:8000/socialite/callback',
+        'redirect' => 'http://noborderclub.herokuapp.com/socialite/callback',
     ]
 
 ];
