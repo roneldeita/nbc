@@ -13,7 +13,7 @@
 
 			<h2>
 				<div class="project-img background-primary-nbc">
-					P
+					{{$project->name[0]}}
 				</div>
 				<span style="color:#fff">{{$project->name}}</span>
 			</h2>

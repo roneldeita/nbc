@@ -71,7 +71,7 @@
 	                            <p>Budget : $ {{$budget->budget}}</p>
 	                        </td>
 	                        <td>
-	                            <a href="{{url('/worker/works/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-primary-nbc btn-md">View</a>
+	                            <a href="{{url('/worker/works/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
 	                        </td>
 	                    </tr>
 						@endforeach

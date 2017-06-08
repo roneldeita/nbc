@@ -33,7 +33,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-info btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                        <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -66,7 +66,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/coordinator/projects/pre_screening/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-info btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                        <a href="{{url('/coordinator/projects/pre_screening/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -99,7 +99,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/coordinator/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-info btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                        <a href="{{url('/coordinator/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -132,7 +132,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/coordinator/projects/in_progress/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-info btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                        <a href="{{url('/coordinator/projects/in_progress/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -164,7 +164,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/coordinator/projects/closed/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-info btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                        <a href="{{url('/coordinator/projects/closed/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -197,7 +197,7 @@
         if (details.coordinator_id == {{Auth::user()->id}}) {
             var id = $('#publishedTable tbody tr').length + 1;
             var url = window.location+'/'+hashed;
-            $('#publishedTable tbody').append('<tr><td>'+id+'</td><td>'+details.name+'</td><td>'+client.name+'</td><td>--</td><td><a href="'+url+'" class="btn btn-info btn-sm"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i> View </a></td></tr>');
+            $('#publishedTable tbody').append('<tr><td>'+id+'</td><td>'+details.name+'</td><td>'+client.name+'</td><td>--</td><td><a href="'+url+'" class="btn btn-secondary-nbc btn-sm"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i> View </a></td></tr>');
         }
     });
 

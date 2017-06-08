@@ -53,7 +53,9 @@ class HMessage
 			select max(a.created_at) as date, max(a.id) as id, projects.name,
 			(select message from messages where created_at = max(a.created_at)) message,
 			(select seen from messages where created_at = max(a.created_at)) seen,
-			(select messages.from from messages where created_at = max(a.created_at)) as sender
+			(select messages.from from messages where created_at = max(a.created_at)) as sender,
+			(select messages.project_id from messages where created_at = max(a.created_at)) as project_id,
+			(select messages.type from messages where created_at = max(a.created_at)) as type
 			from messages a join projects ON projects.id = a.project_id
 			WHERE a.from != 2
 			group by projects.name
@@ -65,7 +67,7 @@ class HMessage
 	}
 
 	public function ProjectChat ($project_id, $status) {
-		$messages = Message::where('to', Auth::user()->id)->where('project_id', $project_id)->where('type', $status)->get();
+		$messages = Message::where('to', Auth::user()->id)->where('project_id', $project_id)->get();
 		return $messages;
 	}
 }

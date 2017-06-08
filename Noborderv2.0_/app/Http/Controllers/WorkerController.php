@@ -12,6 +12,8 @@ use App\WorkerSkill;
 use App\WorkerPersonal;
 use App\WorkerEducation;
 use App\WorkerExperience;
+use App\DeliverableContent;
+use App\DeliverableComment;
 
 
 use Illuminate\Http\Request;
@@ -112,29 +114,14 @@ class WorkerController extends Controller
 
             $proposal = Proposal::where('project_id', $projectId)->where('worker_id', $request->user()->id)->first();
             if (count($proposal)) {
-                return view('/worker/projects/proposal/index');
+                return view('/worker/projects/proposal/index')->with('proposal', $proposal);
             }
             return 'Invalid id';
         }
-        // if ($proj["_status"] == 'contract_signing' && $status == 'contract_signing') {
-        //     // fck shit
-        //     // $data = Project::join('contracts', 'contracts.project_id', '=', 'projects.id')
-        //     //             ->where('contracts.worker_id', $request->user()->id)
-        //     //             ->where('projects.status', 4)
-        //     //             ->select('projects.name', DB::raw('contracts.name as contracts_name'), DB::raw('contracts.id as contracts_id'),'contracts.worker_approved', 'contracts.client_approved')
-        //     //             ->get();
-        //
-        //     $data = Project::join('contracts', 'contracts.project_id', '=', 'projects.id')
-        //                 ->where('contracts.worker_id', $request->user()->id)
-        //                 ->where('projects.status', 4)
-        //                 ->where('projects.id', $projectId)
-        //                 ->with('client')
-        //                 ->select('projects.*', DB::raw('contracts.name as contracts_name'), DB::raw('contracts.id as contracts_id'),
-        //                  'contracts.cost', 'contracts.days', 'contracts.worker_approved', 'contracts.client_approved')
-        //                 ->first();
-        //     //return $contracts;
-        //     return view('/worker/projects/contract/view')->with('data', $data);
-        // }
+        if ($proj['_status'] == 'in_progress') {
+            $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
+            return view('/worker/projects/progress/index')->with('project', $projectWithContractDetails);
+        }
 
         if ($proj['_status'] != $status) {
             return 'Invalid Id';
@@ -158,7 +145,7 @@ class WorkerController extends Controller
         if ($contract) {
             $contract->worker_approved = 1;
             $contract->save();
-            
+
             $container = array();
             $container['type'] = 4;
             $container['to'] = $contract->client_id;
@@ -179,8 +166,23 @@ class WorkerController extends Controller
         }
     }
 
+    public function SaveDeliverableContent (Request $request) {
+        // if ($request->get('')) {
+        //
+        // }
+        
+        $comment = new DeliverableContent;
+        $comment->deliverable_id = $request->get('deliverable_id');
+        $comment->content = $request->get('content');
+        $comment->save();
+    }
 
-    public function SaveFileDeliverable (Request $request) {
+    public function SaveDeliverableComment (Request $request) {
+        $comment = new DeliverableComment;
+        $comment->user_id = $request->user()->id;
+        $comment->deliverable_id = $request->get('deliverable_id');
+        $comment->content = $request->get('content');
+        $comment->save();
 
     }
 
@@ -225,7 +227,7 @@ class WorkerController extends Controller
                 $worker_experience->position = $experience[$i]["position"];
                 $worker_experience->from = $experience[$i]["from"];
                 $worker_experience->to = $experience[$i]["to"];
-                $worker_experience->description = $experience[$i]["additional"];
+                $worker_experience->description = array_key_exist($experience[$i]["additional"], $experience[$i]) == true ? $experience[$i]["additional"] : "";
                 $worker_experience->save();
             }
         }
@@ -246,7 +248,7 @@ class WorkerController extends Controller
                 $worker_education->school = $education[$i]["institute"];
                 $worker_education->from = $education[$i]["from"];
                 $worker_education->to = $education[$i]["to"];
-                $worker_education->description = $education[$i]["additional"];
+                    $worker_education->description = array_key_exists($education[$i]["additional"], $education[$i]) == true ? $education[$i]["additional"] : "";
                 $worker_education->save();
             }
         }

@@ -7,11 +7,14 @@ use Braintree_Transaction;
 use DB;
 
 use App\Contract;
+use App\Deliverable;
 use App\Project;
 use App\Proposal;
 use App\Rate;
 use App\SkillCategory;
 use App\User;
+use App\DeliverableContent;
+use App\DeliverableComment;
 
 use Illuminate\Http\Request;
 use Facades\App\Services\Notifications;
@@ -51,6 +54,11 @@ class ClientController extends Controller
                 $project = Project::find($projectId);
                 if (HClient::identifyStatus($project->status) != $status) {
                     return view('client/projects/invalid');
+                }
+
+                if (HClient::identifyStatus($project->status) == 'in_progress') {
+                    $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
+                    return view('client/projects/progress/view')->with('project', $projectWithContractDetails);
                 }
                 // if ($status == "contract_signing") {
                 //     return view(HClient::viewProject($project->status))->with('project', $project)->with('applicants', $applicants);
@@ -165,4 +173,26 @@ class ClientController extends Controller
     public function testing () {
         return HMessage::All();
     }
+
+    public function SaveDeliverableContent (Request $request) {
+        // if ($request->get('')) {
+        //
+        // }
+    }
+
+    public function SaveDeliverableComment (Request $request) {
+        $comment = new DeliverableComment;
+        $comment->user_id = $request->user()->id;
+        $comment->deliverable_id = $request->get('deliverable_id');
+        $comment->content = $request->get('content');
+        $comment->save();
+
+    }
+
+    public function SaveDeliverableStatus (Request $request) {
+        $deliverable = Deliverable::find($request->get('deliverable_id'));
+        $deliverable->status = 1;
+        $deliverable->save();
+    }
+
 }

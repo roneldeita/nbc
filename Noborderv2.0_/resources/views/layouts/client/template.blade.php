@@ -7,9 +7,9 @@
 
     <!-- CSRF Token -->
     <meta id="token" name="csrf-token" value="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{asset('images/fav.png')}}"/>
 
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>NoBorderClub</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -54,9 +54,9 @@
                         &nbsp;
                     </ul>
 
-                    @if (Auth::user()->verification !== null && Auth::user()->verified === 1)
+                    @if (Auth::user()->verification != null && Auth::user()->verified == 1)
                         @include('layouts/client/include/navigation')
-                    @elseif (Auth::user()->password === null && count(Auth::user()->socialAcc->id))
+                    @elseif (Auth::user()->password == null && count(Auth::user()->socialAcc->id))
                         @include('layouts/client/include/navigation')
                     @else
                     @endif
@@ -74,11 +74,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{ url('/client/profile') }}">
                                             Profile
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -103,7 +103,7 @@
 
     <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js""></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-
+    <script type="text/javascript" src="{{asset('js/cons.js')}}"></script>
     <script src="{{asset('temp/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('temp/bootstrap.min.js')}}"></script>
     <script src="{{asset('js/footable.all.min.js')}}"></script>
@@ -118,7 +118,7 @@
             "progressBar": true,
         };
 
-        var socket = io.connect('http://noborderbclubnode.herokuapp.com');
+        var socket = io.connect(LOCALPORT);
 
         socket.on('new contract', function (details) {
             if (details.clientId == "{{Auth::user()->id}}") {

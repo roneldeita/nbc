@@ -10,24 +10,20 @@
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
                 <li >
-                    @if ($notification->type == 1)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
-                        <strong>New Project </strong>: {{json_decode($notification->content)->name}}
-                    </a>
-                    @elseif ($notification->type == 2)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
+                    @if ($notification->type == 2)
+                    <a href="{{url('/client/projects/'.HELPERIdentifyStatus(json_decode($notification->content)->status)['_status'].'/'.HELPERDoubleEncrypt($notification->project_id))}}" style="word-wrap: break-word; white-space: normal;background-color: #eee">
                         <strong>Project Status Updated</strong> : {{json_decode($notification->content)->name}}
                     </a>
                     @elseif ($notification->type == 3)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
+                    <a href="{{url('/client/projects/contract_signing/'.HELPERDoubleEncrypt($notification->project_id))}}" style="word-wrap: break-word; white-space: normal;background-color: #eee">
                         <strong>New Contract</strong> : {{json_decode($notification->content)->name}}
                     </a>
                     @elseif ($notification->type == 4)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
+                    <a href="{{url('/client/projects/contract_signing/'.HELPERDoubleEncrypt($notification->project_id))}}" style="word-wrap: break-word; white-space: normal;background-color: #eee">
                         <strong>Contract Approval</strong> : {{json_decode($notification->content)->name}}
                     </a>
                     @elseif ($notification->type == 11)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
+                    <a href="{{url('/client/projects/published/'.HELPERDoubleEncrypt($notification->project_id))}}" style="word-wrap: break-word; white-space: normal;background-color: #eee">
                         <strong>New Applicant</strong> : {{json_decode($notification->content)->name}}
                     </a>
                     @endif
@@ -46,12 +42,12 @@
                 <li id="{{$message->id}}">
 
                     @if ($message->seen == 2)
-                    <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
+                    <a href="{{url('/client/projects/'.HELPERIdentifyStatus($message->type)['_status'].'/'.HELPERDoubleEncrypt($message->project_id))}}" style="word-wrap: break-word; white-space: normal;background-color: #eee">
                         <strong>{{$message->name}}</strong><br>
                         {{$message->message}}
                     </a>
                     @else
-                    <a href="" style="word-wrap: break-word; white-space: normal;">
+                    <a href="{{url('/client/projects/'.HELPERIdentifyStatus($message->type)['_status'].'/'.HELPERDoubleEncrypt($message->project_id))}}" style="word-wrap: break-word; white-space: normal;">
                         <strong>{{$message->name}}</strong><br>
                         {{$message->message}}
                     </a>

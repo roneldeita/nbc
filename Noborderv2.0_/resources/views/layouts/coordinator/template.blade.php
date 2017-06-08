@@ -7,9 +7,9 @@
 
     <!-- CSRF Token -->
     <meta id="token" name="csrf-token" value="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{asset('images/fav.png')}}"/>
 
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>NoBorderClub</title>
 
     <!-- Styles -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
@@ -45,7 +45,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a  href="{{ url('/client') }}">
+                    <a  href="{{ url('/coordinator') }}">
                         <img src="{{asset('images/logo_.svg')}}" height="48" width="48" >
                     </a>
                 </div>
@@ -68,11 +68,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{ url('/coordinator/profile') }}">
                                             Profile
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -94,13 +94,7 @@
 
         @yield('content')
     </div>
-
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js""></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script> -->
-
-
+    <script type="text/javascript" src="{{asset('js/cons.js')}}"></script>
     <script src="{{asset('temp/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('temp/bootstrap.min.js')}}"></script>
     <script src="{{asset('temp/toastr.min.js')}}"></script>
@@ -109,7 +103,7 @@
     <script src="{{asset('js/footable.all.min.js')}}"></script>
 
     <script type="text/javascript">
-    var socket = io.connect('http://noborderbclubnode.herokuapp.com/');
+    var socket = io.connect(LOCALPORT);
     toastr.options = {
         "timeOut": "5000",
         "positionClass" : "toast-top-right",

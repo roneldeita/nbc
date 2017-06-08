@@ -7,9 +7,9 @@
 
     <!-- CSRF Token -->
     <meta id="token" name="csrf-token" value="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{asset('images/fav.png')}}"/>
 
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>NoBorderClub</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -73,11 +73,11 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{ url('/worker/profile') }}">
                                             Profile
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -100,7 +100,7 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
+    <script type="text/javascript" src="{{asset('js/cons.js')}}"></script>
     <script src="{{asset('temp/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('temp/bootstrap.min.js')}}"></script>
     <script src="{{asset('temp/toastr.min.js')}}"></script>
@@ -110,7 +110,7 @@
 
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
     <script >
-        var socket = io.connect('http://noborderbclubnode.herokuapp.com/');
+        var socket = io.connect(LOCALPORT);
 
         toastr.options = {
             "timeOut": "5000",

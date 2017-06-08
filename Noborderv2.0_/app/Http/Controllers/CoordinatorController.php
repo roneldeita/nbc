@@ -28,11 +28,11 @@ class CoordinatorController extends Controller
     public function ViewProject ($status, $hashedProjectId) {
         $projectId = HELPERDoubleDecrypt($hashedProjectId);
         if (!is_numeric($projectId) || empty(Project::find($projectId))) {
-            return view('client/projects/invalid');
+            return view('coordinator/projects/invalid');
         }
         $project = Project::find($projectId);
         if (HCoordinator::identifyStatus($project->status) != $status) {
-            return view('client/projects/invalid');
+            return view('coordinator/projects/invalid');
 
         }
         $applicants = DB::table('proposals')

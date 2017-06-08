@@ -13,11 +13,7 @@
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
                 <li >
-                    @if ($notification->type == 1)
-                    <a href="" style="word-wrap: break-word; white-space: normal;">
-                        <strong>New Project </strong>: {{json_decode($notification->content)->name}}
-                    </a>
-                    @elseif ($notification->type == 2)
+                    @if ($notification->type == 2)
                         @if (json_decode($notification->content)->status == 5)
                         <a href="" style="word-wrap: break-word; white-space: normal;">
                             <strong>Project Development </strong>: {{json_decode($notification->content)->name}}
@@ -39,19 +35,22 @@
     </li>
     <li class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">Messages
-            <span class="badge btn-primary-nbc" id="messagesBadge">{{count($messages) > 0 ? count($messages) : ''}}</span>
+            <span class="badge btn-primary-nbc" id="messagesBadge">{{count($unseen) > 0 ? count($unseen) : ''}}</span>
         </a>
         <ul class="dropdown-menu scrollable-menu" id="messagesMenu">
         @if (count($messages) > 0)
             @foreach ($messages as $message)
-                <li >
+                <li id="{{$message->id}}">
+
                     @if ($message->seen == 2)
                     <a href="" style="word-wrap: break-word; white-space: normal;background-color: #eee">
-
+                        <strong>{{$message->name}}</strong><br>
+                        {{$message->message}}
                     </a>
                     @else
                     <a href="" style="word-wrap: break-word; white-space: normal;">
-
+                        <strong>{{$message->name}}</strong><br>
+                        {{$message->message}}
                     </a>
                     @endif
                 </li>

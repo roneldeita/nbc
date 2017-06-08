@@ -14,7 +14,7 @@ class HWorker
                 return array
         ('proposalProjects' => HProposal::fetchAll(),
         'contractProjects' => HContract::fetchAll(),
-        //'progressProjects' => 
+        'progressProjects' => HProject::fetchInProgress(),
         );
 
         }

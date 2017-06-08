@@ -87,6 +87,10 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth', 'noRoleYet', 'verif
     Route::post('/message/send', 'ClientController@SendMessage');
     Route::post('/message/read', 'ClientController@ReadMessage');
 
+    Route::post('/progress/content', 'ClientController@SaveDeliverableContent');
+    Route::post('/progress/comment', 'ClientController@SaveDeliverableComment');
+    Route::post('/progress/deliverable/completed', 'ClientController@SaveDeliverableStatus');
+
 });
 
 Route::group(['prefix' => 'worker', 'middleware' => ['auth', 'noRoleYet', 'verifiedEmail', 'handleRole:2', 'basicRequirementWorker']], function () {
@@ -107,6 +111,9 @@ Route::group(['prefix' => 'worker', 'middleware' => ['auth', 'noRoleYet', 'verif
     //Route::post('/deliverable/file', 'WorkerController@SaveFileDeliverable');
 
     Route::post('/message/send', 'WorkerController@SendMessage');
+
+    Route::post('/progress/content', 'WorkerController@SaveDeliverableContent');
+    Route::post('/progress/comment', 'WorkerController@SaveDeliverableComment');
 });
 
 Route::group(['prefix' => 'coordinator', 'middleware' => ['auth', 'handleRole:3']], function () {

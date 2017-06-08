@@ -90,7 +90,7 @@
                 <input type="text" v-model="experienceDetails.position" class="form-control">
                 <br>
 
-                <label>Shool Year
+                <label>Date Started - Date End
                     <span v-if ="!experienceDetails.from && !experienceDetails.to" class="text-danger">*</span>
                 </label>
                 <div class="row">

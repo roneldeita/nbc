@@ -1,7 +1,7 @@
 @extends('layouts/worker/template')
 
 @section('content')
-@include('layouts/worker/include/easysteps')
+
 <div class="container">
 
     <div class="row">
@@ -36,7 +36,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/worker/projects/proposal/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-success btn-md">View Details</a>
+                                        <a href="{{url('/worker/projects/proposal/'.HELPERDoubleEncrypt($project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -68,7 +68,7 @@
                                         <h4># <span class="project-name">{{$project->name}}</span></h4>
                                     </td>
                                     <td>
-                                        <a href="{{url('/worker/contract_signing/'.HELPERDoubleEncrypt($project->contracts_id))}}" class="btn btn-success btn-md">View Details</a>
+                                        <a href="{{url('/worker/contract_signing/'.HELPERDoubleEncrypt($project->contracts_id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -79,7 +79,18 @@
                     <div id="progress" class="tab-pane fade" style="padding: 0; min-height: 300px">
                         <table class="table table-project">
                             <tbody>
+                                <?php $i = 1;?>
+                                @foreach ($progressProjects as $progress)
+                                <tr>
 
+                                    <td>
+                                        <h4># <span class="project-name">{{$progress->project->name}}</span></h4>
+                                    </td>
+                                    <td>
+                                        <a href="{{url('/worker/projects/in_progress/'.HELPERDoubleEncrypt($progress->project->id))}}" class="btn btn-secondary-nbc btn-md"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i>View Details</a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

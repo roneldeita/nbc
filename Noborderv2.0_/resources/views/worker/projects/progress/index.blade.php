@@ -1,7 +1,4 @@
-@extends('layouts/client/template')
-@section('styles')
-<link type="text/css" href="{{asset('css/toggle-switch.css')}}" rel="stylesheet">
-@endsection
+@extends('layouts/worker/template')
 @section('content')
 <div class="container" id="project_details">
     <div class="row">
@@ -14,7 +11,6 @@
 	        </h2>
 	        <br>
         </div>
-
         <div class="col-md-8">
             <div v-if="selectedDeliverable != null" v-cloak>
             	<div class="panel panel-default" >
@@ -22,16 +18,17 @@
                         @{{selectedDeliverable.title}} <span class="label" v-bind:class="selectedDeliverable.status == 1 ? 'label-success' : 'label-default' ">
                              @{{selectedDeliverable.status == 1 ? 'Completed' : 'Incomplete'}}
                         </span>
-
-                        <label class="switch pull-right" v-if="selectedDeliverable.content != null">
-                            <input type="checkbox" @click="CheckDeliverable(selectedDeliverable.id)" v-bind:disabled="selectedDeliverable.status == 1" v-bind:checked="selectedDeliverable.status">
-                            <div class="slider round"></div>
-                        </label>
-
             		</div>
             		<div class="panel-body">
+                        <strong>"Note : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</strong>
+                        <br><br>
+
                         <div class="" v-if="selectedDeliverable.content == null">
-                            <h3>No Update Yet...</h3>
+                            <textarea name="name" class="form-control" rows="4" placeholder="What's your update?" v-model="textUpdate"></textarea><br>
+                            <button type="button" class="btn btn-secondary-nbc pull-right" @click="SaveText()">
+                            <i class="pe-7s-diskette" style="font-size : 18px;"></i>
+                                Save
+                            </button>
                         </div>
                         <div class="" v-else>
                              @{{selectedDeliverable.content.content}}
@@ -68,7 +65,7 @@
         <div class="col-md-4">
         	<div class="panel panel-default">
         		<div class="panel-heading">
-        			Deliverables <br><br>
+        			Deliverables
                     <div class="progress" v-cloak>
                         <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" v-bind:style = "{width : DeliverablePercentage + '%'}">
                             @{{DeliverablePercentage}}%
@@ -96,7 +93,6 @@
                     {{$project->description}}
         		</div>
         	</div>
-
             <div class="panel panel-default">
         		<div class="panel-heading">
         			Contract Details
@@ -108,10 +104,9 @@
         		</div>
         		<div id="contract_body" class="panel-body panel-collapse collapse" style="max-height:300px; overflow-y:auto">
                     <p >This CONTRACT OF AGREEMENT, is entered into made effective this {{date('d', strtotime($project->contract->created_at))}} day of {{date('F, y', strtotime($project->contract->created_at))}},
-                        by and between {{Auth::user()->name}} (client) and {{$project->contract->worker->name }} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
+                        by and between {{$project->contract->client->name}} (client) and {{Auth::user()->name}} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
                         herein contained, the parties hereby agree to the Kill Sleepy requirements as follows:
                     </p>
-
                     <div class="row">
                         <div class="col-md-6">
                             <p><strong>Deliverables</strong></p>
@@ -134,11 +129,9 @@
                             <p>{{$project->contract->days}}</p>
                         </div>
                     </div>
-
         		</div>
         	</div>
         </div>
-
     </div>
 </div>
 @endsection
@@ -163,7 +156,7 @@
                 deliverables : deliverables,
                 comment : null,
                 commented : false,
-                textUpdated : false
+                textUpdated : false,
             },
             computed : {
                 DeliverablePercentage : function () {
@@ -189,7 +182,7 @@
                         content : this.comment
                     }
 
-                    this.$http.post('/client/progress/comment', dataToPost).then(response => {
+                    this.$http.post('/worker/progress/comment', dataToPost).then(response => {
 
                         location.reload();
 
@@ -198,17 +191,21 @@
 
                     });
                 },
-                CheckDeliverable : function (id) {
+                SaveText : function (textId) {
+                    this.textUpdated = true;
 
-                    this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
+                    var dataToPost = {
+                        deliverable_id : this.selectedDeliverable.id,
+                        content : this.textUpdate
+                    }
 
+                    this.$http.post('/worker/progress/content', dataToPost).then(response => {
                         location.reload();
-
                     }, response => {
 
 
                     });
-                }
+                },
             }
 
         });

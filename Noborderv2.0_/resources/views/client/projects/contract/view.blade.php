@@ -14,7 +14,7 @@
                     <h3 class="text-center">Contract Agreement</h3>
                     <div class="text-center" style="width: 700px; margin : auto; font-size : 18px">
                         <p >This CONTRACT OF AGREEMENT, is entered into made effective this {{date('d', strtotime($project->contract->created_at))}} day of {{date('F, y', strtotime($project->contract->created_at))}},
-                            by and between {{Auth::user()->name}} (client) and {{Auth::user()->name}} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
+                            by and between {{Auth::user()->name}} (client) and {{$project->contract->worker->name}} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
                             herein contained, the parties hereby agree to the Kill Sleepy requirements as follows:
                         </p>
                     </div>
@@ -101,6 +101,6 @@
             }, 5000);
         }
     });
-   
+
 </script>
 @endsection
