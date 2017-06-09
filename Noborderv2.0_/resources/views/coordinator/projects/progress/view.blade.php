@@ -61,7 +61,10 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script src="{{asset('temp/vue.js')}}"></script>
     <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
+    <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
     <script type="text/javascript">
 	$(function(){
 		$('#summernote').summernote({
@@ -69,18 +72,16 @@
 		});
 	});
 
-
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
         var v = new Vue({
             el : '#project_details',
             data : {
-               
+
             },
             methods : {
-               
+
             },
-            
+
         });
-    
+
     </script>
 @endsection

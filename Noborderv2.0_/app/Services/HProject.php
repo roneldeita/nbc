@@ -22,6 +22,7 @@ class HProject
 		return
 			WorkerProjects::where('worker_id', Auth::user()->id)
 				->where('status', 0)
+				->orderBy('id', 'desc')
 				->get();
 	}
 

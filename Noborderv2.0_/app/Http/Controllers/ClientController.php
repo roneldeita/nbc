@@ -48,6 +48,7 @@ class ClientController extends Controller
 
             public function ViewProject ($status, $hashedProjectId) {
                 $projectId = HELPERDoubleDecrypt($hashedProjectId);
+
                 if (!is_numeric($projectId) || empty(Project::find($projectId))) {
                     return view('client/projects/invalid');
                 }
@@ -60,9 +61,11 @@ class ClientController extends Controller
                     $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
                     return view('client/projects/progress/view')->with('project', $projectWithContractDetails);
                 }
+
                 // if ($status == "contract_signing") {
                 //     return view(HClient::viewProject($project->status))->with('project', $project)->with('applicants', $applicants);
                 // }
+
                 $applicants = DB::table('proposals')
                             ->join('projects', 'proposals.project_id', '=', 'projects.id')
                             ->join('users', 'proposals.worker_id', '=', 'users.id')
@@ -193,6 +196,10 @@ class ClientController extends Controller
         $deliverable = Deliverable::find($request->get('deliverable_id'));
         $deliverable->status = 1;
         $deliverable->save();
+    }
+
+    public function ReadNotification (Request $request) {
+        Notifications::MarkAsRead($request->get('status'));
     }
 
 }

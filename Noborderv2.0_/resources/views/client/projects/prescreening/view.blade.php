@@ -35,9 +35,9 @@
                                         <label>Cost :</label><br>
                                         ${{$budget->budget}}<br>
                                     </div>
-                                    <div class="panel-footer">
+                                    <!-- <div class="panel-footer">
                                         <a href="" style="color:#000"> <i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i> View Contract</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -185,8 +185,13 @@
 
     <script src="{{asset('temp/vue.js')}}"></script>
     <script src="{{asset('temp/vue-resource.min.js')}}"></script>
+    <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
 
     <script type="text/javascript">
+    vm.SeenNotification({role : "client", status : 2});
 
     var varDeliverables = "{{$project->deliverables}}";
     var varTermsAndConditions = "{{$project->terms_condition}}";
@@ -195,8 +200,6 @@
     varDeliverables = JSON.parse(varDeliverables.replace(/&quot;/g,'"'));
     varTermsAndConditions = JSON.parse(varTermsAndConditions.replace(/&quot;/g,'"'));
     varApplicants = JSON.parse(varApplicants.replace(/&quot;/g,'"'));
-
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
         var v = new Vue({
             el : '#project_details',
             data : {

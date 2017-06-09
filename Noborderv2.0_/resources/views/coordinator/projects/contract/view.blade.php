@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -92,12 +92,15 @@
 
     <script src="{{asset('temp/vue.js')}}"></script>
     <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
+    <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
     <script type="text/javascript">
     function identifyRes (ca, wa) {
         if (ca == 1 && wa == 1) {
             return true;
-        } 
+        }
         return false;
     }
     var worker_approved = {{$project->contract->worker_approved}};
@@ -111,7 +114,6 @@
     };
 
 
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
     var v = new Vue({
         el : "#project_details",
         data : {
@@ -140,11 +142,11 @@
                         };
                     socket.emit('project development', dataToEmit);
                     toastr.success('Project Updated  Successfully!');
-                    
-                          
+
+
                     setTimeout(function() {
                         window.location = '/coordinator/projects/in_progress/{{HELPERDoubleEncrypt($project->id)}}';
-                    }, 5000);                     
+                    }, 5000);
                 }, response => {
 
                 });
@@ -159,7 +161,7 @@
                 $("#worker_approved").addClass("panel-success");
                 $("#worker_approved_text").html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Associate Approved the Contract');
                 v.$data.worker_approved = 1;
-            } else {    
+            } else {
                 toastr.info('Client signed the contract', ''+details.projectName);
                 $("#client_approved").addClass("panel-success");
                 $('#client_approved_text').html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Client Approved the Contract');
@@ -167,6 +169,6 @@
             }
         }
     });
-                
+
     </script>
 @endsection

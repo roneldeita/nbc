@@ -59,9 +59,13 @@
 @section('scripts')
 <script src="{{asset('temp/vue.js')}}"></script>
 <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
+<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+<script type="text/javascript">
+    vm.SeenNotification({role : "worker", status : 3});
+    vm.SeenNotification({role : "worker", status : 4});
     var v = new Vue({
         el : '#contract',
         data : {
@@ -96,7 +100,7 @@
             toastr.success('Your have new project assigned!', ''+details.projectName);
             addNotification('<li><a href=""><strong>Project Development </strong>: '+ details.projectName +'</a></li>');
             setTimeout(function() {
-                
+
             }, 5000);
             this.approve = true;
         }
@@ -107,4 +111,5 @@
     //     }
     // })
 </script>
+
 @endsection

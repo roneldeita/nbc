@@ -169,4 +169,8 @@ class CoordinatorController extends Controller
             // not found
         }
     }
+
+    public function ReadNotification (Request $request) {
+        Notifications::MarkAsRead($request->get('status'));
+    }
 }

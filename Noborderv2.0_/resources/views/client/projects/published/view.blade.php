@@ -193,8 +193,15 @@
     <script src="{{asset('temp/vue-resource.min.js')}}"></script>
 
     <script type="text/javascript">
-    $( document ).ready(function() {
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
 
+
+    <script type="text/javascript">
+
+    $( document ).ready(function() {
+    vm.SeenNotification({role : "client", status : 11});
     var varDeliverables = "{{$project->deliverables}}";
     var varTermsAndConditions = "{{$project->terms_condition}}";
     var varApplicants = "{{$applicants}}";

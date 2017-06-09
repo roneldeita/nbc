@@ -178,7 +178,7 @@
             }
             var final = badge + 1;
             $('#notificationsBadge').text(""+final);
-            $('#notificationsMenu').prepend(data);
+            //$('#notificationsMenu').prepend(data);
         }
 
         function addMessage (data) {
@@ -188,7 +188,7 @@
             }
             var final = badge + 1;
             $('#messagesBadge').text(""+final);
-            $('#messagesMenu').prepend(data);
+            //$('#messagesMenu').prepend(data);
         }
 
     </script>

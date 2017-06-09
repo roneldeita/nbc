@@ -62,6 +62,12 @@
 
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
+<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+
+<script type="text/javascript">
+vm.SeenNotification({role : "client", status : 3});
+vm.SeenNotification({role : "client", status : 4});
     var v = new Vue({
         el : '#contract',
         data : {

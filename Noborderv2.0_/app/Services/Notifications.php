@@ -2,12 +2,13 @@
 namespace App\Services;
 use App\Notification;
 use Auth;
+use DB;
 /**
-* 
+*
 */
 class Notifications
 {
-	
+
 	public function Create ($project, $type) {
 		$notification = new Notification;
 		$notification->type = $type;
@@ -30,15 +31,19 @@ class Notifications
 	}
 
 	public function All ($id) {
-		$notification = Notification::where('to', $id)->get();
+		$notification = Notification::where('to', $id)->orderBy('id', 'desc')->get();
 		return $notification;
 	}
 	public function Unread ($id) {
-		$notification = Notification::where('to', $id)->where('seen', 2)->get();
+		$notification = Notification::where('to', $id)->where('seen', 2)->orderBy('id', 'desc')->get();
 		return $notification;
 	}
 
-	public function MarkAsRead ($id) {
+	public function MarkAsRead ($type) {
+		DB::table('notifications')->where('to', Auth::user()->id)->where('type', $type)->update(['seen' => 1]);
+	}
+
+	public function MarkAsReadOld ($id) {
 		$notification = Notification::find($id);
 		$result;
 		if (empty($notification)) {
@@ -50,6 +55,6 @@ class Notifications
 		}
 		return $result;
 	}
-	
+
 }
 ?>

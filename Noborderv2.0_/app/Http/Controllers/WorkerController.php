@@ -118,7 +118,7 @@ class WorkerController extends Controller
             }
             return 'Invalid id';
         }
-        if ($proj['_status'] == 'in_progress') {
+        if ($proj['_status'] == 'in_progress' && $status == $proj['_status']) {
             $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
             return view('/worker/projects/progress/index')->with('project', $projectWithContractDetails);
         }
@@ -133,7 +133,11 @@ class WorkerController extends Controller
         if (!is_numeric($contractId) || empty(Contract::find($contractId))) {
             return view('errors/404');
         }
+
         $contract = Contract::find($contractId);
+        if ($contract->project->status != 3) {
+            return 'invalid id';
+        }
         if ($contract->worker_id != $request->user()->id) {
             return 'Invalid Id';
         }
@@ -167,10 +171,6 @@ class WorkerController extends Controller
     }
 
     public function SaveDeliverableContent (Request $request) {
-        // if ($request->get('')) {
-        //
-        // }
-        
         $comment = new DeliverableContent;
         $comment->deliverable_id = $request->get('deliverable_id');
         $comment->content = $request->get('content');
@@ -183,7 +183,10 @@ class WorkerController extends Controller
         $comment->deliverable_id = $request->get('deliverable_id');
         $comment->content = $request->get('content');
         $comment->save();
+    }
 
+    public function ReadNotification (Request $request) {
+        Notifications::MarkAsRead($request->get('status'));
     }
 
     // SHOULD UPDATE

@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="alert btn-secondary-nbc" role="alert">
                     "
-                        Hi, Thank you for bidding on the job post. We have already published your bid to the client and we are currently waiting for him/her to review your bid. You will be receiving  a notification as soon as the client has accepted or rejected your bid. While waiting for a response, we suggest that you visit the project page (AS IT IS UPDATED REGULARLY)  for more projects to choose from. Good luck!" 
+                        Hi, Thank you for bidding on the job post. We have already published your bid to the client and we are currently waiting for him/her to review your bid. You will be receiving  a notification as soon as the client has accepted or rejected your bid. While waiting for a response, we suggest that you visit the project page (AS IT IS UPDATED REGULARLY)  for more projects to choose from. Good luck!"
                 </div>
                 <h1>
                     <div class="project-img background-primary-nbc">
@@ -72,3 +72,13 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+<script src="{{asset('temp/vue.js')}}"></script>
+<script src="{{asset('temp/vue-resource.min.js')}}"></script>
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
+<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+@endsection('')

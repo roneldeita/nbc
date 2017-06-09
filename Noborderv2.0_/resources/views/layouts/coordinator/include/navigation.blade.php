@@ -10,9 +10,12 @@
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
                 <li >
+                    <?php
+                    $project = json_decode($notification->content);
+                    ?>
                     @if ($notification->type == 1)
-                    <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($notification->project_id))}}" style="word-wrap: break-word; white-space: normal;">
-                        <strong>New Project </strong>: {{json_decode($notification->content)->name}}
+                    <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" style="word-wrap: break-word; white-space: normal;">
+                        <strong>New Project </strong>: {{$project->name}}
                     </a>
                     @endif
                 </li>

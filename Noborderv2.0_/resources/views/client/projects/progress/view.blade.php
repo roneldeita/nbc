@@ -148,12 +148,16 @@
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
     <script src="{{asset('temp/vue.js')}}"></script>
     <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
     <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+    <script type="text/javascript">
+    vm.SeenNotification({role : "client", status : 2});
+
 	var deliverables = "{{$project->contract->deliverables}}";
     deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
 
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
         var v = new Vue({
             el : '#project_details',
             data : {

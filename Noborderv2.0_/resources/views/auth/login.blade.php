@@ -56,7 +56,7 @@
                                 <!-- <a href="#fb_l" data-toggle="modal" class="btn btn-default">
                                     Login Using Fb
                                 </a> -->
-                                <a href="{{url('socialite/redirect')}}" class="btn btn-default">Login Using Fb</a>
+                                <!-- <a href="{{url('socialite/redirect')}}" class="btn btn-default">Login Using Fb</a> -->
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
@@ -79,7 +79,7 @@
 
         <div class="modal-body">
             <div class="text-center">
-                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>                
+                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
             </div>
         </div>
         <div class="modal-footer">
@@ -102,17 +102,17 @@
     // new Vue({
     //     el : '#login',
     //      data : {
- 
+
     //      },
     //      methods : {
     //         LoginFb : function() {
-    //             this.$http.get('socialite/redirect').then(response => {              
+    //             this.$http.get('socialite/redirect').then(response => {
     //                 console.log(response);
     //                 }, response => {
 
-    //             });    
+    //             });
     //         }
-            
+
     //      }
     // });
     $('#fb').on('click', function () {
@@ -127,7 +127,7 @@
                 console.log(data);
             }
         });
-    
-    });  
+
+    });
 </script>
 @endsection

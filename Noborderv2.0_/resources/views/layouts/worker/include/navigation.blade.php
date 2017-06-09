@@ -13,19 +13,22 @@
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
                 <li >
+                    <?php
+                    $project = json_decode($notification->content);
+                    ?>
                     @if ($notification->type == 2)
                         @if (json_decode($notification->content)->status == 5)
-                        <a href="" style="word-wrap: break-word; white-space: normal;">
-                            <strong>Project Development </strong>: {{json_decode($notification->content)->name}}
+                        <a href="{{url('worker/projects/in_progress/'.HELPERDoubleEncrypt($project->id))}}" style="word-wrap: break-word; white-space: normal;">
+                            <strong>Project Development </strong>: {{$project->name}}
                         </a>
                         @endif
                     @elseif ($notification->type == 3)
-                    <a href="" style="word-wrap: break-word; white-space: normal;">
-                        <strong>New Contract </strong>: {{json_decode($notification->content)->name}}
+                    <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" style="word-wrap: break-word; white-space: normal;">
+                        <strong>New Contract </strong>: {{$project->name}}
                     </a>
                     @elseif ($notification->type == 4)
-                    <a href="" style="word-wrap: break-word; white-space: normal;">
-                        <strong>Contract Approval </strong>: {{json_decode($notification->content)->name}}
+                    <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" style="word-wrap: break-word; white-space: normal;">
+                        <strong>New Contract </strong>: {{$project->name}}
                     </a>
                     @endif
                 </li>
