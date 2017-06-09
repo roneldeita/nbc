@@ -95,7 +95,7 @@ class RegisterController extends Controller
         ]);
         dispatch(new SendVerificationEmail($user));
         // Mail::to($user->email)->send(new WelcomeEmailValidation($user));
-        // return $user;
+         return $user;
     }
     public function showRegistrationForm()
     {
