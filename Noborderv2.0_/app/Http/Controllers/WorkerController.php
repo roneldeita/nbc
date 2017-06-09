@@ -230,7 +230,7 @@ class WorkerController extends Controller
                 $worker_experience->position = $experience[$i]["position"];
                 $worker_experience->from = $experience[$i]["from"];
                 $worker_experience->to = $experience[$i]["to"];
-                $worker_experience->description = array_key_exist($experience[$i]["additional"], $experience[$i]) == true ? $experience[$i]["additional"] : "";
+                $worker_experience->description = "UPDATE"; //array_key_exist($experience[$i]["additional"], $experience[$i]) == true ? $experience[$i]["additional"] : "";
                 $worker_experience->save();
             }
         }
@@ -251,7 +251,7 @@ class WorkerController extends Controller
                 $worker_education->school = $education[$i]["institute"];
                 $worker_education->from = $education[$i]["from"];
                 $worker_education->to = $education[$i]["to"];
-                    $worker_education->description = array_key_exists($education[$i]["additional"], $education[$i]) == true ? $education[$i]["additional"] : "";
+                $worker_education->description = "UPDATE";//array_key_exists($education[$i]["additional"], $education[$i]) == true ? $education[$i]["additional"] : "";
                 $worker_education->save();
             }
         }

@@ -86,7 +86,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth', 'noRoleYet', 'verif
     Route::post('/rate', 'ClientController@SaveRate');
     Route::post('/message/send', 'ClientController@SendMessage');
     Route::post('/message/read', 'ClientController@ReadMessage');
-    Route::post('/client/read', 'ClientController@ReadNotification');
+    Route::post('/notification/read', 'ClientController@ReadNotification');
 
     Route::post('/progress/content', 'ClientController@SaveDeliverableContent');
     Route::post('/progress/comment', 'ClientController@SaveDeliverableComment');
@@ -124,7 +124,7 @@ Route::group(['prefix' => 'coordinator', 'middleware' => ['auth', 'handleRole:3'
     Route::get('/projects/{status}/{hashedProjectId}', 'CoordinatorController@ViewProject');
     Route::post('/projects/status/update', 'CoordinatorController@UpdateProjectStatus');
 
-    Route::get('/profile', 'CoordinatorController@IndexProfile');
+    Route::get('/profile', 'CoordinatorController@IndexProfile');   
     Route::post('/projects/contract', 'CoordinatorController@SaveWorkerContract');
 
     Route::post('/message/send', 'CoordinatorController@SendMessage');
