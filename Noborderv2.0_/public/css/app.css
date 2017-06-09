@@ -14,7 +14,9 @@ body {
 hr {
     border-color : #000;
 }
-
+.panel-body {
+    word-wrap: break-word;
+}
 .navbar {
     border-radius: 0;
 }

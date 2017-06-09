@@ -94,7 +94,7 @@
                                 @foreach($applicants as $applicant)
                                     <li><input type="radio" name="associate" id="{{$applicant->id}}" @click='ChooseWorker("{{$applicant->id}}")'   />
                                     <label class="c" for="{{$applicant->id}}"><img class="img img-circle" src="http://lorempixel.com/100/100" />
-                                        <p>{{$applicant->name}}</p>
+                                        {{$applicant->name}}
                                     </label>
                                     </li>
                                 @endforeach
