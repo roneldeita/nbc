@@ -111,12 +111,11 @@
                                         <ul class="list-unstyled" id="message_container" style="margin-top: 5px">
                                             @foreach ($project->messages as $message)
                                                 @if ($message->type == $project->status)
-                                                    @if ($message->from == Auth::user()->id)
-                                                    <li class="left clearfix admin_chat"><div class="chat_content clearfix"><p>{{$message->message}}</p></div></li>
-                                                    @else
-                                                    <li class="left clearfix"><div class="chat_content clearfix"><p>{{$message->message}}</p></div></li>
-                                                    @endif
-
+                                                    <li class="left clearfix {{$message->from == Auth::user()->id ? 'admin_chat' : ''}}">
+                                                        <div class="chat_content clearfix">
+                                                            <p>{{$message->message}}</p>
+                                                        </div>
+                                                    </li>
                                                 @endif
                                             @endforeach
                                         </ul>
