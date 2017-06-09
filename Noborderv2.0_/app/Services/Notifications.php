@@ -38,7 +38,10 @@ class Notifications
 		$notification = Notification::where('to', $id)->where('seen', 2)->orderBy('id', 'desc')->get();
 		return $notification;
 	}
-
+	public function UnreadForCoordinator ($id) {
+		$notification = Notification::where('to', $id)->where('seen', 2)->where('type', 1)->orderBy('id', 'desc')->get();
+		return $notification;
+	}
 	public function MarkAsRead ($type) {
 		DB::table('notifications')->where('to', Auth::user()->id)->where('type', $type)->update(['seen' => 1]);
 	}
