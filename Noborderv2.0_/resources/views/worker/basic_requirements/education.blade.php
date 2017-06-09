@@ -85,7 +85,7 @@
             </div>
 
             <div class="modal-body">
-                <label>Institue/University
+                <label>Institute/University
                     <span v-if ="!educationDetails.institute" class="text-danger">*</span>
                 </label>
                 <input v-model="educationDetails.institute" type="text" class="form-control">
