@@ -28,7 +28,7 @@ class Project extends Model
     }
 
     public function messages () {
-        return $this->hasMany('App\Message', 'project_id', 'id')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\Message', 'project_id', 'id')->orderBy('created_at', 'asc');
     }
 
 
