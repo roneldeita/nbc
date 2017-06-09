@@ -58,7 +58,7 @@ class HMessage
 			(select messages.type from messages where created_at = max(a.created_at) AND id = max(a.id)) as type
 			from messages a join projects ON projects.id = a.project_id
 			WHERE a.to = ".Auth::user()->id."
-			group by projects.name ORDER BY id");
+			group by projects.name ORDER BY id DESC");
 
 		$seen = collect($messages)->pluck('seen');
 		$unseen = array_diff($seen->all(), array(1));
