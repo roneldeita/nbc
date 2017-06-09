@@ -52,10 +52,10 @@ class HMessage
 		$messages = DB::select("
 			select max(a.created_at) as date, max(a.id) as id, projects.name,
 			(select message from messages where created_at = max(a.created_at) AND id = max(a.id)) message,
-			(select seen from messages where created_at = max(a.created_at)) seen,
-			(select messages.from from messages where created_at = max(a.created_at)) as sender,
-			(select messages.project_id from messages where created_at = max(a.created_at)) as project_id,
-			(select messages.type from messages where created_at = max(a.created_at)) as type
+			(select seen from messages where created_at = max(a.created_at) AND id = max(a.id)) seen,
+			(select messages.from from messages where created_at = max(a.created_at) AND id = max(a.id)) as sender,
+			(select messages.project_id from messages where created_at = max(a.created_at) AND id = max(a.id)) as project_id,
+			(select messages.type from messages where created_at = max(a.created_at) AND id = max(a.id)) as type
 			from messages a join projects ON projects.id = a.project_id
 			WHERE a.to = ".Auth::user()->id."
 			group by projects.name");
