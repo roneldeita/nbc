@@ -27,7 +27,7 @@ class ViewServiceProvider extends ServiceProvider
         });
         view()->composer('layouts.client.include.navigation', function ($view) {
             $notifications = Notifications::Unread(Auth::user()->id);
-            $messages = HMessage::All();
+            $messages =array(); // HMessage::All();
             // $unreadNotifications = Notifications::Unread(Auth::user()->id);
             // $allNotifications = Notifications::All(Auth::user()->id);
             $view->with('notifications', $notifications)->with('messages', $messages["messages"])->with('unseen', $messages["unseen"]);

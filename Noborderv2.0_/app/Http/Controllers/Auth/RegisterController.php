@@ -93,9 +93,9 @@ class RegisterController extends Controller
             'question_id' => $data['question'],
             'answer' => bcrypt($data['answer'])
         ]);
-        //dispatch(new SendVerificationEmail($user));
-        Mail::to($user->email)->send(new WelcomeEmailValidation($user));
-        return $user;
+        dispatch(new SendVerificationEmail($user));
+        // Mail::to($user->email)->send(new WelcomeEmailValidation($user));
+        // return $user;
     }
     public function showRegistrationForm()
     {
