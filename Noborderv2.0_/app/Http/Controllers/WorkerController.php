@@ -135,7 +135,7 @@ class WorkerController extends Controller
         }
 
         $contract = Contract::find($contractId);
-        if ($contract->project->status != 3) {
+        if ($contract->project->status != 4) {
             return 'invalid id';
         }
         if ($contract->worker_id != $request->user()->id) {

@@ -58,10 +58,10 @@
                                 <p>{{$proposal->days}}</p>
                                 <br>
                                 <p><strong>Amount</strong></p>
-                                <p>{{$proposal->amount}}</p>
+                                <p>$ {{$proposal->amount}}</p>
                                 <br>
                                 <p><strong>Message</strong></p>
-                                <p>$ {{$proposal->message}}</p>
+                                <p>{{$proposal->message}}</p>
                                 <br>
                             </div>
                         </div>
