@@ -32,10 +32,12 @@ var create = new Vue({
             if (!value) {
                 return;
             }
-            this.newProject.deliverables.push({
-                name : value
-            });
-            this.deliverable = '';
+            if (this.newProject.deliverables.length < 12) {
+                this.newProject.deliverables.push({
+                    name : value
+                });
+                this.deliverable = '';
+            }
         },
         RemoveDeliverable : function (deliverable) {
             this.newProject.deliverables.splice(this.newProject.deliverables.indexOf(deliverable), 1);
@@ -45,10 +47,12 @@ var create = new Vue({
             if (!value) {
                 return;
             }
-            this.newProject.termAndAgreements.push({
-                name : value
-            });
-            this.termAndAgreement = '';
+            if (this.newProject.termAndAgreements.length < 12) {
+                this.newProject.termAndAgreements.push({
+                    name : value
+                });
+                this.termAndAgreement = '';
+            }
         },
         RemoveTermAndAgreement : function (termAndAgreement) {
             this.newProject.termAndAgreements.splice(this.newProject.termAndAgreements.indexOf(termAndAgreement), 1);

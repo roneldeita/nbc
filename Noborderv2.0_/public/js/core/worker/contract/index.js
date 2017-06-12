@@ -5,7 +5,7 @@ var contract = new Vue({
     },
     methods : {
         Approve : function () {
-            this.$http.post("/worker/contract/approve')}}", {id : $("#cId").val()}).then(response => {
+            this.$http.post("/worker/contract/approve", {id : $("#cId").val()}).then(response => {
                 var dataToEmit = {
                     contract_id : $("#cId").val(),
                     receiver : $("#receiver").val(),

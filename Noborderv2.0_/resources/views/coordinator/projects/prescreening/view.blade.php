@@ -78,7 +78,7 @@
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="cId" value="{{$project->client_id}}"> 
+    <input type="hidden" id="cId" value="{{$project->client_id}}">
     <div class="row">
         <div class="col-md-12">
         <?php
@@ -96,7 +96,7 @@
                             <h3>Applicants</h3>
                             <ul class="c">
                                 @foreach($applicants as $applicant)
-                                    <li><input type="radio" name="associate" id="{{$applicant->id}}" @click='ChooseWorker("{{$applicant->id}}")'   />
+                                    <li><input type="radio" name="associate" id="{{$applicant->id}}" @click='ChooseWorker("{{$applicant->id}}", "{{$applicant->days}}", "{{$applicant->amount}}")'   />
                                     <label class="c" for="{{$applicant->id}}"><img class="img img-circle" src="http://lorempixel.com/100/100" />
                                         {{$applicant->name}}
                                     </label>
@@ -111,13 +111,14 @@
                             <label>Cost
                                 <span v-if ="!contract.cost" class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" value="{{$budget->budget}}" v-model="contract.cost">
+                            <input type="text" class="form-control" value="{{$budget->budget}}" v-model="contract.cost" disabled>
+                            <br>
                         </div>
                         <div class="col-md-6">
                             <label>No. of Days
                                 <span v-if ="!contract.days" class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" v-model ="contract.days">
+                            <input type="text" class="form-control" v-model ="contract.days" disabled>
                         </div>
                     </div>
                     <br>
@@ -186,7 +187,7 @@ varDeliverables = JSON.parse(varDeliverables.replace(/&quot;/g,'"'));
 varTermsAndConditions = JSON.parse(varTermsAndConditions.replace(/&quot;/g,'"'));
 
 prescreening.deliverables = varDeliverables;
-prescreening.terms = varDeliverables;
+prescreening.terms = varTermsAndConditions;
 
 
 Message.Seen({role : "coordinator", projectId : pId});

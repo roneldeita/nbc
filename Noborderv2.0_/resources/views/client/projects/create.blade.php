@@ -25,6 +25,7 @@
                         <!-- <span class="text-danger" v-if="newProject.name.length < 6">The minimum should be 6 letter</span> -->
                     </label>
                     <input type="text" v-model="newProject.name" class="form-control" placeholder="e.g. Create Website Logo">
+                    <span class="text-danger" v-if="newProject.name.length > 121">Project Name is too long</span>
                     <br><br>
 
                     <label class="project-label">How much is your budget?
@@ -35,6 +36,7 @@
                                 <input type="number" v-model="newProject.budget" class="form-control" placeholder="e.g. 400">
                             <span class="input-group-addon">.00</span>
                         </div>
+                        <span class="text-danger" v-if="newProject.budget >= 50">Budget is too low</span>
                     <br><br>
 
                     <label class="project-label">Choose you project term.
@@ -85,7 +87,7 @@
                         <div class="input-group">
                             <input type="text" v-model="deliverable" class="form-control" placeholder="e.g. The color of the logo should be blue">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary-nbc" type="button" @click="AddDeliverable()">Add</button>
+                                <button class="btn btn-primary-nbc" type="button" @click="AddDeliverable()" v-bind:disabled="newProject.deliverables.length > 11">Add</button>
                             </span>
                         </div>
                     <br>
@@ -105,7 +107,7 @@
                     <div class="input-group">
                         <input type="text" v-model="termAndAgreement" class="form-control" placeholder="e.g. The created logo should be own design and not copyrighted">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary-nbc" type="button" @click="AddTermAndAgreement()">Add</button>
+                            <button class="btn btn-primary-nbc" type="button" @click="AddTermAndAgreement()"  v-bind:disabled="newProject.termAndAgreements.length > 11">Add</button>
                         </span>
                     </div>
                     <br>

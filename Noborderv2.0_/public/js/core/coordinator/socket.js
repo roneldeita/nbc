@@ -25,9 +25,9 @@ if (!urlForProjects()) {
                 published.$data.applicants = [];
                 published.$data.applicants.push(worker);
             }
-            toastr.info('You have new message!', ''+details.projectName);
+            toastr.info('You have new applicant!', ''+details.projectName);
         } else if (details.receiver == aId) {
-            toastr.info('You have new message!', ''+details.projectName);
+            toastr.info('You have new applicant!', ''+details.projectName);
         }
     });
 
@@ -44,9 +44,9 @@ if (!urlForProjects()) {
 }
 
 if (urlForContract()) {
-    var cId = document.getElementById("cId").value;
+    var pCId = document.getElementById("pCId").value;
     socket.on('contract approve', function (details) {
-        if (details.contract_id == cId) {
+        if (details.contract_id == pCId) {
             if (details.by == "worker") {
                 toastr.info('Worker signed the contract', ''+details.projectName);
                 $("#worker_approved").addClass("panel-success");

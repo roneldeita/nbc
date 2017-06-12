@@ -4,7 +4,7 @@
 <div class="container" id="project">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}"> 
+    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}">
     <div class="row">
         <div class="col-md-12">
         <?php
@@ -17,7 +17,7 @@
             <div class="card">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
-                    <li><a data-toggle="tab" href="#applicant">Applicant</a></li>
+                    <li><a data-toggle="tab" href="#applicant">Applicant <i class="badge" v-cloak>@{{applicants == null ? '0' : applicants.length }}</i></a></li>
                 </ul>
 
 
@@ -95,7 +95,7 @@
                                         <textarea class="form-control" placeholder="type a message" v-model="message" @keydown="$event.keyCode == 13 ? SendMessage($event) : false"></textarea>
                                         <div class="clearfix"></div>
                                         <div class="chat_bottom">
-                                            <button type="button" class="pull-right btn btn-primary-nbc" @click="SendMessage($event)">Send</button>
+                                            <button type="button" class="pull-right btn btn-primary-nbc" @click="SendMessage($event)" v-bind:disabled="emptyMessage">Send</button>
                                         </div>
                                     @endslot
                                 @endcomponent
@@ -171,8 +171,8 @@
 
 $('#message_parent').animate({scrollTop : $('#message_parent').prop('scrollHeight')});
 
-var varApplicants = "{{$applicants}}";
-varApplicants = JSON.parse(varApplicants.replace(/&quot;/g,'"'));
+var varApplicants = "{{count($applicants) > 0 ? $applicants : null}}";
+varApplicants = varApplicants == "" ? null : JSON.parse(varApplicants.replace(/&quot;/g,'"'));
 published.applicants = varApplicants;
 
 Message.Seen({role : "client", projectId : pId});

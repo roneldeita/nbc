@@ -40,7 +40,7 @@ class CoordinatorController extends Controller
                     ->join('projects', 'proposals.project_id', '=', 'projects.id')
                     ->join('users', 'proposals.worker_id', '=', 'users.id')
                     ->where('projects.id', $project->id)
-                    ->select('users.id', 'users.name')
+                    ->select('users.id', 'users.name', 'proposals.days', 'proposals.amount')
                     ->get();
         return view(HCoordinator::viewProject($project->status))->with('project', $project)->with('applicants', $applicants);
     }
@@ -166,7 +166,7 @@ class CoordinatorController extends Controller
     public function ReadMessage (Request $request) {
         HMessage::Seen($request);
     }
-    
+
     public function ContractApprove (Request $request) {
         $contract = Contract::find($request->get('id'));
         if ($contract) {

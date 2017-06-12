@@ -18,9 +18,11 @@ var prescreening = new Vue({
         }
     },
     methods : {
-        ChooseWorker : function (id) {
+        ChooseWorker : function (id, days, amount) {
             this.worker = id;
             this.contract.worker_id = this.worker;
+            this.contract.cost = amount;
+            this.contract.days = days;
         },
         CreateContract : function () {
             this.submit = true;

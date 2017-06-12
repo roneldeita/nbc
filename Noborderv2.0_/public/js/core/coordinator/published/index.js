@@ -8,6 +8,14 @@ var published = new Vue({
         applicants : null,
         message : '',
     },
+    computed : {
+        emptyMessage : function () {
+            if (/\S/.test(this.message)) {
+                return false;
+            }
+            return true;
+        }
+    },
     methods : {
         ShowApplicantProposal : function (id) {
             this.$http.post("/coordinator/applicant_proposal/view", {id : id}).then(response => {
@@ -26,7 +34,7 @@ var published = new Vue({
                 $('#message_parent').animate({scrollTop : $('#message_parent').prop('scrollHeight')});
 
                 Message.Send({ "message" :this.message, "projectId" : $("#pId").val(), "projectName" : $("#pName").val(), "receiver": $("#receiver").val(), "role" : "coordinator", "status" : "2"});
-                this.message = null;
+                this.message = '';
             }
 
         },

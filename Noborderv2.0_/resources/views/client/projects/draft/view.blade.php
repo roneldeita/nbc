@@ -3,7 +3,7 @@
 <div class="container" id="project">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}"> 
+    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}">
     <?php
         $budget = json_decode($project->budget_info);
     ?>
@@ -31,7 +31,10 @@
                         <input type="hidden" name="budget" value="{{$budget->budget}}">
                         <br>
 
-                        <button type="submit" class="btn btn-primary-nbc" style="width:100%" name="button"><span>Pay</span></button>
+                        <button type="submit" class="btn btn-primary-nbc hidden" style="width:100%" name="button" id="pay">
+                            <span>Pay</span>
+                            <i class="fa fa-circle-o-notch fa-spin hidden" id="loading"></i>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -70,7 +73,16 @@
     <script src="https://js.braintreegateway.com/js/braintree-2.32.0.min.js"></script>
 
     <script type="text/javascript">
+    setInterval(function(){
+        if ($("#payment-form > iframe")) {
+            $('#pay').removeClass('hidden');
+        }
+    }, 3000);
 
+    $("#checkoutform").on("submit", function () {
+        $('#pay').attr('disabled', 'disabled');
+        $('#loading').removeClass('hidden');
+    });
     braintree.setup("@braintreeClientToken", "dropin", {
         container: "payment-form",
         form: 'checkoutform',
@@ -88,6 +100,7 @@
         },
         paymentMethodNonceReceived: function (event, data) {
             event.preventDefault();
+
             $('#paymentSuccess').removeClass('hidden');
             $('#checkoutform').addClass('hidden');
 
