@@ -36,7 +36,7 @@
                                 <input type="number" v-model="newProject.budget" class="form-control" placeholder="e.g. 400">
                             <span class="input-group-addon">.00</span>
                         </div>
-                        <span class="text-danger" v-if="newProject.budget >= 50">Budget is too low</span>
+                        <span class="text-danger" v-if="newProject.budget >= 50 || newProject.budget == '' ">Budget is too low</span>
                     <br><br>
 
                     <label class="project-label">Choose you project term.
@@ -80,7 +80,8 @@
                         <span class="text-danger" v-if="!newProject.description">*</span>
                     </label>
                     <textarea rows="3" v-model="newProject.description" class="form-control" placeholder="Describe your project here..."></textarea><br><br>
-
+                    <span class="text-danger" v-if="newProject.description >255">Description is too long</span>
+                    
                     <label>Deliverables
                         <span class="text-danger" v-if="!newProject.deliverables.length > 0">*</span>
                     </label>
