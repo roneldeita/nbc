@@ -25,7 +25,7 @@
                         <!-- <span class="text-danger" v-if="newProject.name.length < 6">The minimum should be 6 letter</span> -->
                     </label>
                     <input type="text" v-model="newProject.name" class="form-control" placeholder="e.g. Create Website Logo">
-                    <span class="text-danger" v-if="newProject.name.length > 121">Project Name is too long</span>
+                    <span class="text-danger" v-if="newProject.name.length > 121" v-cloak>Project Name is too long</span>
                     <br><br>
 
                     <label class="project-label">How much is your budget?
@@ -36,8 +36,8 @@
                                 <input type="number" v-model="newProject.budget" class="form-control" placeholder="e.g. 400">
                             <span class="input-group-addon">.00</span>
                         </div>
-                        <span class="text-danger" v-if="newProject.budget >= 50 || newProject.budget == '' ">Budget is too low</span>
-                        <span class="text-danger" v-else></span>
+                        <span class="text-danger" v-if="newProject.budget >= 50 || newProject.budget == '' " v-cloak></span>
+                        <span class="text-danger" v-else v-cloak>Budget is too low</span>
                     <br><br>
 
                     <label class="project-label">Choose you project term.
