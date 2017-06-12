@@ -128,7 +128,9 @@ Route::group(['prefix' => 'coordinator', 'middleware' => ['auth', 'handleRole:3'
     Route::post('/projects/contract', 'CoordinatorController@SaveWorkerContract');
 
     Route::post('/message/send', 'CoordinatorController@SendMessage');
+    Route::post('/message/read', 'CoordinatorController@ReadMessage');
     Route::post('/notification/read', 'CoordinatorController@ReadNotification');
 
     Route::post('/projects/worker/assign', 'CoordinatorController@SaveWorkerProject');
+    Route::post('/applicant_proposal/view', 'CoordinatorController@ViewApplicantProposal');
 });

@@ -1,7 +1,12 @@
 @extends('layouts/worker/template')
 
 @section('content')
-<div class="container" id="contract">
+<div class="container" id="project">
+    <input type="hidden" id="p" value="{{$contract->project}}">
+    <input type="hidden" id="pId" value="{{$contract->project->id}}">
+    <input type="hidden" id="pName" value="{{$contract->project->name}}">
+    <input type="hidden" id="cId" value="{{$contract->id}}">
+    <input type="hidden" id="receiver" value="{{$contract->client->id}}">
     <div class="row">
         <div class="col-md-12">
             <h2>
@@ -62,54 +67,9 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
-<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+<script src="{{asset('js/core/general/notification.js')}}"></script>
+<script src="{{asset('js/core/worker/contract/index.js')}}"></script>
 <script type="text/javascript">
-    vm.SeenNotification({role : "worker", status : 3});
-    vm.SeenNotification({role : "worker", status : 4});
-    var v = new Vue({
-        el : '#contract',
-        data : {
-            approve : false
-        },
-        methods : {
-            Approve : function () {
-                this.$http.post("{{url('/worker/contract/approve')}}", {id : "{{$contract->id}}"}).then(response => {
-                    var dataToEmit = {
-                        contract_id : "{{$contract->id}}",
-                        receiver : "{{$contract->client->id}}",
-                        project : "{{$contract->project}}",
-                        projectName : "{{$contract->project->name}}",
-                        update : response.data.client_approved,
-                        by : "worker"
-                    }
-                    socket.emit('contract approve', dataToEmit);
-                    toastr.info('You approved the contract!');
-                    setTimeout(function() {
-                        location.reload();
-                    }, 5000);
-                    this.approve = true;
-                }, response => {
-
-                });
-            }
-        }
-    });
-
-    socket.on('project development', function (details) {
-        if (details.workerId == "{{Auth::user()->id}}") {
-            toastr.success('Your have new project assigned!', ''+details.projectName);
-            addNotification('<li><a href=""><strong>Project Development </strong>: '+ details.projectName +'</a></li>');
-            setTimeout(function() {
-
-            }, 5000);
-            this.approve = true;
-        }
-    });
-    // socket.on('contract approve', function (details) {
-    //     if (details.contract_id == "{{$contract->id}}" && details.by == "client") {
-    //         toastr.info('Client approved to contract signing!');
-    //     }
-    // })
+    Notification.Seen({role : "worker", projectId : pId});
 </script>
-
 @endsection

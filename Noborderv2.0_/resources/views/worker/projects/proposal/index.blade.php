@@ -80,5 +80,5 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
-<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
-@endsection('')
+
+@endsection

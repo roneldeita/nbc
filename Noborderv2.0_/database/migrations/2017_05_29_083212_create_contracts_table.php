@@ -18,7 +18,6 @@ class CreateContractsTable extends Migration
             $table->integer('worker_id');
             $table->integer('project_id');
             $table->integer('client_id');
-            $table->string('name');
             $table->decimal('cost',10,2);
             $table->integer('days');
             $table->integer('worker_approved');

@@ -82,6 +82,8 @@ class RegisterController extends Controller
             'role' => $data['role'],
             'verification' => str_random(30),
             'verified' => 0,
+            'avatar' => "http://localhost:8000/images/default_avatar.png",
+            'background' => "http://localhost:8000/images/default_background.jpg",
             'online' => 0
         ]);
 

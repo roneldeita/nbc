@@ -1,6 +1,7 @@
 @extends('layouts/worker/template')
 @section('content')
 <div class="container" id="project_details">
+    <input type="hidden" id="pId" value="{{$project->id}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -144,75 +145,75 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
-<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+<script src="{{asset('js/core/general/notification.js')}}"></script>
 
-    <script type="text/javascript">
-    vm.SeenNotification({role : "worker", status : 2});
-	var deliverables = "{{$project->contract->deliverables}}";
-    deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
+<script type="text/javascript">
+Notification.Seen({role : "worker", projectId : pId});
+var deliverables = "{{$project->contract->deliverables}}";
+deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
 
-        var v = new Vue({
-            el : '#project_details',
-            data : {
-                id : "{{Auth::user()->id}}",
-                textUpdate : null,
-                selectedDeliverable : null,
-                deliverables : deliverables,
-                comment : null,
-                commented : false,
-                textUpdated : false,
-            },
-            computed : {
-                DeliverablePercentage : function () {
-                    var completed = 0;
-                    for (var i = 0; i < deliverables.length; i++) {
-                        if (this.deliverables[i].status) {
-                            completed++;
-                        }
+    var v = new Vue({
+        el : '#project_details',
+        data : {
+            id : "{{Auth::user()->id}}",
+            textUpdate : null,
+            selectedDeliverable : null,
+            deliverables : deliverables,
+            comment : null,
+            commented : false,
+            textUpdated : false,
+        },
+        computed : {
+            DeliverablePercentage : function () {
+                var completed = 0;
+                for (var i = 0; i < deliverables.length; i++) {
+                    if (this.deliverables[i].status) {
+                        completed++;
                     }
-
-                    return Math.floor((100 / this.deliverables.length) * completed);
                 }
-            },
-            methods : {
-                SelectDeliverable : function (deliverable) {
-                    this.selectedDeliverable = deliverable;
-                },
-                SaveComment : function () {
-                    this.commented = true;
 
-                    var dataToPost = {
-                        deliverable_id : this.selectedDeliverable.id,
-                        content : this.comment
-                    }
-
-                    this.$http.post('/worker/progress/comment', dataToPost).then(response => {
-
-                        location.reload();
-
-                    }, response => {
-
-
-                    });
-                },
-                SaveText : function (textId) {
-                    this.textUpdated = true;
-
-                    var dataToPost = {
-                        deliverable_id : this.selectedDeliverable.id,
-                        content : this.textUpdate
-                    }
-
-                    this.$http.post('/worker/progress/content', dataToPost).then(response => {
-                        location.reload();
-                    }, response => {
-
-
-                    });
-                },
+                return Math.floor((100 / this.deliverables.length) * completed);
             }
+        },
+        methods : {
+            SelectDeliverable : function (deliverable) {
+                this.selectedDeliverable = deliverable;
+            },
+            SaveComment : function () {
+                this.commented = true;
 
-        });
+                var dataToPost = {
+                    deliverable_id : this.selectedDeliverable.id,
+                    content : this.comment
+                }
 
-    </script>
+                this.$http.post('/worker/progress/comment', dataToPost).then(response => {
+
+                    location.reload();
+
+                }, response => {
+
+
+                });
+            },
+            SaveText : function (textId) {
+                this.textUpdated = true;
+
+                var dataToPost = {
+                    deliverable_id : this.selectedDeliverable.id,
+                    content : this.textUpdate
+                }
+
+                this.$http.post('/worker/progress/content', dataToPost).then(response => {
+                    location.reload();
+                }, response => {
+
+
+                });
+            },
+        }
+
+    });
+
+</script>
 @endsection

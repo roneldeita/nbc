@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('online')->nullable();
             $table->integer('role')->nullable(); // 1 - client , 2 - worker , 3 - coordinator
             $table->string('avatar')->nullable();
+            $table->string('background')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

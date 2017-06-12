@@ -1,6 +1,9 @@
 @extends('layouts/client/template')
 @section('content')
 <div class="container" id="project">
+    <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="pName" value="{{$project->name}}">
+    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}"> 
     <?php
         $budget = json_decode($project->budget_info);
     ?>

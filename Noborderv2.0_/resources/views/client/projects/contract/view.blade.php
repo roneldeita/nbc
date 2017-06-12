@@ -1,7 +1,13 @@
 @extends('layouts/client/template')
 
 @section('content')
-<div class="container" id="contract">
+<div class="container" id="project">
+    <input type="hidden" id="p" value="{{$project}}">
+    <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="pName" value="{{$project->name}}">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="pCId" value="{{$project->contract->id}}">
+    <input type="hidden" id="receiver" value="{{$project->contract->worker_id}}">
     <div class="row">
         <div class="col-md-12">
             <h2>
@@ -63,50 +69,13 @@
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
-<script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
+<script src="{{asset('js/core/general/message.js')}}"></script>
+<script src="{{asset('js/core/client/contract/index.js')}}"></script>
+<script src="{{asset('js/core/general/notification.js')}}"></script>
+
 
 <script type="text/javascript">
-vm.SeenNotification({role : "client", status : 3});
-vm.SeenNotification({role : "client", status : 4});
-    var v = new Vue({
-        el : '#contract',
-        data : {
-            approve : false
-        },
-        methods : {
-            Approve : function () {
-                this.$http.post("{{url('/client/contract/approve')}}", {id : "{{$project->contract->id}}"}).then(response => {
-                    var dataToEmit = {
-                        contract_id : "{{$project->contract->id}}",
-                        receiver : "{{$project->contract->worker->id}}",
-                        project : "{{$project}}",
-                        projectName : "{{$project->name}}",
-                        update : response.data.worker_approved,
-                        by : "client"
-                    }
-                    socket.emit('contract approve', dataToEmit);
-                    toastr.info('You approved the contract!');
-                    setTimeout(function() {
-                        location.reload();
-                        //window.location = '/client/projects/in_progress/{{HELPERDoubleEncrypt($project->id)}}';
-                    }, 5000);
-                    this.approve = true;
-                }, response => {
-
-                });
-            }
-        }
-    });
-    socket.on('project development', function (details) {
-        if (details.clientId == "{{Auth::user()->id}}") {
-            toastr.success('Your project is now on development!', ''+details.projectName);
-            addNotification('<li><a href=""><strong>Project Status Updated </strong>: '+ details.projectName +'</a></li>');
-             setTimeout(function() {
-                //location.reload();
-                window.location = '/client/projects/in_progress/{{HELPERDoubleEncrypt($project->id)}}';
-            }, 5000);
-        }
-    });
-
+Message.Seen({role : "client", projectId : pId});
+Notification.Seen({role : "client", projectId : pId});
 </script>
 @endsection

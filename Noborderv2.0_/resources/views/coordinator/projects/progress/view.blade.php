@@ -6,6 +6,7 @@
 @endsection()
 @section('content')
 <div class="container" id="project_details">
+    <input type="hidden" id="pId" value="{{$project->id}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -58,30 +59,22 @@
 
 
 @section('scripts')
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-    <script src="{{asset('temp/vue.js')}}"></script>
-    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-    <script type="text/javascript">
-        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-    </script>
-    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
-    <script type="text/javascript">
-	$(function(){
-		$('#summernote').summernote({
-			height:100
-		});
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
+<script src="{{asset('temp/vue.js')}}"></script>
+<script src="{{asset('temp/vue-resource.min.js')}}"></script>
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
+<script src="{{asset('js/core/general/message.js')}}"></script>
+<script src="{{asset('js/core/general/notification.js')}}"></script>
+<script type="text/javascript">
+$(function(){
+	$('#summernote').summernote({
+		height:100
 	});
+});
 
-        var v = new Vue({
-            el : '#project_details',
-            data : {
-
-            },
-            methods : {
-
-            },
-
-        });
-
-    </script>
+Message.Seen({role : "coordinator", projectId : pId});
+Notification.Seen({role : "coordinator", projectId : pId});
+</script>
 @endsection

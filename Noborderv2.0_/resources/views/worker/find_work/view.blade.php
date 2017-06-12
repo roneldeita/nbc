@@ -1,7 +1,7 @@
 @extends('layouts/worker/template')
 @section('content')
 <div style="height: 200px; margin-top:-22px;">
-	<img src="http://placehold.it/2000X400/6794B2" alt="" class="img-responsive" style="min-height: 400px">
+	<img src="{{Auth::user()->background}}"  class="img-responsive" style="height: 400px; width: 100%;">
 </div>
 <div class="container" id="proposal" style="margin-top:-100px">
 	<?php
@@ -124,7 +124,7 @@
 
 	                    	setTimeout(function() {
 	                    		window.location = "/worker/projects";
-	                    	}, 5000);
+	                    	}, TIME_INTERVAL);
 
                         } else {
                         	toastr.error('Theres a problem on your proposal!');
@@ -135,9 +135,6 @@
                     }, response => {
                     	toastr.error('Theres a problem on your proposal!');
                     });
-        			console.log(this.proposal);
-
-
     			}
     		}
     	});

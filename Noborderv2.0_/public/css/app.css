@@ -11,6 +11,21 @@
 body {
     color: #000;
 }
+.applicants { 
+	cursor: pointer;
+
+}
+.applicants:hover {
+	background-color: #BDBDBD;
+}
+
+.notification , .chat_message{
+	word-wrap: break-word; 
+	white-space: normal
+}
+.unseen {
+	background-color: #eee;
+}
 hr {
     border-color : #000;
 }
@@ -91,8 +106,8 @@ hr {
     color: #fff;
     text-decoration: underline;
 }
-.text-white.navbar-nav>li>a:active, a:visited, a:focus, a:link:active {
-	background-color: transparent;
+.text-white.navbar-nav>li>a:active, .text-white.navbar-nav>li> a:visited, .text-white.navbar-nav>li> a:focus,.text-white.navbar-nav>li>  a:link:active {
+	background-color: #001f31;
     color: #fff;
 }
 

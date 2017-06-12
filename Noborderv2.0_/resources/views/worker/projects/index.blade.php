@@ -1,7 +1,6 @@
 @extends('layouts/worker/template')
 
 @section('content')
-
 <div class="container">
 
     <div class="row">
@@ -23,7 +22,7 @@
                     <li><a data-toggle="tab" href="#closed">Finished</a></li>
                 </ul>
 
-                <div class="tab-content" style="padding: 0">
+                <div class="tab-content" style="padding: 0; min-height: 300px;">
                     <div id="proposal" class="tab-pane fade in active" style="padding: 0; min-height: 300px">
                         @if (count($proposalProjects) > 0)
                         <table class="table table-project">
@@ -43,21 +42,13 @@
                             </tbody>
                         </table>
                         @else
-                        <div style="width: 100%; height: 300px;" class="text-center">
-                            <a href="{{url('/worker/works')}}" class="empty_sample">
-                                <div style="width: 100%; height: 100%;">
-                                    <div style="padding: 80px 20px 20px 20px;">
-                                        <i class="i pe-7s-file pe-5x"></i>
-                                        <h1>Submit proposal to projects!</h1>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                            @include('worker/projects/empty')
                         @endif
                     </div>
 
 
                     <div id="contract" class="tab-pane fade" style="padding: 0; min-height: 300px">
+                        @if (count($contractProjects) > 0)
                         <table class="table table-project">
                             <tbody>
                                 <?php $i = 1;?>
@@ -74,9 +65,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('worker/projects/empty')
+                        @endif
                     </div>
 
                     <div id="progress" class="tab-pane fade" style="padding: 0; min-height: 300px">
+                        @if (count($progressProjects) > 0)
                         <table class="table table-project">
                             <tbody>
                                 <?php $i = 1;?>
@@ -93,6 +88,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('worker/projects/empty')
+                        @endif
                     </div>
 
                     <div id="closed" class="tab-pane fade" style="padding: 0; min-height: 300px">

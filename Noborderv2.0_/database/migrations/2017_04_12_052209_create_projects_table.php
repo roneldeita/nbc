@@ -27,6 +27,7 @@ class CreateProjectsTable extends Migration
             $table->text('deliverables');
             $table->text('terms_condition');
             $table->text('skills'); // set of ids in json form
+            $table->text('link')->nullable();
             $table->timestamps();
         });
     }

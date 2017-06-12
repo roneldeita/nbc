@@ -25,10 +25,10 @@
                 </ul>
 
                 <div class="tab-content" style="padding: 0">
-                    <div id="draft" class="tab-pane fade in active" style="padding: 0">
-
+                    <div id="draft" class="tab-pane fade in active" style="padding: 0; min-height : 300px;">
+                        @if (count($draftProjects) > 0)
                         <div class="input-group" style="width: 100%; padding:20px;">
-                            <input type="text" class="form-control" placeholder="e.g. 400" id="filterDraft">
+                            <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterDraft">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
 
@@ -57,14 +57,16 @@
                                 </tr>
                             </tfoot>
                         </table>
-
+                        @else 
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
 
-                    <div id="published" class="tab-pane fade" style="padding: 0">
-
+                    <div id="published" class="tab-pane fade" style="padding: 0; min-height : 300px;">
+                        @if(count($publishedProjects) > 0)
                         <div class="input-group" style="width: 100%; padding:20px;">
-                            <input type="text" class="form-control" placeholder="e.g. 400" id="filterPublished">
+                            <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterPublished">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
 
@@ -87,12 +89,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
-                    <div id="prescreening" class="tab-pane fade" style="padding: 0">
-
-                        <div class="input-group" style="width: 100%; padding:20px;">
-                            <input type="text" class="form-control" placeholder="e.g. 400" id="filterPrescreening">
+                    <div id="prescreening" class="tab-pane fade" style="padding: 0; min-height : 300px;">
+                        @if (count($matchingProjects) > 0)
+                        <div class="input-group" style="width: 100%; padding:20px;">    
+                            <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterPrescreening">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
 
@@ -114,12 +119,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
-                    <div id="contract" class="tab-pane fade" style="padding: 0">
-
-                        <div class="input-group" style="width: 100%; padding:20px;">
-                            <input type="text" class="form-control" placeholder="e.g. 400" id="filterContract">
+                    <div id="contract" class="tab-pane fade" style="padding: 0; min-height : 300px;">
+                        @if (count($contractProjects) > 0)
+                        <div class="input-group" style="width: 100%; padding:20px;">    
+                            <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterContract">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
 
@@ -141,14 +149,18 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
-                    <div id="progress" class="tab-pane fade" style="padding: 0">
-                        <table class="table table-project footable">
-                            <div class="input-group" style="width: 100%; padding:20px">
-                                <input type="text" class="form-control" placeholder="e.g. 400">
+                    <div id="progress" class="tab-pane fade" style="padding: 0; min-height : 300px;">
+                        @if (count($progressProjects) > 0)
+                        <div class="input-group" style="width: 100%; padding:20px">
+                                <input type="text" class="form-control" placeholder="e.g. Project Name">
                                 <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
-                            </div>
+                        </div>
+                        <table class="table table-project footable">
                             <tbody>
                                 <?php $i = 1;?>
                                 @foreach ($progressProjects as $project)
@@ -166,15 +178,19 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
-                    <div id="closed" class="tab-pane fade" style="padding: 0">
+                    <div id="closed" class="tab-pane fade" style="padding: 0; min-height : 300px;">
+                        @if (count($closedProjects) > 0)
+                        <div class="input-group" style="width: 100%; padding: 20px;">
+                            <input type="text" class="form-control" placeholder="e.g. 400">
+                            <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
+                        </div>
                         <table class="table table-project footable">
                             <tbody>
-                                <div class="input-group" style="width: 100%; padding: 20px;">
-                                    <input type="text" class="form-control" placeholder="e.g. 400">
-                                    <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
-                                </div>
                                 <?php $i = 1;?>
                                 @foreach ($closedProjects as $project)
                                 <tr>
@@ -192,6 +208,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @else
+                            @include('client/projects/empty')
+                        @endif
                     </div>
 
                 </div>

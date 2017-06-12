@@ -41,6 +41,7 @@ class HProject
         $project->deliverables = json_encode($request->get('deliverables'));
         $project->terms_condition = json_encode($request->get('termAndAgreements'));
         $project->skills = "{id : 1},{id : 2}";
+        $project->link = $request->get('link');
         $project->save();
         return $project;
 	}

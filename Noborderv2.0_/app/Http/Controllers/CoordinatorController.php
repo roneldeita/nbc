@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\User;
 use App\Contract;
+use App\Proposal;
 use App\Deliverable;
 use App\Term;
 use App\WorkerProjects;
@@ -56,6 +57,7 @@ class CoordinatorController extends Controller
         $worker_project->save();
 
         $container = array();
+        $container['project_id'] = $request->get('id');
         $container['type'] = 2;
         $container['to'] = $project->client_id;
         $container['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
@@ -63,6 +65,7 @@ class CoordinatorController extends Controller
         Notifications::CreateV2($container);
 
         $containerB = array();
+        $containerB['project_id'] = $request->get('id');
         $containerB['type'] = 2;
         $containerB['to'] = $request->get('worker_id');
         $containerB['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
@@ -78,7 +81,6 @@ class CoordinatorController extends Controller
         $project->save();
 
         $contract = new Contract;
-        $contract->name = $request->get('contract')["name"];
         $contract->cost = $request->get('contract')["cost"];
         $contract->days = $request->get('contract')["days"];
         $contract->worker_id = $request->get('contract')["worker_id"];
@@ -89,6 +91,7 @@ class CoordinatorController extends Controller
         $contract->save();
 
         $container = array();
+        $container['project_id'] = $request->get('id');
         $container['type'] = 3;
         $container['to'] = $project->client_id;
         $container['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
@@ -97,6 +100,7 @@ class CoordinatorController extends Controller
 
 
         $containerB = array();
+        $containerB['project_id'] = $request->get('id');
         $containerB['type'] = 3;
         $containerB['to'] = $contract->worker_id;
         $containerB['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
@@ -146,6 +150,7 @@ class CoordinatorController extends Controller
         $project->save();
 
         $container = array();
+        $container['project_id'] = $projectId;
         $container['type'] = 2;
         $container['to'] = $project->client_id;
         $container['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
@@ -158,6 +163,10 @@ class CoordinatorController extends Controller
     public function SendMessage (Request $request) {
         HMessage::Create($request);
     }
+    public function ReadMessage (Request $request) {
+        HMessage::Seen($request);
+    }
+    
     public function ContractApprove (Request $request) {
         $contract = Contract::find($request->get('id'));
         if ($contract) {
@@ -171,6 +180,11 @@ class CoordinatorController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('status'));
+        Notifications::MarkAsRead($request->get('projectId'));
+    }
+    public function ViewApplicantProposal (Request $request) {
+        $proposal = Proposal::where('worker_id', $request->get('id'))->with('worker', 'worker.skills.skill')->first();
+        return $proposal;
+
     }
 }

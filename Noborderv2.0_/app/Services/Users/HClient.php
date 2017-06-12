@@ -3,6 +3,7 @@
 namespace App\Services\Users;
 
 use Auth;
+use DB;
 
 use App\Project;
 use Facades\App\Services\HProject;
@@ -20,32 +21,36 @@ class HClient
         );
 	}
 
-    public function viewProject ($status) {
-            $result;
-            switch ($status) {
-                    case 1 :
-                        $result = 'client/projects/draft/view';
-                        break;
-                    case 2 :
-                        $result = 'client/projects/published/view';
-                        break;
-                    case 3 :
-                        $result = 'client/projects/prescreening/view';
-                        break;
-                    case 4 :
-                        $result = 'client/projects/contract/view';
-                        break;
-                    case 5 :
-                        $result = 'client/projects/progress/view';
-                        break;
-                    case 6 :
-                        $result = 'client/projects/closed/view';
-                        break;
-                    default :
-                        $result ='errors/404';
-                        break;
-            }
-            return $result;
+    public function viewProject ($project) {
+    switch ($project->status) {
+        case 1 :
+            return view('client/projects/draft/view')->with('project', $project);
+            break;
+        case 2 :
+            $applicants = DB::table('proposals')
+                        ->join('projects', 'proposals.project_id', '=', 'projects.id')
+                        ->join('users', 'proposals.worker_id', '=', 'users.id')
+                        ->where('projects.id', $project->id)
+                        ->select('users.id', 'users.name')
+                        ->get();
+            return view('client/projects/published/view')->with('project', $project)->with('applicants', $applicants);
+            break;
+        case 3 :
+            return view('client/projects/prescreening/view')->with('project', $project);
+            break;
+        case 4 :
+            return view('client/projects/contract/view')->with('project', $project);
+            break;
+        case 5 :
+            return view('client/projects/progress/view')->with('project', $project);
+            break;
+        case 6 :
+            $result = 'client/projects/closed/view';
+            break;
+        default :
+            $result ='errors/404';
+            break;
+    }
     }
 
 

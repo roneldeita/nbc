@@ -25,7 +25,7 @@ use Facades\App\Services\HMessage;
 class ClientController extends Controller
 {
     public function Index () {
-        return view('client/home/index');
+        return view('client/home/index',HClient::projects());
     }
 
     //::PROJECT
@@ -46,34 +46,24 @@ class ClientController extends Controller
                 return view('client/projects/created')->with('project', Project::find($projectId));
             }
 
-            public function ViewProject ($status, $hashedProjectId) {
+            public function ViewProject ($status, $hashedProjectId, Request $request) {
                 $projectId = HELPERDoubleDecrypt($hashedProjectId);
 
-                if (!is_numeric($projectId) || empty(Project::find($projectId))) {
+                if (!is_numeric($projectId)) {
                     return view('client/projects/invalid');
                 }
                 $project = Project::find($projectId);
-                if (HClient::identifyStatus($project->status) != $status) {
+                if (HClient::identifyStatus($project->status) != $status || $project->client_id != $request->user()->id) {
                     return view('client/projects/invalid');
                 }
-
-                if (HClient::identifyStatus($project->status) == 'in_progress') {
-                    $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
-                    return view('client/projects/progress/view')->with('project', $projectWithContractDetails);
-                }
-
-                // if ($status == "contract_signing") {
-                //     return view(HClient::viewProject($project->status))->with('project', $project)->with('applicants', $applicants);
+                
+                return HClient::viewProject($project);
+                
+                
+                // if (HClient::identifyStatus($project->status) == 'in_progress') {
+                //     $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
+                //     return view('client/projects/progress/view')->with('project', $projectWithContractDetails);
                 // }
-
-                $applicants = DB::table('proposals')
-                            ->join('projects', 'proposals.project_id', '=', 'projects.id')
-                            ->join('users', 'proposals.worker_id', '=', 'users.id')
-                            ->where('projects.id', $project->id)
-                            ->select('users.id', 'users.name')
-                            ->get();
-
-                return view(HClient::viewProject($project->status))->with('project', $project)->with('applicants', $applicants);
             }
 
         // -- POST
@@ -147,6 +137,7 @@ class ClientController extends Controller
             $contract->save();
 
             $container = array();
+            $container['project_id'] = $contract->project_id;
             $container['type'] = 4;
             $container['to'] = $contract->worker_id;
             $container['content'] = array("id" => $contract->project_id, "name" => $contract->project->name, "by" => "client");
@@ -154,6 +145,7 @@ class ClientController extends Controller
             Notifications::CreateV2($container);
 
             $containerB = array();
+            $containerB['project_id'] = $contract->project_id;
             $containerB['type'] = 4;
             $containerB['to'] = $contract->project->coordinator_id;
             $containerB['content'] = array("id" => $contract->project_id, "name" => $contract->project->name, "by" => "client");
@@ -173,8 +165,9 @@ class ClientController extends Controller
         HMessage::Seen($request);
     }
 
-    public function testing () {
-        return HMessage::All();
+    public function testing (Request $request) {
+        //return HMessage::All();
+        return $request->ip();
     }
 
     public function SaveDeliverableContent (Request $request) {
@@ -199,7 +192,7 @@ class ClientController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('status'));
+        Notifications::MarkAsRead($request->get('projectId'));
     }
 
 }

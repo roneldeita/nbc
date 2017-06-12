@@ -1,7 +1,7 @@
 @extends('layouts/client/template')
 
 @section('content')
-<div class="container"  id="project_details">
+<div class="container"  id="project">
     <div class="row">
         <div class="col-md-12">
         <h1>Create Project</h1><br>
@@ -69,6 +69,11 @@
                 <div class="panel-body">
                     <label class="project-label">Tell us more about your project.</label><br>
 
+                    <label>Link bla bla
+                    </label>
+                    <input type="text" v-model="newProject.link" class="form-control" placeholder="e.g. www.asdasd.com">
+                    <br>
+
                     <label>Description
                         <span class="text-danger" v-if="!newProject.description">*</span>
                     </label>
@@ -124,95 +129,13 @@
 
 
 @section('scripts')
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
 
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script> -->
+<script src="{{asset('temp/vue.js')}}"></script>
+<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 
+<script type="text/javascript">
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
 
-    <script src="{{asset('temp/vue.js')}}"></script>
-    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
-    <script type="text/javascript">
-    socket.on('greetings', function (data) {
-        console.log(data);
-    });
-
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-
-        new Vue({
-            el : '#project_details',
-            data : {
-                newProject : { client : 1, type : 'Select Here', name : '', budget : '', timeline : 'Choose term', description : '', deliverables : [], termAndAgreements : [] },
-                deliverable : '',
-                termAndAgreement : '',
-                submitted : false
-            },
-            computed : {
-                errors : function () {
-                    if (!this.newProject.deliverables.length > 0 || !this.newProject.termAndAgreements.length > 0) {
-                        return true;
-                    } else if (this.newProject.deliverables.length > 0 && this.newProject.termAndAgreements.length > 0) {
-                        for (var key in this.newProject) {
-                            if (this.newProject.type === 'Select Here' || this.newProject.timeline === 'Choose Term') {
-                                return true;
-                            } else if (!this.newProject[key]) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
-                        return false;
-                    } else {
-                        return false;
-                    }
-                }
-            },
-            methods : {
-                AddDeliverable : function () {
-                    var value = this.deliverable && this.deliverable.trim();
-                    if (!value) {
-                        return;
-                    }
-                    this.newProject.deliverables.push({
-                        name : value
-                    });
-                    this.deliverable = '';
-                },
-                RemoveDeliverable : function (deliverable) {
-                    this.newProject.deliverables.splice(this.newProject.deliverables.indexOf(deliverable), 1);
-                },
-                AddTermAndAgreement : function () {
-                    var value = this.termAndAgreement && this.termAndAgreement.trim();
-                    if (!value) {
-                        return;
-                    }
-                    this.newProject.termAndAgreements.push({
-                        name : value
-                    });
-                    this.termAndAgreement = '';
-                },
-                RemoveTermAndAgreement : function (termAndAgreement) {
-                    this.newProject.termAndAgreements.splice(this.newProject.termAndAgreements.indexOf(termAndAgreement), 1);
-                },
-                OnSubmitForm : function (e) {
-                    e.preventDefault();
-                    this.submitted = true;
-
-                    this.$http.post('save', this.newProject).then(response => {
-                        var dataToEmit = {
-                            "details" : response.data.details,
-                            "client" : response.data.client,
-                            "hashed" : response.data.redirect
-                        };
-                        //socket.emit('new project published', dataToEmit);
-                        window.location = "/client/projects/created/"+response.data.redirect;
-                        //window.location = "/client";
-                    }, response => {
-
-                    });
-                }
-            }
-        });
-    </script>
+<script src="{{asset('js/core/client/create.js')}}"></script>
 @endsection

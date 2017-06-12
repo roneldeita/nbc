@@ -75,6 +75,34 @@ function HELPERIdentifyCategory ($category) {
     }
     return $result;
 }
+// simplier version xD
+function HIS ($status) {
+    $result;
+    switch ($status) {
+        case 1 : 
+            $result = "draft";
+            break;
+        case 2 :
+            $result = "published";
+            break;
+        case 3 :
+            $result = "pre_screening";
+            break;
+        case 4 : 
+            $result = "contract_signing";
+            break;
+        case 5 : 
+            $result = "in_progress";
+            break;
+        case 6 : 
+            $result = "closed";
+            break;
+        default :
+            $result ='';
+            break;
+    }
+    return $result;
+}
 
 function HELPERIdentifyStatus ($status) {
 	$result;

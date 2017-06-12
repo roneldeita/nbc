@@ -35,7 +35,7 @@ class HMessage
 		DB::table('messages')
 			->where('project_id',$request->get('projectId'))
 			->where('to', Auth::user()->id)
-			->where('type', $request->get('status'))
+			//->where('type', $request->get('status'))
 			->update(['seen' => 1]);
 	}
 

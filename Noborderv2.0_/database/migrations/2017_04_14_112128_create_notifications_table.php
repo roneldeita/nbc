@@ -15,6 +15,7 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id');
             $table->integer('type'); // 1 - new project, 2 - Project Update,  3 - New Contract , 4 - Contract Signed/ Approve, *5 - Project Now On Progress // 11 - new proposal
             $table->integer('from'); 
             $table->integer('to');

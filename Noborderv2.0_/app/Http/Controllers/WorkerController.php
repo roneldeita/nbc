@@ -27,7 +27,7 @@ class WorkerController extends Controller
     //
 
     public function Index () {
-        return view('worker/home/index');
+        return view('worker/home/index',HWorker::projects());
     }
 
     public function IndexProfile () {
@@ -74,6 +74,7 @@ class WorkerController extends Controller
             HWorker::createProposal($request, $projectId);
             $project = Project::find($projectId);
             $container = array();
+            $container['project_id'] = $projectId;
             $container['type'] = 11;
             $container['to'] = $project->client_id;
             $container['content'] = array("id" => $projectId, "name" => $project->name);
@@ -81,6 +82,7 @@ class WorkerController extends Controller
             Notifications::CreateV2($container);
 
             $containerB = array();
+            $containerB['project_id'] = $projectId;
             $containerB['type'] = 11;
             $containerB['to'] = $project->coordinator_id;
             $containerB['content'] = array("id" => $projectId, "name" => $project->name);
@@ -151,6 +153,7 @@ class WorkerController extends Controller
             $contract->save();
 
             $container = array();
+            $container['project_id'] = $request->get('id');
             $container['type'] = 4;
             $container['to'] = $contract->client_id;
             $container['content'] = array("id" => $contract->project_id, "name" => $contract->project->name, "by" => "worker");
@@ -158,6 +161,7 @@ class WorkerController extends Controller
             Notifications::CreateV2($container);
 
             $containerB = array();
+            $containerB['project_id'] = $request->get('id');
             $containerB['type'] = 4;
             $containerB['to'] = $contract->project->coordinator_id;
             $containerB['content'] = array("id" => $contract->project_id, "name" => $contract->project->name, "by" => "worker");
@@ -186,7 +190,7 @@ class WorkerController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('status'));
+        Notifications::MarkAsRead($request->get('project_id'));
     }
 
     // SHOULD UPDATE

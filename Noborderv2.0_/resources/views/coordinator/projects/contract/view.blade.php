@@ -9,7 +9,13 @@
 </style>
 @endsection
 @section('content')
-<div class="container" id="project_details">
+<div class="container" id="project">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="pName" value="{{$project->name}}">
+    <input type="hidden" id="cId" value="{{$project->client_id}}"> 
+    <input type="hidden" name="wId" value="{{$project->contract->worker_id}}">
+
     <div class="row">
         <div class="col-md-12">
         <?php
@@ -70,9 +76,6 @@
                                         <label>Cost :</label><br>
                                         ${{$budget->budget}}<br>
                                     </div>
-                                    <div class="panel-footer">
-                                        <a href="" style="color:#000"> <i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i> View Contract</a>
-                                    </div>
                                 </div>
                             </div>
 
@@ -88,87 +91,22 @@
 
 
 @section('scripts')
-    <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
 
-    <script src="{{asset('temp/vue.js')}}"></script>
-    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-    <script type="text/javascript">
-        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-    </script>
-    <script type="text/javascript" src="{{asset('js/tempV.js')}}"></script>
-    <script type="text/javascript">
-    function identifyRes (ca, wa) {
-        if (ca == 1 && wa == 1) {
-            return true;
-        }
-        return false;
-    }
-    var worker_approved = {{$project->contract->worker_approved}};
-    var client_approved = {{$project->contract->client_approved}};
+<script src="{{asset('temp/vue.js')}}"></script>
+<script src="{{asset('temp/vue-resource.min.js')}}"></script>
+<script type="text/javascript">
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+</script>
+<script src="{{asset('js/core/general/message.js')}}"></script>
+<script src="{{asset('js/core/general/notification.js')}}"></script>
+<script src="{{asset('js/core/coordinator/contract/index.js')}}"></script>
+<script type="text/javascript">
+contract.worker_approved = {{$project->contract->worker_approved}};
+contract.client_approved = {{$project->contract->client_approved}};
 
-    console.log(identifyRes(worker_approved, client_approved));
-    toastr.options = {
-        "timeOut": "5000",
-        "positionClass" : "toast-top-right",
-        "progressBar": true,
-    };
+Message.Seen({role : "coordinator", projectId : pId});
+Notification.Seen({role : "coordinator", projectId : pId});
 
-
-    var v = new Vue({
-        el : "#project_details",
-        data : {
-            updateProject : false,
-            worker_approved : worker_approved,
-            client_approved : client_approved,
-        },
-        computed : {
-            canUpdate : function () {
-                if (this.worker_approved == 1 && this.client_approved == 1) {
-                    return false;
-                }
-                return true;
-            }
-        },
-        methods : {
-            UpdateProjectStatus : function () {
-                this.updateProject = true;
-
-                this.$http.post("{{url('/coordinator/projects/worker/assign')}}", {id : "{{$project->id}}", worker_id : "{{$project->contract->worker_id}}"}).then(response => {
-                    var dataToEmit = {
-                            clientId : "{{$project->client_id}}",
-                            workerId : "{{$project->contract->worker_id}}",
-                            projectName :"{{$project->name}}",
-                            projectId : "{{$project->id}}"
-                        };
-                    socket.emit('project development', dataToEmit);
-                    toastr.success('Project Updated  Successfully!');
-
-
-                    setTimeout(function() {
-                        window.location = '/coordinator/projects/in_progress/{{HELPERDoubleEncrypt($project->id)}}';
-                    }, 5000);
-                }, response => {
-
-                });
-            }
-        }
-    });
-
-    socket.on('contract approve', function (details) {
-        if (details.contract_id == "{{$project->contract->id}}") {
-            if (details.by == "worker") {
-                toastr.info('Worker signed the contract', ''+details.projectName);
-                $("#worker_approved").addClass("panel-success");
-                $("#worker_approved_text").html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Associate Approved the Contract');
-                v.$data.worker_approved = 1;
-            } else {
-                toastr.info('Client signed the contract', ''+details.projectName);
-                $("#client_approved").addClass("panel-success");
-                $('#client_approved_text').html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Client Approved the Contract');
-                v.$data.client_approved = 1;
-            }
-        }
-    });
-
-    </script>
+</script>
 @endsection

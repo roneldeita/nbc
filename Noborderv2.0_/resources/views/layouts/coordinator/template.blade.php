@@ -31,6 +31,7 @@
     </script>
 </head>
 <body>
+    <input type="hidden" id="aId" value="{{Auth::user()->id}}">
     <div id="app">
         <nav class="navbar background-secondary-nbc ">
             <div class="container">
@@ -94,75 +95,19 @@
 
         @yield('content')
     </div>
-    <script type="text/javascript" src="{{asset('js/cons.js')}}"></script>
+
     <script src="{{asset('temp/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('temp/bootstrap.min.js')}}"></script>
     <script src="{{asset('temp/toastr.min.js')}}"></script>
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
-
     <script src="{{asset('js/footable.all.min.js')}}"></script>
 
-    <script type="text/javascript">
-    var socket = io.connect(LOCALPORT);
-    toastr.options = {
-        "timeOut": "5000",
-        "positionClass" : "toast-top-right",
-        "progressBar": true,
-    };
-    socket.on('new project published', function (data) {
-        var details = data.details;
-        if (details.coordinator_id == "{{Auth::user()->id}}") {
+    <script src="{{asset('js/core/general/cons.js')}}"></script>
+    <script src="{{asset('js/core/general/setup.js')}}"></script>
+    <script src="{{asset('js/core/general/namDOM.js')}}"></script>
+    <script src="{{asset('js/core/general/checkUrl.js')}}"></script>
+    <script src="{{asset('js/core/coordinator/socket.js')}}"></script>
 
-            // toastr.options = {
-            //     "timeOut": "5000",
-            //     "positionClass" : "toast-bottom-left"
-            // };
-
-            addNotification('<li><a href=""><strong>New Project </strong>: '+ details.name +'</a></li>');
-            toastr.info(''+details.name ,'New Project Created');
-        }
-    });
-
-
-
-    if (!urlForProjects()) {
-        socket.on('new message', function (details) {
-            if (details.receiver == "{{Auth::user()->id}}") {
-                toastr.info('You have new message!', ''+details.projectName);
-                addMessage('<li><a href="">'+ details.projectName +'</a></li>');
-                console.log(details);
-            }
-        });
-    }
-
-
-    function urlForProjects () {
-        var pathArray = window.location.pathname.split("/");
-        if (pathArray[2] == "projects" && typeof pathArray[3] != "undefined" ) {
-            return true;
-        }
-    }
-
-    function addNotification (data) {
-        var badge = parseInt($('#notificationsBadge').text());
-        if (isNaN(badge)) {
-            badge = 0;
-        }
-        var final = badge + 1;
-        $('#notificationsBadge').text(""+final);
-        //$('#notificationsMenu').prepend(data);
-    }
-
-    function addMessage (data) {
-        var badge = parseInt($('#messagesBadge').text());
-        if (isNaN(badge)) {
-            badge = 0;
-        }
-        var final = badge + 1;
-        $('#messagesBadge').text(""+final);
-        //$('#messagesMenu').prepend(data);
-    }
-    </script>
     @yield('scripts')
 </body>
 </html>

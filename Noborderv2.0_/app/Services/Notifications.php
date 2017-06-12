@@ -11,6 +11,7 @@ class Notifications
 
 	public function Create ($project, $type) {
 		$notification = new Notification;
+		$notification->project_id = $project->id;
 		$notification->type = $type;
 		$notification->from = $project->client_id;
 		$notification->to = $project->coordinator_id;
@@ -21,6 +22,7 @@ class Notifications
 
 	public function CreateV2 ($data) {
 		$notification = new Notification;
+		$notification->project_id = $data['project_id'];
 		$notification->type = $data['type'];
 		$notification->from = Auth::user()->id;
 		$notification->to = $data['to'];
@@ -42,8 +44,8 @@ class Notifications
 		$notification = Notification::where('to', $id)->where('seen', 2)->where('type', 1)->orderBy('id', 'desc')->get();
 		return $notification;
 	}
-	public function MarkAsRead ($type) {
-		DB::table('notifications')->where('to', Auth::user()->id)->where('type', $type)->update(['seen' => 1]);
+	public function MarkAsRead ($id) {
+		DB::table('notifications')->where('to', Auth::user()->id)->where('project_id', $id)->update(['seen' => 1]);
 	}
 
 	public function MarkAsReadOld ($id) {
