@@ -46,7 +46,7 @@ class SocialAccountController extends Controller
         $user->email = $provider->getEmail();
         $user->verified = 1;
         $user->avatar = $provider->getAvatar();
-        $user->background = "http://localhost:8000/images/default_background.jpg";
+        $user->background = "http://noborderclub.herokuapp:8000/images/default_background.jpg";
         //$user->avatar = 'http://graph.facebook.com/'.$provider->getId().'/picture';
         //$user->role = 1; // 1 - client , 2 - worker , 3 - coordinator
         $user->save();
