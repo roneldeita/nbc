@@ -3,8 +3,8 @@
 
 <div class="container" id="project">
     <input type="hidden" id="pId" value="{{$project->id}}">
-    <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="receiver" value="{{$project->client_id}}">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="p" value="{{$project}}">
     <div class="row">
         <div class="col-md-12">
         <?php

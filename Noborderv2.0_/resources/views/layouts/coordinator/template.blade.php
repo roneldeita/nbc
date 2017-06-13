@@ -32,6 +32,7 @@
 </head>
 <body>
     <input type="hidden" id="aId" value="{{Auth::user()->id}}">
+    <input type="hidden" id="mr" value="coordinator">
     <div id="app">
         <nav class="navbar background-secondary-nbc ">
             <div class="container">
@@ -102,6 +103,7 @@
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
     <script src="{{asset('js/footable.all.min.js')}}"></script>
 
+    <script src="{{asset('js/core/general/helper.js')}}"></script>
     <script src="{{asset('js/core/general/cons.js')}}"></script>
     <script src="{{asset('js/core/general/setup.js')}}"></script>
     <script src="{{asset('js/core/general/namDOM.js')}}"></script>

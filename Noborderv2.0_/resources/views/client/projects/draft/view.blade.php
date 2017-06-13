@@ -2,8 +2,8 @@
 @section('content')
 <div class="container" id="project">
     <input type="hidden" id="pId" value="{{$project->id}}">
-    <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="receiver" value="{{$project->coordinator->id}}">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="p" value="{{$project}}">
     <?php
         $budget = json_decode($project->budget_info);
     ?>
@@ -111,9 +111,10 @@
                 success : function (response) {
                     response = JSON.parse(response);
                     var dataToEmit = {
-                        details : response.details,
-                        client : response.client,
-                        hashed : response.redirect
+                        project : JSON.parse($("#p").val().replace(/&quot;/g,'"')),
+                        type : 1,
+                        hPId : $("#hPId").val(),
+                        newStatus : "published"
                     };
                     socket.emit('new project published', dataToEmit);
                     window.location = "/client/projects/published/"+response.redirect;

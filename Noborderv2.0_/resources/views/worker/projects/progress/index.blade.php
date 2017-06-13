@@ -1,7 +1,8 @@
 @extends('layouts/worker/template')
 @section('content')
-<div class="container" id="project_details">
+<div class="container" id="projects">
     <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="p" value="{{$project}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php

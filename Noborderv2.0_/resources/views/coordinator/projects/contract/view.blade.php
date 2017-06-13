@@ -12,10 +12,8 @@
 <div class="container" id="project">
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
-    <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="cId" value="{{$project->client_id}}">
-    <input type="hidden" id="pCId" value="{{$project->contract->id}}">
-    <input type="hidden" name="wId" value="{{$project->contract->worker_id}}">
+    <input type="hidden" id="p" value="{{$project}}">
+    <input type="hidden" id="c" value="{{$project->contract}}">
 
     <div class="row">
         <div class="col-md-12">

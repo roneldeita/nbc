@@ -11,11 +11,11 @@ class HMessage
 {
 	public function Create ($request){
 		$message = new Message;
-		$message->project_id = $request->get('projectId');
+		$message->project_id = $request->get('project_id');
 		$message->message = $request->get('message');
 		$message->to = $request->get('receiver');
 		$message->from = Auth::user()->id;
-		$message->type = $request->get('status');
+		$message->type = $request->get('project_status');
 		$message->seen = 2;
 		$message->save();
 	}
@@ -57,7 +57,7 @@ class HMessage
 			(select messages.project_id from messages where created_at = max(a.created_at) AND id = max(a.id)) as project_id,
 			(select messages.type from messages where created_at = max(a.created_at) AND id = max(a.id)) as type
 			from messages a join projects ON projects.id = a.project_id
-			WHERE a.to = ".Auth::user()->id."
+			WHERE a.to = ".Auth::user()->id." OR a.from = ".Auth::user()->id."
 			group by projects.name ORDER BY id DESC");
 
 		$seen = collect($messages)->pluck('seen');

@@ -3,11 +3,9 @@
 @section('content')
 <div class="container" id="project">
     <input type="hidden" id="p" value="{{$project}}">
+    <input type="hidden" id="c" value="{{$project->contract}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
-    <input type="hidden" id="pName" value="{{$project->name}}">
-    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
-    <input type="hidden" id="pCId" value="{{$project->contract->id}}">
-    <input type="hidden" id="receiver" value="{{$project->contract->worker_id}}">
+    <input type="hidden" id="pHId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <div class="row">
         <div class="col-md-12">
             <h2>

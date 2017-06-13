@@ -7,6 +7,8 @@
 @section('content')
 <div class="container" id="project_details">
     <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="p" value="{{$project}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php

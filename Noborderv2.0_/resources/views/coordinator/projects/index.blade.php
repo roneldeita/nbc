@@ -190,17 +190,6 @@
 
 @section('scripts')
 <script type="text/javascript">
-    socket.on('new project published', function (data) {
-        var client = data.client;
-        var details = data.details;
-        var hashed = data.hashed;
-        if (details.coordinator_id == {{Auth::user()->id}}) {
-            var id = $('#publishedTable tbody tr').length + 1;
-            var url = window.location+'/'+hashed;
-            $('#publishedTable tbody').append('<tr><td>'+id+'</td><td>'+details.name+'</td><td>'+client.name+'</td><td>--</td><td><a href="'+url+'" class="btn btn-secondary-nbc btn-sm"><i style="font-size: 15px; font-weight:bold;margin-right: 5px" class="pe-7s-note2 pe-2x"></i> View </a></td></tr>');
-        }
-    });
-
     $('.footable').footable();
 </script>
 @endsection

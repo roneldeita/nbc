@@ -5,7 +5,8 @@ var prescreening = new Vue({
         deliverables : null,
         terms : null,
         worker : null,
-        submit : false
+        submit : false,
+        project : JSON.parse($("#p").val().replace(/&quot;/g,'"')),
     },
     computed : {
         errors : function () {
@@ -27,15 +28,14 @@ var prescreening = new Vue({
         CreateContract : function () {
             this.submit = true;
 
-            this.$http.post('/coordinator/projects/contract', { id : $("#pId").val(), contract : this.contract, deliverables : this.deliverables, terms : this.termsAndConditions}).then(response => {
+            this.$http.post('/coordinator/projects/contract', { id : this.project.id, contract : this.contract, deliverables : this.deliverables, terms : this.termsAndConditions}).then(response => {
 
                 var dataToEmit = {
-                projectName : $("#pName").val(),
-                projectId : $("#pId").val(),
-                clientId : $("#cId").val(),
-                workerId : this.contract.worker_id
+                    hPId : $("#pHId").val(),
+                    project : this.project,
+                    contract : this.contract,
+                    type : 3
                 }
-
                 socket.emit('new contract', dataToEmit);
                 toastr.success('Contract Successfully Created!');
                 window.location = "/coordinator/projects/contract_signing/"+$("#hPId").val();

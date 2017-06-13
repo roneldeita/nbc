@@ -4,6 +4,8 @@ var contract = new Vue({
         updateProject : false,
         worker_approved : null,
         client_approved : null,
+        contract : JSON.parse($("#c").val().replace(/&quot;/g,'"')),
+        project : JSON.parse($("#p").val().replace(/&quot;/g,'"')),
     },
     computed : {
         canUpdate : function () {
@@ -17,13 +19,13 @@ var contract = new Vue({
         UpdateProjectStatus : function () {
             this.updateProject = true;
 
-            this.$http.post("/coordinator/projects/worker/assign", {id : $("#pId").val(), worker_id : ("#wId").val()}).then(response => {
+            this.$http.post("/coordinator/projects/worker/assign", {id : this.contract.client_id, worker_id : this.contract.worker_id}).then(response => {
                 var dataToEmit = {
-                        clientId : $("#cId").val(),
-                        workerId : $("#wId").val(),
-                        projectName : $("#pName").val(),
-                        projectId : $("#pId").val()
-                    };
+                    hPId : $("#hPId").val(),
+                    contract : this.contract,
+                    project : this.project,
+                    type : 2
+                };
                 socket.emit('project development', dataToEmit);
                 toastr.success('Project Updated  Successfully!');
 

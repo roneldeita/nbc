@@ -4,7 +4,9 @@
 @endsection
 @section('content')
 <div class="container" id="project">
+    <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
+    <input type="hidden" id="p" value="{{$project}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -156,7 +158,7 @@
 <script src="{{asset('js/core/client/progress/index.js')}}"></script>
 <script type="text/javascript">
 Message.Seen({role : "client", projectId : pId});
-Notification.Seen({role : "client", projectId : pId});    
+Notification.Seen({role : "client", projectId : pId});
 var deliverables = "{{$project->contract->deliverables}}";
 progress.deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
 </script>

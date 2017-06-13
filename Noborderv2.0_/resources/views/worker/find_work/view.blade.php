@@ -8,6 +8,9 @@
     	$budget = json_decode($project->budget_info);
 	?>
 	<input type="hidden" id="project_id" value="{{HELPERDoubleEncrypt($project->id)}}">
+	<input type="hidden" id="p" value="{{$project}}">
+	<input type="hidden" id="w" value="{{Auth::user()}}">
+
 	<div class="row">
 		<div class="col-md-12">
 
@@ -114,11 +117,10 @@
                         if (response.data.status == "2000" || response.data.status == 2000) {
 	                        toastr.success('Proposal Submitted  Successfully!');
 							var dataToEmit = {
-								projectName : "{{$project->name}}",
-								clientId : "{{$project->client_id}}",
-								projectId : "{{$project->id}}",
-								status : "{{$project->status}}",
-								worker : "{{Auth::user()}}",
+								project : JSON.parse($("#p").val()),
+								worker : $("#w").val(),
+								hPId : $("#project_id").val(),
+								type : 11
 							}
 							socket.emit('new applicant', dataToEmit);
 

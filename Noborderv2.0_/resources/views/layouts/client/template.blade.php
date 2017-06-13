@@ -30,6 +30,7 @@
 </head>
 <body>
     <input type="hidden" id="aId" value="{{Auth::user()->id}}">
+    <input type="hidden" id="mr" value="client">
     <div id="app">
         <nav class="navbar background-secondary-nbc">
             <div class="container">
@@ -110,6 +111,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
 
+    <script src="{{asset('js/core/general/helper.js')}}"></script>
     <script src="{{asset('js/core/general/cons.js')}}"></script>
     <script src="{{asset('js/core/general/setup.js')}}"></script>
     <script src="{{asset('js/core/general/namDOM.js')}}"></script>
