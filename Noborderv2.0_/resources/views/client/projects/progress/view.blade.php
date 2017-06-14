@@ -160,6 +160,7 @@
 Message.Seen({role : "client", projectId : pId});
 Notification.Seen({role : "client", projectId : pId});
 var deliverables = "{{$project->contract->deliverables}}";
-progress.deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
+deliverables = deliverables == "" ? null : JSON.parse(deliverables.replace(/&quot;/g,'"'));
+progress.deliverables = deliverables;
 </script>
 @endsection
