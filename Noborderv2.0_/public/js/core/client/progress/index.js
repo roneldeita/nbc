@@ -12,13 +12,13 @@ var progress = new Vue({
     computed : {
         DeliverablePercentage : function () {
             var completed = 0;
-
-            for (var i = 0; i < this.deliverables.length; i++) {
-                if (this.deliverables[i].status) {
-                    completed++;
+            if (this.deliverables != null) {
+                for (var i = 0; i < this.deliverables.length; i++) {
+                    if (this.deliverables[i].status) {
+                        completed++;
+                    }
                 }
             }
-            
             return Math.floor((100 / this.deliverables.length) * completed);
         }
     },
