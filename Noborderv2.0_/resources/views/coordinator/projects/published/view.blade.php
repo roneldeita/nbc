@@ -104,7 +104,6 @@
                                         </div>
                                     @endslot
                                 @endcomponent
-
                             </div>
                         </div>
                     </div>

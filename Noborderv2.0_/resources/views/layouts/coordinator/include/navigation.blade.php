@@ -14,8 +14,9 @@
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 1)
-                    <a href="{{url('/coordinator/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Project </strong>: {{$project->name}}
+                    <a href="{{url('/coordinator/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                        <strong>New Project </strong> <br>
+                        <span>{{$project->name}}</span>
                     </a>
                     @endif
                 </li>
@@ -33,7 +34,7 @@
                 <li id="{{$message->project_id}}">
                     <a href="{{url('/coordinator/projects/'.HELPERIdentifyStatus($message->type)['_status'].'/'.HELPERDoubleEncrypt($message->project_id))}}" class="chat_message {{$message->seen == 2 ? 'unseen' : ''}}">
                         <strong>{{$message->name}}</strong><br>
-                        <span>{{$message->message}}</span>
+                        <span>{{str_limit($message->message, 20)}} ...</span>
                     </a>
                 </li>
             @endforeach

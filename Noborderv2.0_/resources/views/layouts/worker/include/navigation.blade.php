@@ -18,17 +18,20 @@
                     ?>
                     @if ($notification->type == 2)
                         @if (json_decode($notification->content)->status == 5)
-                        <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                            <strong>Project Development </strong>: {{$project->name}}
+                        <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                            <strong>Project Development </strong>
+                            <br> {{$project->name}}
                         </a>
                         @endif
                     @elseif ($notification->type == 3)
-                    <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Contract </strong>: {{$project->name}}
+                    <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                        <strong>New Contract </strong>
+                        <br>{{$project->name}}
                     </a>
                     @elseif ($notification->type == 4)
-                    <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Contract </strong>: {{$project->name}}
+                    <a href="{{url('worker/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                        <strong>New Contract </strong>
+                        <br> {{$project->name}}
                     </a>
                     @endif
                 </li>

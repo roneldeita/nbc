@@ -86,5 +86,60 @@ if (urlForContract()) {
             }
         }
     });
+} else {
+    socket.on('contract approve', function (details) {
+        var project = details.project;
+        var contract = details.contract;
+        var by = details.by;
 
+        if (project.coordinator_id == aId) {
+            if (by == "worker") {
+                toastr.info('Worker signed the contract', ''+project.name);
+                addNotification(details);
+            } else {
+                toastr.info('Client signed the contract', ''+project.name);
+                addNotification(details);
+            }
+        }
+    });
+}
+
+if (!urlForProgress()) {
+    socket.on('progress comment', function (details) {
+        var project = details.project;
+        if (project.coordinator_id = aId) {
+            toastr.success('Worker Commented', ''+project.name);
+            addNotification(details);
+        }
+    });
+
+    socket.on('progress update', function (details) {
+        var project = details.project;
+        if (project.coordinator_id_id = aId) {
+            toastr.success('Worker Update', ''+project.name);
+            addNotification(details);
+        }
+    });
+} else {
+    socket.on('progress comment', function (details) {
+        var project = details.project;
+        var deliverable = details.deliverable;
+        var comment = details.comment;
+
+        // else (project.client_id = aId) {
+        //     toastr.success('Worker Commented', ''+project.name);
+        //     addNotification(details);
+        // }
+    });
+
+    socket.on('progress update', function (details) {
+        var project = details.project;
+        var deliverable = details.deliverable;
+        var text = details.text;
+
+        // else (project.client_id = aId) {
+        //     toastr.success('Worker Update', ''+project.name);
+        //     addNotification(details);
+        // }
+    });
 }

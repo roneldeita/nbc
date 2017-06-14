@@ -14,20 +14,24 @@
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 2)
-                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id) )}}" class="{{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>Project Status Updated</strong> : {{$project->name}}
+                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id) )}}" class="{{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                        <strong>Project Status Updated</strong> 
+                        <br>{{$project->name}}
                     </a>
                     @elseif ($notification->type == 3)
-                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Contract</strong> : {{$project->name}}
+                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                        <strong>New Contract</strong> 
+                        <br> {{$project->name}}
                     </a>
                     @elseif ($notification->type == 4)
-                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>Contract Approval</strong> : {{$project->name}}
+                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                        <strong>Contract Approval</strong> 
+                        <br> {{$project->name}}
                     </a>
                     @elseif ($notification->type == 11)
-                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Applicant</strong> : {{$project->name}}
+                    <a href="{{url('/client/projects/'.HIS($notification->project->status).'/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                        <strong>New Applicant</strong> 
+                        <br>{{$project->name}}
                     </a>
                     @endif
                 </li>
@@ -45,7 +49,7 @@
                 <li id="{{$message->project_id}}">
                     <a href="{{url('/client/projects/'.HELPERIdentifyStatus($message->type)['_status'].'/'.HELPERDoubleEncrypt($message->project_id))}}" class="chat_message {{$message->seen == 2 ? 'unseen' : ''}}">
                         <strong>{{$message->name}}</strong><br>
-                        {{$message->message}}
+                        <span>{{str_limit($message->message, 20)}} ...</span>
                     </a>
                 </li>
             @endforeach

@@ -47,24 +47,31 @@ var published = new Vue({
         },
         UpdateProjectStatus : function (project_id, status) {
             this.updateProject = true;
-
-            this.$http.post("/coordinator/projects/status/update", {id : project_id, status : status}).then(response => {
-                if (response.data.status == 200 || response.data.status == "200") {
-                    var dataToEmit = {
-                        hPId : $("#hPId").val(),
-                        project : this.project,
-                        newStatus : response.data.projectStatus,
-                        type : 2
-                    };
-                    socket.emit('project update', dataToEmit);
-                    toastr.success('Project Updated  Successfully!');
-                    setTimeout(function() {
-                        window.location = '/coordinator/projects/'+response.data.projectStatus+'/'+response.data.redirect;
-                    }, TIME_INTERVAL);
-                }
-            }, response => {
-
-            });
+            var dataToEmit = {
+                hPId : $("#hPId").val(),
+                project : this.project,
+                newStatus : response.data.projectStatus,
+                type : 2
+            };
+            socket.emit('project update', dataToEmit);
+            console.log(this.project);
+            // this.$http.post("/coordinator/projects/status/update", {id : project_id, status : status}).then(response => {
+            //     if (response.data.status == 200 || response.data.status == "200") {
+            //         var dataToEmit = {
+            //             hPId : $("#hPId").val(),
+            //             project : this.project,
+            //             newStatus : response.data.projectStatus,
+            //             type : 2
+            //         };
+            //         socket.emit('project update', dataToEmit);
+            //         toastr.success('Project Updated  Successfully!');
+            //         setTimeout(function() {
+            //             window.location = '/coordinator/projects/'+response.data.projectStatus+'/'+response.data.redirect;
+            //         }, TIME_INTERVAL);
+            //     }
+            // }, response => {
+            //
+            // });
         }
 
     }

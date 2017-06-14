@@ -4,7 +4,7 @@ if (!urlForContract()) {
         var project = details.project;
     	if (contract.client_id == aId) {
     		toastr.info('You have new contract signing!', ''+project.name);
-            //addNotification();
+            addNotification(details);
     	}
     });
 } else {
@@ -18,16 +18,19 @@ if (!urlForContract()) {
             setTimeout(function() {
                 window.location = '/client/projects/contract_signing/'+$("#hPId").val();
             }, TIME_INTERVAL);
-        } else if (details.clientId == aId) {
-            toastr.info('You have new contract signing!', ''+details.projectName);
-            addNotification('<li><a href=""><strong>New Contract </strong>: '+ details.projectName +'</a></li>');
+        } else if (project.client_id == aId) {
+            toastr.info('You have new contract signing!', ''+project.name);
+            addNotification(details);
         }
     });
 }
 socket.on('contract approve', function (details) {
-    if (details.receiver == aId) {
-        toastr.info('Worker approved to contract!', ''+details.projectName +'');
-        addNotification('<li><a href=""><strong>Contract Approval </strong>: '+ details.projectName +'</a></li>');
+    var contract = details.contract;
+    var project = details.project;
+
+    if (contract.client_id == aId) {
+        toastr.info('Worker approved to contract!', ''+project.name +'');
+        addNotification(details);
     }
 });
 
@@ -42,10 +45,14 @@ if (!urlForProjects()) {
         }
     });
     socket.on('project update', function (details) {
-        if (details.clientId == aId) {
-            toastr.success('Your project updated to '+ details.status +'!', ''+details.projectName);
+        var project = details.project;
+        var hPId = details.hPId;
+        var status = (!('newStatus' in details)) ? identifyStatus(project.status) : data.newStatus;
+        if (project.client_id == aId) {
+            toastr.success('Your project updated to '+ status +'!', ''+project.name);
             addNotification(details);
         }
+        console.log(details);
     });
 } else {
 	var pId = document.getElementById("pId").value;
@@ -69,7 +76,7 @@ if (!urlForProjects()) {
 	socket.on('project update', function (details) {
         var project = details.project;
         var hPId = details.hPId;
-        var status = (!('newStatus' in data)) ? identifyStatus(project.status) : data.newStatus;
+        var status = (!('newStatus' in details)) ? identifyStatus(project.status) : data.newStatus;
         if (project.id == pId) {
             toastr.success('Your project updated to Prescreening!');
             setTimeout(function() {
@@ -128,5 +135,45 @@ if (!urlForPublished()) {
             toastr.info('You have new applicant!', ''+project.name);
             addNotification(details);
         }
+    });
+}
+
+if (!urlForProgress()) {
+    socket.on('progress comment', function (details) {
+        var project = details.project;
+        if (project.client_id = aId) {
+            toastr.success('Worker Commented', ''+project.name);
+            addNotification(details);
+        }
+    });
+
+    socket.on('progress update', function (details) {
+        var project = details.project;
+        if (project.client_id = aId) {
+            toastr.success('Worker Update', ''+project.name);
+            addNotification(details);
+        }
+    });
+} else {
+    socket.on('progress comment', function (details) {
+        var project = details.project;
+        var deliverable = details.deliverable;
+        var comment = details.comment;
+
+        // else (project.client_id = aId) {
+        //     toastr.success('Worker Commented', ''+project.name);
+        //     addNotification(details);
+        // }
+    });
+
+    socket.on('progress update', function (details) {
+        var project = details.project;
+        var deliverable = details.deliverable;
+        var text = details.text;
+
+        // else (project.client_id = aId) {
+        //     toastr.success('Worker Update', ''+project.name);
+        //     addNotification(details);
+        // }
     });
 }

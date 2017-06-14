@@ -32,3 +32,13 @@ function urlForContract () {
     }
 }
 
+
+
+//noborderclub/role/projects/contract_signing
+function urlForProgress () {
+    var pathArray = window.location.pathname.split("/");
+    if (pathArray[2] == "projects" && pathArray[3] == "in_progress" ) {
+        return true;
+    }
+}
+
