@@ -14,6 +14,7 @@
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="p" value="{{$project}}">
     <input type="hidden" id="c" value="{{$project->contract}}">
+    <input type="hidden" id="pCId" value="{{$project->contract->id}}">
 
     <div class="row">
         <div class="col-md-12">

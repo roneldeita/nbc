@@ -128,9 +128,12 @@ if (!urlForPublished()) {
         var project = details.project;
         var worker = details.worker;
         if (project.id == pId) {
+            var worker = JSON.parse(details.worker.replace(/&quot;/g,'"'));
+            if (published.$data.applicants == null || published.$data.applicants == "") {
+                published.$data.applicants = [];
+                published.$data.applicants.push(worker);
+            }
             toastr.info('You have new applicant!', ''+project.name);
-            var applicant = JSON.parse(worker.replace(/&quot;/g,'"'));
-            published.$data.applicants.push(applicant);
         } else if (project.client_id == aId) {
             toastr.info('You have new applicant!', ''+project.name);
             addNotification(details);
