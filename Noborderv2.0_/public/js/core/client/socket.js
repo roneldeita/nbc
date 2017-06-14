@@ -76,7 +76,7 @@ if (!urlForProjects()) {
 	socket.on('project update', function (details) {
         var project = details.project;
         var hPId = details.hPId;
-        var status = (!('newStatus' in details)) ? identifyStatus(project.status) : data.newStatus;
+        var status = (!('newStatus' in details)) ? identifyStatus(project.status) : details.newStatus;
         if (project.id == pId) {
             toastr.success('Your project updated to Prescreening!');
             setTimeout(function() {
