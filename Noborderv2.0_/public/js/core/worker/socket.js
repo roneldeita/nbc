@@ -48,7 +48,7 @@ if (!urlForContract()) {
             // setTimeout(function() {
 
             // }, TIMEINTERVAL);
-            this.approve = true;
+            //this.approve = true;
         }
     });
 }

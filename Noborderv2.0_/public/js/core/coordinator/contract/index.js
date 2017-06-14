@@ -19,7 +19,7 @@ var contract = new Vue({
         UpdateProjectStatus : function () {
             this.updateProject = true;
 
-            this.$http.post("/coordinator/projects/worker/assign", {id : this.contract.client_id, worker_id : this.contract.worker_id}).then(response => {
+            this.$http.post("/coordinator/projects/worker/assign", {id : this.project.id, worker_id : this.contract.worker_id}).then(response => {
                 var dataToEmit = {
                     hPId : $("#hPId").val(),
                     contract : this.contract,
