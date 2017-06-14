@@ -111,9 +111,9 @@
                     </span>
         		</div>
         		<div id="contract_body" class="panel-body panel-collapse collapse" style="max-height:300px; overflow-y:auto">
-                    <p >This CONTRACT OF AGREEMENT, is entered into made effective this {{date('d', strtotime($project->contract->created_at))}} day of {{date('F, y', strtotime($project->contract->created_at))}},
-                        by and between {{Auth::user()->name}} (client) and {{$project->contract->worker->name }} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
-                        herein contained, the parties hereby agree to the Kill Sleepy requirements as follows:
+                    <p >This CONTRACT OF AGREEMENT, is entered into made effective this <strong>{{date('d', strtotime($project->contract->created_at))}} day of {{date('F, y', strtotime($project->contract->created_at))}} </strong>
+                        by and between <strong> {{Auth::user()->name}} (<i>client</i>) </strong> and {{$project->contract->worker->name}} (associate). NOW THEREFORE, in consideration of the foregoing, and the mutual promises
+                        herein contained, the parties hereby agree to the <strong>{{$project->name}}</strong> requirements as follows:
                     </p>
 
                     <div class="row">
