@@ -4,7 +4,7 @@ var progress = new Vue({
         id : pId,
         textUpdate : null,
         selectedDeliverable : null,
-        deliverables : deliverables,
+        deliverables : null,
         comment : null,
         commented : false,
         textUpdated : false
