@@ -1,76 +1,67 @@
 @extends('layouts/coordinator/template')
 @section('styles')
 <style>
-    ul.c {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    }
+.selection {
+list-style-type: none;
+margin-left: -50px;
+}
 
-    ul.c > li {
-    display: inline-block;
-    float: left;
-    }
+.selection li {
+display: inline-block;
+}
 
-    input[type="radio"][name="associate"] {
-    display: none;
-    }
+.selection input[type="radio"][name="associate"] {
+display: none;
+}
 
-    label.c {
-    font-family: FontAwesome;
-    border: 1px solid #fff;
-    display: block;
-    position: relative;
-    margin: 5px;
-    cursor: pointer;
-    }
+.selection label {
+font-family: FontAwesome;
+border: 1px solid #fff;
+display: block;
+position: relative;
+margin: 10px;
+cursor: pointer;
+}
 
-    label.c:before {
-    background-color: white;
-    color: white;
-    content: " ";
-    display: block;
-    border-radius: 50%;
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    line-height: 28px;
-    transition-duration: 0.4s;
-    transform: scale(0);
-    }
+.selection label:before {
+background-color: white;
+color: white;
+content: " ";
+display: block;
+border-radius: 50%;
+position: absolute;
+top: -5px;
+left: -5px;
+width: 25px;
+height: 25px;
+text-align: center;
+line-height: 28px;
+transition-duration: 0.4s;
+transform: scale(0);
+}
 
-    label.c img {
-    height: 100px;
-    width: 100px;
-    transition-duration: 0.2s;
-    transform-origin: 50% 50%;
-    }
-    label.c p {
-    text-align: center;
-    width: 100px;
-    font-family: Raleway,sans-serif;
-    margin-top: 5px;
-    font-size: 12px;
-    }
+.selection label img {
+height: 100px;
+width: 100px;
+transition-duration: 0.2s;
+transform-origin: 50% 50%;
+}
 
-    :checked + label {
-    border-color: #5cb85c;
-    }
+.selection input:checked + label {
+ border-color: #5cb85c ;
+}
 
-    :checked + label:before {
-    content: "\f00c";
-    background-color: #5cb85c;
-    z-index: 1;
-    transform: scale(1.1);
-    }
+.selection input:checked + label:before {
+ content: "\f00c";
+ background-color: #5cb85c ;
+ z-index: 1;
+ transform: scale(1.1);
+}
 
-    :checked + label img {
-    transform: scale(0.9);
-    z-index: -1;
-    }
+.selection input:checked + label img {
+ transform: scale(0.9);
+ z-index: -1;
+}
 </style>
 @endsection
 @section('content')
@@ -93,10 +84,12 @@
                     <div style="height : 300px; width : 100%; overflow-x : auto; overflow-y : auto; border : 1px solid #ddd; margin-bottom : 10px">
                         <div style="margin: 10px">
                             <h3>Applicants</h3>
-                            <ul class="c">
+                            <ul class="selection">
                                 @foreach($applicants as $applicant)
-                                    <li><input type="radio" name="associate" id="{{$applicant->id}}" @click='ChooseWorker("{{$applicant->id}}", "{{$applicant->days}}", "{{$applicant->amount}}")'   />
-                                    <label class="c" for="{{$applicant->id}}"><img class="img img-circle" src="http://lorempixel.com/100/100" />
+                                    <li><input type="radio" name="associate" id="avatar{{$applicant->id}}" @click='ChooseWorker("{{$applicant->id}}", "{{$applicant->days}}", "{{$applicant->amount}}")'   />
+                                    <label for="avatar{{$applicant->id}}" style="text-align:center">
+                                        <img class="img img-circle" src="{{asset('images/default_avatar.png')}}" height="100" width="100" />
+                                        <br>
                                         {{$applicant->name}}
                                     </label>
                                     </li>
