@@ -4,7 +4,7 @@ var progress = new Vue({
         id : pId,
         textUpdate : null,
         selectedDeliverable : null,
-        deliverables : null,
+        deliverables : JSON.parse($("#deliverables").val().replace(/&quot;/g,'"')),
         comment : null,
         commented : false,
         textUpdated : false
@@ -12,13 +12,13 @@ var progress = new Vue({
     computed : {
         DeliverablePercentage : function () {
             var completed = 0;
-            if (this.deliverables != null) {
-                for (var i = 0; i < this.deliverables.length; i++) {
-                    if (this.deliverables[i].status) {
-                        completed++;
-                    }
+
+            for (var i = 0; i < this.deliverables.length; i++) {
+                if (this.deliverables[i].status) {
+                    completed++;
                 }
             }
+
             return Math.floor((100 / this.deliverables.length) * completed);
         }
     },

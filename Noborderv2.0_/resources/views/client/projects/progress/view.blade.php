@@ -7,6 +7,7 @@
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="p" value="{{$project}}">
+    <input type="hidden" id="deliverables" value="{{$project->contract->deliverables}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
