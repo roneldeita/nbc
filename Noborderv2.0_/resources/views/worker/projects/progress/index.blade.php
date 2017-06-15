@@ -6,6 +6,7 @@
     <input type="hidden" id="p" value="{{$project}}">
     <input type="hidden" id="ca" value="{{strtotime($project->created_at)}}">
     <input type="hidden" id="deliverables" value="{{$project->contract->deliverables}}">
+    <input type="hidden" id="aName" value="{{Auth::user()->name}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -47,20 +48,21 @@
                 <h3>Comments</h3>
                     <div v-if="selectedDeliverable.comments.length > 0">
                         <div class="well" v-for="comment in selectedDeliverable.comments">
-                            <strong> @{{comment.by.name}} @{{comment.user_id == id ? '(You)' : '' }} </strong> :  @{{comment.content}}
+                            <strong> @{{comment.by.name}} @{{comment.user_id == user_id ? '(You)' : '' }} </strong> :  @{{comment.content}}
                         </div>
                     </div>
                 <hr>
-
-                    <textarea name="name" class="form-control" rows="4" v-model="comment"></textarea><br>
-                    <button v-if="!commented" type="button" class="btn btn-secondary-nbc  pull-right" v-bind:disabled="!comment" @click="SaveComment()">
-                        <i class="pe-7s-check" style="font-size : 18px;"></i>
-                        Post
-                    </button>
-                    <button v-if="commented" type="button" class="btn btn-secondary-nbc  pull-right" disabled>
-                        <i class="pe-7s-check" style="font-size : 18px;"></i>
-                        Post
-                    </button>
+                    <div v-if="selectedDeliverable.status == 0">
+                        <textarea name="name" class="form-control" rows="4" v-model="comment"></textarea><br>
+                        <button v-if="!commented" type="button" class="btn btn-secondary-nbc  pull-right" v-bind:disabled="!comment" @click="SaveComment()">
+                            <i class="pe-7s-check" style="font-size : 18px;"></i>
+                            Post
+                        </button>
+                        <button v-if="commented" type="button" class="btn btn-secondary-nbc  pull-right" disabled>
+                            <i class="pe-7s-check" style="font-size : 18px;"></i>
+                            Post
+                        </button>
+                    </div>
                 </div>
 
                 <br>
@@ -155,7 +157,7 @@
 <script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/worker/progress/index.js')}}"></script>
 <script type="text/javascript">
-Notification.Seen({role : "worker", projectId : pId, notificationId : });
+Notification.Seen({role : "worker", projectId : pId });
 var deliverables = "{{$project->contract->deliverables}}";
 deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
 progress.deliverables = deliverables;

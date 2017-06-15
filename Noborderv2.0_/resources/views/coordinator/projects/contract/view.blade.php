@@ -11,6 +11,7 @@
 @section('content')
 <div class="container" id="project">
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
+    <input type="hidden" id="hCId" value="{{HELPERDoubleEncrypt($project->contract->id)}}">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="p" value="{{$project}}">
     <input type="hidden" id="c" value="{{$project->contract}}">

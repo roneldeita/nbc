@@ -26,7 +26,7 @@ if (!urlForProjects()) {
     });
 }
 
-if (!urlForContract()) {
+if (!urlForContractWorker()) {
     socket.on('project development', function (details) {
         var project = details.project;
         var contract = details.contract;
@@ -34,6 +34,7 @@ if (!urlForContract()) {
         if (contract.worker_id == aId) {
             toastr.success('Your have new project assigned!', ''+project.name);
             //addNotification('<li><a href=""><strong>Project Development </strong>: '+ details.projectName +'</a></li>');
+            console.log('asd');
         }
     });
 } else {
@@ -41,12 +42,12 @@ if (!urlForContract()) {
         var project = details.project;
         var contract = details.contract;
 
-        if (contract.worker_id == aId) {
+        if (contract.worker_id == aId && project.id == $("#pId").val()) {
             toastr.success('Your have new project assigned!', ''+project.name);
             //addNotification('<li><a href=""><strong>Project Development </strong>: '+ details.projectName +'</a></li>');
-            // setTimeout(function() {
-
-            // }, TIMEINTERVAL);
+            setTimeout(function() {
+                window.location = '/worker/contract_signing/'+details.hCId;
+            }, TIME_INTERVAL);
             //this.approve = true;
         }
     });
@@ -74,10 +75,13 @@ if (!urlForProgress()) {
         var deliverable = details.deliverable;
         var comment = details.comment;
 
-        // else (project.client_id = aId) {
-        //     toastr.success('Worker Commented', ''+project.name);
-        //     addNotification(details);
-        // }
+        if (details.worker_id == aId && project.id == $("#pId").val()) {
+
+            // toastr.success('Worker Commented', ''+project.name);
+            // addNotification(details);
+            //console.log(deliverables[details.index]);
+            deliverables[details.index].comments.push(comment);
+        }
     });
 
     socket.on('progress update', function (details) {

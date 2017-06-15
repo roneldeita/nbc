@@ -3,7 +3,7 @@
         <a href="{{url('/worker/works')}}">Find Work</a>
     </li>
     <li>
-    	<a href="{{url('/worker/projects')}}">Projects</a>
+    	<a href="{{url('/worker/projects')}}">My Projects</a>
     </li>
     <li class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">Notifications
@@ -12,24 +12,28 @@
         <ul class="dropdown-menu scrollable-menu" id ="notificationsMenu">
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
-                <li id="notif{{strtotime($notification->created_at)}}">
+
                     <?php
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 2)
+                    <li id="notif{{strtotime($notification->created_at)}}">
                         @if (json_decode($notification->content)->status == 5)
                         <a href="{{url('worker/projects/in_progress/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
                             <strong>Project Development </strong>
                             <br> {{$project->name}}
                         </a>
                         @endif
+                    </li>
                     @elseif ($notification->type == 3)
-                    <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
-                        <strong>New Contract </strong>
-                        <br>{{$project->name}}
-                    </a>
+                    <li id="notif{{strtotime($notification->created_at)}}">
+                        <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                            <strong>New Contract </strong>
+                            <br>{{$project->name}}
+                        </a>
+                    </li>
                     @endif
-                </li>
+
             @endforeach
         @endif
         </ul>
@@ -48,6 +52,12 @@
                     </a>
                 </li>
             @endforeach
+        @else
+        <li>
+            <a>
+                <strong>No Messages Yet</strong>
+            </a>    
+        </li>
         @endif
         </ul>
     </li>

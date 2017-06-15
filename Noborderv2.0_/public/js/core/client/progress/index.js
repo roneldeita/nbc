@@ -2,12 +2,14 @@ var progress = new Vue({
     el : '#project',
     data : {
         id : pId,
+        user_id : $("#aId").val(),
         textUpdate : null,
         selectedDeliverable : null,
-        deliverables : JSON.parse($("#deliverables").val().replace(/&quot;/g,'"')),
         comment : null,
         commented : false,
-        textUpdated : false
+        textUpdated : false,
+        project : JSON.parse($("#p").val().replace(/&quot;/g,'"')),
+        deliverables : JSON.parse($("#deliverables").val().replace(/&quot;/g,'"')),
     },
     computed : {
         DeliverablePercentage : function () {
@@ -25,8 +27,6 @@ var progress = new Vue({
     methods : {
         SelectDeliverable : function (deliverable) {
             this.selectedDeliverable = deliverable;
-            console.log(this.selectedDeliverable);
-            console.log(this.deliverables);
         },
         SaveComment : function () {
             this.commented = true;
@@ -36,7 +36,24 @@ var progress = new Vue({
                 content : this.comment
             }
 
+
+
             this.$http.post('/client/progress/comment', dataToPost).then(response => {
+                var dataToEmit = {
+                    hPId : $('#hPId').val(),
+                    project : this.project,
+                    deliverable : this.selectedDeliverable,
+                    comment : {
+                        by : {
+                            name : $('#aName').val()
+                        },
+                        user_id : aId,
+                        content : this.comment
+                    },
+                    index : this.deliverables.indexOf(this.selectedDeliverable),
+                    worker_id : this.project.contract.worker_id
+                }
+                socket.emit('progress comment', dataToEmit);
 
                 location.reload();
 

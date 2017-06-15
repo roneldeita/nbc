@@ -22,6 +22,7 @@ var contract = new Vue({
             this.$http.post("/coordinator/projects/worker/assign", {id : this.project.id, worker_id : this.contract.worker_id}).then(response => {
                 var dataToEmit = {
                     hPId : $("#hPId").val(),
+                    hCId : $("#hCId").val(),
                     contract : this.contract,
                     project : this.project,
                     type : 2

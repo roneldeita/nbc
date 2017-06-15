@@ -151,6 +151,7 @@ if (!urlForProgress()) {
             toastr.success('Worker Commented', ''+project.name);
             addNotification(details);
         }
+        //console.log(details);
     });
 
     socket.on('progress update', function (details) {
@@ -159,6 +160,7 @@ if (!urlForProgress()) {
             toastr.success('Worker Update', ''+project.name);
             addNotification(details);
         }
+        //console.log(details);
     });
 } else {
     socket.on('progress comment', function (details) {
@@ -166,10 +168,14 @@ if (!urlForProgress()) {
         var deliverable = details.deliverable;
         var comment = details.comment;
 
-        // else (project.client_id = aId) {
-        //     toastr.success('Worker Commented', ''+project.name);
-        //     addNotification(details);
-        // }
+        if (project.client_id == aId && project.id == pId) {
+
+            // toastr.success('Worker Commented', ''+project.name);
+            // addNotification(details);
+            //console.log(deliverables[details.index]);
+            deliverables[details.index].comments.push(comment);
+        }
+        //console.log(details);
     });
 
     socket.on('progress update', function (details) {
@@ -177,9 +183,11 @@ if (!urlForProgress()) {
         var deliverable = details.deliverable;
         var text = details.text;
 
-        // else (project.client_id = aId) {
-        //     toastr.success('Worker Update', ''+project.name);
-        //     addNotification(details);
-        // }
+        if (project.client_id = aId && project.id == pId) {
+            // toastr.success('Worker Update', ''+project.name);
+            // addNotification(details);
+            deliverables[details.index].content = {content : details.text};
+        }
+        //console.log(details);
     });
 }

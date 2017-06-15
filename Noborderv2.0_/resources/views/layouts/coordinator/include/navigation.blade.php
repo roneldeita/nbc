@@ -1,6 +1,6 @@
 <ul class="nav navbar-nav navbar-left text-white">
     <li>
-        <a href="{{url('/coordinator/projects')}}">Projects</a>
+        <a href="{{url('/coordinator/projects')}}">My Projects</a>
     </li>
     <li class="dropdown">
         <a href="" class="dropdown-toggle" data-toggle="dropdown">Notifications
@@ -9,17 +9,19 @@
         <ul class="dropdown-menu scrollable-menu" id ="notificationsMenu">
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
-                <li id="notif{{strtotime($notification->created_at)}}">
+
                     <?php
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 1)
-                    <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
-                        <strong>New Project </strong> <br>
-                        <span>{{$project->name}}</span>
-                    </a>
+                    <li id="notif{{strtotime($notification->created_at)}}">
+                        <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
+                            <strong>New Project </strong> <br>
+                            <span>{{$project->name}}</span>
+                        </a>
+                    </li>
                     @endif
-                </li>
+
             @endforeach
         @endif
         </ul>
@@ -38,6 +40,12 @@
                     </a>
                 </li>
             @endforeach
+        @else
+        <li>
+            <a>
+                <strong>No Messages Yet</strong>
+            </a>    
+        </li>
         @endif
         </ul>
     </li>

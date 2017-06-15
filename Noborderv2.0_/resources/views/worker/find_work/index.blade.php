@@ -102,5 +102,29 @@
 @section('scripts')
 <script type="text/javascript">
 	$('.footable').footable();
+
+	$('a.toggle').click(function(){
+		if($('#steps').css('display') == 'block'){
+			toggleStep("hidden");
+		}else{
+			toggleStep("shown");
+		}
+	});
+
+	$(function(){
+		toggleStep(localStorage.step);
+	});
+
+	function toggleStep(status){
+		if(status == 'shown'){
+			localStorage.step = "shown";
+			$('#steps').fadeIn(300);
+			$('.toggle').removeClass('pe-7s-angle-down').addClass('pe-7s-angle-up');
+		}else{
+			localStorage.step = "hidden";
+			$('#steps').fadeOut(300);
+			$('.toggle').removeClass('pe-7s-angle-up').addClass('pe-7s-angle-down');
+		}
+	}
 </script>
 @endsection

@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar background-secondary-nbc">
             <div class="container">
                 <div class="navbar-header">
 
@@ -38,7 +38,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="{{asset('images/homepage/NBCLogo_White-01.svg')}}" style="height:45px; margin-top:-10px">
                     </a>
                 </div>
 
@@ -49,7 +49,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right text-white">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>

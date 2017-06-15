@@ -32,6 +32,12 @@ function urlForContract () {
     }
 }
 
+function urlForContractWorker () {
+    var pathArray = window.location.pathname.split("/");
+    if (pathArray[2] == "contract_signing" ) {
+        return true;
+    }
+}
 
 
 //noborderclub/role/projects/contract_signing

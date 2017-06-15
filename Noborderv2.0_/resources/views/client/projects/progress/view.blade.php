@@ -8,6 +8,7 @@
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="p" value="{{$project}}">
     <input type="hidden" id="deliverables" value="{{$project->contract->deliverables}}">
+    <input type="hidden" id="aName" value="{{Auth::user()->name}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -49,7 +50,7 @@
                 <h3>Comments</h3>
                     <div v-if="selectedDeliverable.comments.length > 0">
                         <div class="well" v-for="comment in selectedDeliverable.comments">
-                            <strong> @{{comment.by.name}} @{{comment.user_id == id ? '(You)' : '' }} </strong> :  @{{comment.content}}
+                            <strong> @{{comment.by.name}} @{{comment.user_id == user_id ? '(You)' : '' }} </strong> :  @{{comment.content}}
                         </div>
                     </div>
                 <hr>

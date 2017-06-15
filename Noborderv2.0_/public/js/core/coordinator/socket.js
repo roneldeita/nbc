@@ -111,35 +111,45 @@ if (!urlForProgress()) {
             toastr.success('Worker Commented', ''+project.name);
             addNotification(details);
         }
+        //console.log(details);
     });
 
     socket.on('progress update', function (details) {
         var project = details.project;
-        if (project.coordinator_id_id = aId) {
+        if (project.coordinator_id = aId) {
             toastr.success('Worker Update', ''+project.name);
             addNotification(details);
         }
+        //console.log(details);
     });
 } else {
     socket.on('progress comment', function (details) {
         var project = details.project;
         var deliverable = details.deliverable;
         var comment = details.comment;
-
+        //console.log(details);
         // else (project.client_id = aId) {
         //     toastr.success('Worker Commented', ''+project.name);
         //     addNotification(details);
         // }
+        if (project.coordinator_id = aId) {
+            toastr.success('Worker Commented', ''+project.name);
+            addNotification(details);
+        }
     });
 
     socket.on('progress update', function (details) {
         var project = details.project;
         var deliverable = details.deliverable;
         var text = details.text;
-
+        //console.log(details);
         // else (project.client_id = aId) {
         //     toastr.success('Worker Update', ''+project.name);
         //     addNotification(details);
         // }
+        if (project.coordinator_id = aId) {
+            toastr.success('Worker Update', ''+project.name);
+            addNotification(details);
+        }
     });
 }
