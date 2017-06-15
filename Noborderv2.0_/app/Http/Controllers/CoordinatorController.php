@@ -33,7 +33,7 @@ class CoordinatorController extends Controller
         }
         $project = Project::find($projectId);
         if (HCoordinator::identifyStatus($project->status) != $status) {
-            return view('coordinator/projects/invalid');
+            return view('coordinator/projects/outdated');
 
         }
         $applicants = DB::table('proposals')
@@ -63,6 +63,7 @@ class CoordinatorController extends Controller
         $container['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
 
         Notifications::CreateV2($container);
+        // $forClientNotification = Notifications::CreateV2($container);
 
         $containerB = array();
         $containerB['project_id'] = $request->get('id');
@@ -71,6 +72,7 @@ class CoordinatorController extends Controller
         $containerB['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
 
         Notifications::CreateV2($containerB);
+        // $forWorkerNotification = Notifications::CreateV2($container);
 
         return $project;
     }
@@ -97,7 +99,7 @@ class CoordinatorController extends Controller
         $container['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
 
         Notifications::CreateV2($container);
-
+        // $forClientNotification = Notifications::CreateV2($container);
 
         $containerB = array();
         $containerB['project_id'] = $request->get('id');
@@ -106,7 +108,7 @@ class CoordinatorController extends Controller
         $containerB['content'] = array("id" => $project->id, "name" => $project->name, "status" => $project->status);
 
         Notifications::CreateV2($containerB);
-
+        // $forWorkerNotification = Notifications::CreateV2($container);
 
         for ($i = 0; $i < count($request->get('deliverables')); $i++) {
             $deliverable = new Deliverable;

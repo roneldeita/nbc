@@ -108,6 +108,7 @@ class WorkerController extends Controller
 
         $project = Project::find($projectId);
         $proj = HELPERIdentifyStatus($project->status);
+
         // check if its published or pre screening
         if ($proj['_status'] == 'published' || $proj['_status'] == 'pre_screening') {
             if ($status != 'proposal') {
@@ -126,7 +127,7 @@ class WorkerController extends Controller
         }
 
         if ($proj['_status'] != $status) {
-            return 'Invalid Id';
+            return view('worker/projects/outdated');
         }
     }
 
@@ -138,7 +139,7 @@ class WorkerController extends Controller
 
         $contract = Contract::find($contractId);
         if ($contract->project->status != 4) {
-            return 'invalid id';
+            return view('worker/projects/outdated');
         }
         if ($contract->worker_id != $request->user()->id) {
             return 'Invalid Id';

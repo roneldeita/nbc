@@ -54,12 +54,12 @@ class ClientController extends Controller
                 }
                 $project = Project::find($projectId);
                 if (HClient::identifyStatus($project->status) != $status || $project->client_id != $request->user()->id) {
-                    return view('client/projects/invalid');
+                    return view('client/projects/outdated');
                 }
-                
+
                 return HClient::viewProject($project);
-                
-                
+
+
                 // if (HClient::identifyStatus($project->status) == 'in_progress') {
                 //     $projectWithContractDetails = Project::where('id', $projectId)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
                 //     return view('client/projects/progress/view')->with('project', $projectWithContractDetails);

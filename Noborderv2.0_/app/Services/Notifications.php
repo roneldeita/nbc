@@ -30,6 +30,8 @@ class Notifications
 		$notification->seen = 2;
 		$notification->save();
 
+
+		//return $notification;
 	}
 
 	public function All ($id) {
