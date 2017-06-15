@@ -1,4 +1,4 @@
-@extends('layouts/client/template')
+@extends('layouts/coordinator/template')
 
 @section('styles')
 <style media="screen">

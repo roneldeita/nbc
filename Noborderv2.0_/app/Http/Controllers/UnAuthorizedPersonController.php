@@ -29,7 +29,7 @@ class UnAuthorizedPersonController extends Controller
         if ($user) {
             $user->verified = 1;
             $user->save();
-            return redirect('/');
+            return redirect('/login');
         }
         return view('errors/404');
     }
