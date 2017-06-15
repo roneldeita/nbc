@@ -6,7 +6,7 @@
 ?>
 <div style="position: relative; margin-top:-22px">
     <div style="height: 200px">
-        <img src="http://placehold.it/2000X400/6794B2" alt="" class="img-responsive" style="min-height: 400px">
+        <img src="http://placehold.it/2000X400/6794B2" class="img-responsive" style="min-height: 400px">
     </div>
     <div class="container" style="margin-top: -100px;">
 

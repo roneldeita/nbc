@@ -58,6 +58,12 @@
             $budget = json_decode($project->budget_info);
         ?>
         <h2># {{$project->name}} <span class="label {{$getStatusData['class']}}" style="font-size:18px; font-weight: normal; margin: 10px; border-radius: 20px; padding:5px 25px;">{{$getStatusData['status']}}</span>
+
+            <button v-if="!updateProject" type="button" v-bind:disabled="applicants == null" class="pull-right btn btn-info" @click='UpdateProjectStatus( "{{HELPERDoubleEncrypt($project->id)}}", 3)' >Start Prescreening</button>
+
+            <button v-else v-cloak type="button" class="pull-right btn btn-info" disabled>Start Developing<i class="fa fa-circle-o-notch fa-spin fa-fw "></i></button>
+
+
         </h2>
         <br>
             <div class="card">
