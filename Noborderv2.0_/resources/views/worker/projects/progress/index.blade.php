@@ -95,6 +95,9 @@
         		</div>
         		<div id="project_body" class="panel-body panel-collapse collapse"style="max-height:300px; overflow-y:auto">
                     {{$project->description}}
+                    <br>
+                    <label>File Link :</label><br>
+                    {{$project->link}}<br>
         		</div>
         	</div>
             <div class="panel panel-default">

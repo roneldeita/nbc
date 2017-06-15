@@ -29,6 +29,9 @@
 					<br>
 					<h4>Project Description</h4>
 					<p>{{$project->description}}</p>
+					<br>
+					<h4>Project File Link</h4>
+					<p>{{$project->link}}</p>
 				</div>
 			</div>
 		</div>

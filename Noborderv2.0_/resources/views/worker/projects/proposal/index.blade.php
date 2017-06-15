@@ -42,6 +42,8 @@
                                 <p>
                                     {{$proposal->project->description}}
                                 </p>
+                                <p><strong>Project File Link</strong></p>
+            					<p>{{$proposal->project->link}}</p>
                             </div>
                         </div>
 

@@ -75,6 +75,8 @@
                                         {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br>
                                         <label>Cost :</label><br>
                                         ${{$budget->budget}}<br>
+                                        <label>File Link :</label><br>
+                                        {{$project->link}}<br>
                                     </div>
                                 </div>
                             </div>

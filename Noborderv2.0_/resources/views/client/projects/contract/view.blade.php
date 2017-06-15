@@ -14,6 +14,22 @@
             </h2>
             <br>
             <div class="panel panel-default">
+        		<div class="panel-heading">
+        			Project Description
+                    <span class="pull-right">
+                        <a href="#project_body" data-toggle="collapse">
+                            <i class="pe-7s-angle-up" style="font-size : 24px; font-weight:bold; color : #000"></i>
+                        </a>
+                    </span>
+        		</div>
+        		<div id="project_body" class="panel-body panel-collapse collapse"style="max-height:300px; overflow-y:auto">
+                    {{$project->description}}
+                    <br>
+                    <label>File Link :</label><br>
+                    {{$project->link}}<br>
+        		</div>
+        	</div>
+            <div class="panel panel-default">
                 <div class="panel-body">
                     <h3 class="text-center">Contract Agreement</h3>
                     <div class="text-center" style="width: 700px; margin : auto; font-size : 18px">

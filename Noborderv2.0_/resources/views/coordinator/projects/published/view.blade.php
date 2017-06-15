@@ -1,4 +1,50 @@
-@extends('layouts/coordinator/template')
+@extends('layouts/client/template')
+
+@section('styles')
+<style media="screen">
+  .bordered{
+    border: 1px solid #dddddd;
+  }
+  .applicant-list{
+    list-style: none;
+  }
+  .applicant-list li{
+    margin-left: -40px;
+    padding: 5px;
+  }
+  .applicant-list a{
+    cursor: pointer;
+  }
+  .applicant-list .active{
+    background-color: #999999;
+    color: #ffffff;
+  }
+  .applicant-list li:not(.active):hover{
+    background-color: lightgrey;
+    color: #ffffff;
+  }
+  .applicant-list img{
+    margin-right: -20px;
+  }
+  .applicant-list p{
+    line-height: 0px;
+  }
+  .fa-star{
+    color: gold;
+  }
+  .skills li{
+    margin-bottom: 3px;
+    margin-right: 3px;
+  }
+  .well{
+    padding: 15px 5px 0px;
+  }
+  .row{
+    padding: 0px;
+  }
+</style>
+@endsection
+
 @section('content')
 
 <div class="container" id="project">
@@ -12,11 +58,6 @@
             $budget = json_decode($project->budget_info);
         ?>
         <h2># {{$project->name}} <span class="label {{$getStatusData['class']}}" style="font-size:18px; font-weight: normal; margin: 10px; border-radius: 20px; padding:5px 25px;">{{$getStatusData['status']}}</span>
-
-        <button v-if="!updateProject" type="button" v-bind:disabled="applicants == null" class="pull-right btn btn-info" @click='UpdateProjectStatus( "{{HELPERDoubleEncrypt($project->id)}}", 3)' >Start Prescreening</button>
-
-        <button v-else v-cloak type="button" class="pull-right btn btn-info" disabled>Start Developing<i class="fa fa-circle-o-notch fa-spin fa-fw "></i></button>
-
         </h2>
         <br>
             <div class="card">
@@ -104,6 +145,7 @@
                                         </div>
                                     @endslot
                                 @endcomponent
+
                             </div>
                         </div>
                     </div>
@@ -112,38 +154,90 @@
                     <div id="applicant" class="tab-pane fade" style="padding: 20px 40px">
                         <div class="">
                             <div class="row">
-                                <div class="chat_container">
-                                    <div class="col-md-3">
-                                        <div class="row">
-                                            <div style="width: 100%; height : 300px; overflow-y : auto; border:1px solid #BDBDBD">
-                                                <ul class="list-unstyled">
-                                                    <li v-for="applicant in applicants" style="border-bottom : 1px solid #BDBDBD">
-                                                        <a @click='ShowApplicantProposal(applicant.id)' style="padding : 12px; display : block; " class="applicants">@{{applicant.name}}</a>
-                                                    </li>
-                                                </ul>
+                                <div class="">
+                                  <div class="col-md-4">
+                                      <ul class="bordered applicant-list">
+                                        <li v-for="applicant in applicants">
+                                          <a @click='ShowApplicantProposal(applicant.id)'>
+                                            <div class="row">
+                                              <div class="col-md-3">
+                                                <img class="img img-circle img-responsive" src="{{asset('images/default_avatar.png')}}">
+                                              </div>
+                                              <div class="col-md-9">
+                                                <h4>@{{applicant.name}}</h4>
+                                                <p>
+                                                  <span class="fa fa-star"></span>
+                                                  <span class="fa fa-star"></span>
+                                                  <span class="fa fa-star"></span>
+                                                  <span class="fa fa-star"></span>
+                                                  <span class="fa fa-star"></span>
+                                                </p>
+                                              </div>
                                             </div>
-                                        </div>
+                                          </a>
+                                        </li>
+                                      </ul>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <div class="row">
                                             <div v-if="showApplicantProposal">
-                                                <div style="width: 100%; height : 300px; overflow-y : auto; border:1px solid #BDBDBD; border-left:none">
-                                                    <div style="padding-left: 15px; padding-right : 15px">
-                                                        <h4>Proposal Details</h4>
-                                                        <p><strong>Days : </strong> @{{applicantProposal.days}} Days</p>
-                                                        <p><strong>Amount : </strong> $ @{{applicantProposal.amount}}</p>
-                                                        <p><strong>Message : </strong> @{{applicantProposal.message}}</p>
-                                                        <br>
-                                                        <h4>Worker Details</h4>
-                                                        <p><strong>Name : </strong> @{{applicantProposal.worker.name}}</p>
-                                                        <p><strong>Skills : </strong> </p>
-                                                        <ul>
-                                                            <li v-for =" workerSkill in applicantProposal.worker.skills">
-                                                                @{{workerSkill.skill.name}}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                              <div class="row">
+                                                <div class="col-md-3 text-center">
+                                                  <img class="img img-circle img-responsive" src="{{asset('images/default_avatar.png')}}">
+                                                  <h3>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                    <span class="fa fa-star"></span>
+                                                  </h3>
                                                 </div>
+                                                <div class="col-md-9">
+                                                  <h2>@{{applicantProposal.worker.name}}</h2>
+                                                  <p>@{{applicantProposal.worker.overview}}</p>
+                                                  <div class="well">
+                                                    <ul class="skills">
+                                                      <li class="btn btn-success btn-sm" v-for ="workerSkill in applicantProposal.worker.skills">
+                                                          @{{workerSkill.skill.name}}
+                                                      </li>
+                                                    </ul>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-12">
+                                                <hr>
+                                                <h4>Proposal Details</h4>
+                                              </div>
+                                              <div class="col-md-3 text-center">
+                                                <div class="panel panel-info">
+                                                  <div class="panel-heading">
+                                                    Completion
+                                                  </div>
+                                                  <div class="panel-body">
+                                                    <h1>@{{applicantProposal.days}}<small>days</small></h1>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-3 text-center">
+                                                <div class="panel panel-info">
+                                                  <div class="panel-heading">
+                                                    Bid Amount
+                                                  </div>
+                                                  <div class="panel-body">
+                                                    <h1>@{{applicantProposal.amount}}</h1>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-6 text-center">
+                                                <div class="panel panel-info">
+                                                  <div class="panel-heading">
+                                                    Proposal
+                                                  </div>
+                                                  <div class="panel-body">
+                                                    <p>@{{applicantProposal.message}}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
                                             </div>
                                         </div>
                                     </div>
