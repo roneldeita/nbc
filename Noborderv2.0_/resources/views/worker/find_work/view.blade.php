@@ -30,6 +30,29 @@
 					<h4>Project Description</h4>
 					<p>{{$project->description}}</p>
 					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<h4>Project Deliverables</h4>
+							<ul>
+								@foreach(json_decode($project->deliverables) as $deliverable)
+								<li>
+									{{$deliverable->name}}
+								</li>
+								@endforeach
+							</ul>
+						</div>
+						<div class="col-md-6">
+							<h4>Terms and Condition</h4>
+							<ul>
+								@foreach (json_decode($project->terms_condition) as $term)
+									<li>
+										{{$term->name}}
+									</li>
+								@endforeach
+							</ul>
+						</div>
+					</div>
+					<br>
 					<h4>Project File Link</h4>
 					<p>{{$project->link}}</p>
 				</div>
