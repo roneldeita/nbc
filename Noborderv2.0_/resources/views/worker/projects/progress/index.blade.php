@@ -4,6 +4,7 @@
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="hPId" value="{{HELPERDoubleEcnrypt($project->id)}}">
     <input type="hidden" id="p" value="{{$project}}">
+    <input type="hidden" id="ca" value="{{strtotime($project->created_at)}}">
     <div class="row">
         <div class="col-md-12">
 	        <?php
@@ -150,11 +151,11 @@
 <script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/worker/progress/index.js')}}"></script>
 <script type="text/javascript">
-Notification.Seen({role : "worker", projectId : pId});
+Notification.Seen({role : "worker", projectId : pId, notificationId : });
 var deliverables = "{{$project->contract->deliverables}}";
 deliverables = JSON.parse(deliverables.replace(/&quot;/g,'"'));
 progress.deliverables = deliverables;
-    
+
 
 </script>
 @endsection

@@ -103,7 +103,7 @@ class ClientController extends Controller
                 We have already published your project to our qualified associates page and we are currently waiting for them
                 to propose on your job. You will be receiving notification as soon as associates submit proposal";
 
-                HMessage::static(array("projectId" => $project->id, "status" => $project->status, "message" => $message, "from" => User::find(1)->id));
+                HMessage::StaticMessage(array("projectId" => $project->id, "status" => $project->status, "message" => $message, "from" => User::find(1)->id));
 
                 return json_encode(array("redirect" => HELPERDoubleEncrypt($project->id), "details" => $project, "client" => $project->client));
             }

@@ -9,12 +9,12 @@
         <ul class="dropdown-menu scrollable-menu" id ="notificationsMenu">
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
-                <li >
+                <li id="notif{{strtotime($notification->created_at)}}">
                     <?php
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 1)
-                    <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                    <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
                         <strong>New Project </strong> <br>
                         <span>{{$project->name}}</span>
                     </a>

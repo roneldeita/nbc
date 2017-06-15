@@ -6,6 +6,7 @@
     <input type="hidden" id="c" value="{{$contract}}">
     <input type="hidden" id="pId" value="{{$contract->project->id}}">
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($contract->project->id)}}">
+    <input type="hidden" id="ca" value="{{strtotime($contract->project->created_at)}}">
     <div class="row">
         <div class="col-md-12">
             <h2>

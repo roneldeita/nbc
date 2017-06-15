@@ -20,7 +20,7 @@ class HMessage
 		$message->save();
 	}
 
-	public function Static ($data) {
+	public function StaticMessage ($data) {
 		$message = new Message;
 		$message->project_id =$data["projectId"];
 		$message->message = $data["message"];

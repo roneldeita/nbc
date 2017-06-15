@@ -12,7 +12,7 @@
         <ul class="dropdown-menu scrollable-menu" id ="notificationsMenu">
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
-                <li >
+                <li id="notif{{strtotime($notification->created_at)}}">
                     <?php
                     $project = json_decode($notification->content);
                     ?>
