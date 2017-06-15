@@ -24,8 +24,11 @@
 		<div class="col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-body">
+					<h4>Posted By</h4>
+					<p>{{$project->client->name}}</p>
+					<br>
 					<h4>Budget</h4>
-					<p>${{$budget->budget}}</p>
+					<p>${{number_format($budget->budget, 2, ',')}}</p>
 					<br>
 					<h4>Project Description</h4>
 					<p>{{$project->description}}</p>
