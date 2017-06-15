@@ -22,7 +22,7 @@
 
                 <div class="col-md-4">
                   <div class="card_s hovercard" style="margin: auto">
-                    <img class="img" src="{{ asset('images/steps/Gethired_Icon.png') }}" alt="" style="padding:50px; background-color:#dddddd">
+                    <img class="img" src="{{ asset('images/steps/GetHired_Icon.png') }}" alt="" style="padding:50px; background-color:#dddddd">
                   <div class="avatar">
                     <img src="http://placehold.it/80X80/FFFFFF/&text=2" alt="" />
                   </div>

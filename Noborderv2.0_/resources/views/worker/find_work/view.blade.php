@@ -1,7 +1,7 @@
 @extends('layouts/worker/template')
 @section('content')
 <div style="height: 200px; margin-top:-22px;">
-	<img src="{{Auth::user()->background}}"  class="img-responsive" style="height: 400px; width: 100%;">
+	<img src="{{asset('images/default_background.jpg')}}"  class="img-responsive" style="height: 400px; width: 100%;">
 </div>
 <div class="container" id="proposal" style="margin-top:-100px">
 	<?php
