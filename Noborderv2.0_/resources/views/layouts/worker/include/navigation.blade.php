@@ -35,6 +35,12 @@
                     @endif
 
             @endforeach
+        @else
+            <li>
+                <a>
+                    <strong>No Notifications Yet</strong>
+                </a>
+            </li>
         @endif
         </ul>
     </li>
@@ -56,7 +62,7 @@
         <li>
             <a>
                 <strong>No Messages Yet</strong>
-            </a>    
+            </a>
         </li>
         @endif
         </ul>

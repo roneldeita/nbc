@@ -9,7 +9,6 @@
         <ul class="dropdown-menu scrollable-menu" id ="notificationsMenu">
         @if (count($notifications) > 0)
             @foreach ($notifications as $notification)
-
                     <?php
                     $project = json_decode($notification->content);
                     ?>
@@ -35,8 +34,13 @@
                         </a>
                     </li>
                     @endif
-                </li>
             @endforeach
+        @else
+            <li>
+                <a>
+                    <strong>No Notifications Yet</strong>
+                </a>
+            </li>
         @endif
         </ul>
     </li>
@@ -58,7 +62,7 @@
         <li>
             <a>
                 <strong>No Messages Yet</strong>
-            </a>    
+            </a>
         </li>
         @endif
         </ul>
