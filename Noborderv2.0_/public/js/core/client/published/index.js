@@ -32,7 +32,7 @@ var published = new Vue({
                 $('#message_container').append('<li class="left clearfix admin_chat"><div class="chat_content clearfix"><p>'+this.message+'</p></div></li>');
                 $('#message_parent').animate({scrollTop : $('#message_parent').prop('scrollHeight')});
                 var dataToEmit = {
-                    hPId : $("#pHId").val(),
+                    hPId : $("#hPId").val(),
                     message : this.message,
                     project : this.project,
                     role : "client",

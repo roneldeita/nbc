@@ -9,11 +9,12 @@ var progress = new Vue({
         commented : false,
         textUpdated : false,
         project : JSON.parse($("#p").val().replace(/&quot;/g,'"')),
+        deliverables : JSON.parse($("#deliverables").val().replace(/&quot;/g,'"')),
     },
     computed : {
         DeliverablePercentage : function () {
             var completed = 0;
-            for (var i = 0; i < deliverables.length; i++) {
+            for (var i = 0; i < this.deliverables.length; i++) {
                 if (this.deliverables[i].status) {
                     completed++;
                 }
@@ -38,7 +39,7 @@ var progress = new Vue({
                 hPId : $('#hPId').val(),
                 project : this.project,
                 deliverable : this.selectedDeliverable,
-                comment : this.comment 
+                comment : this.comment
             }
             socket.emit('progress comment', dataToEmit);
 
@@ -64,7 +65,7 @@ var progress = new Vue({
                 hPId : $('#hPId').val(),
                 project : this.project,
                 deliverable : this.selectedDeliverable,
-                text : this.textUpdate 
+                text : this.textUpdate
             }
             socket.emit('progress update', dataToEmit);
 

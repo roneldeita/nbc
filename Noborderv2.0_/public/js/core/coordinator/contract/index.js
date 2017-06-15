@@ -31,7 +31,7 @@ var contract = new Vue({
 
 
                 setTimeout(function() {
-                    window.location = '/coordinator/projects/in_progress/'+$("hPId").val();
+                    window.location = '/coordinator/projects/in_progress/'+$("#hPId").val();
                 }, 5000);
             }, response => {
 

@@ -42,7 +42,9 @@ class HClient
             return view('client/projects/contract/view')->with('project', $project);
             break;
         case 5 :
-            return view('client/projects/progress/view')->with('project', $project);
+			$projectDetails = Project::where('id', $project->id)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
+            //return view('/worker/projects/progress/index')->with('project', $projectWithContractDetails);
+            return view('client/projects/progress/view')->with('project', $projectDetails);
             break;
         case 6 :
             $result = 'client/projects/closed/view';

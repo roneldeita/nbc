@@ -1,11 +1,12 @@
-if (!urlForContract()) {
+if (!urlForPrescreening()) {
     socket.on('new contract', function (details) {
         var contract = details.contract;
         var project = details.project;
-    	if (contract.client_id == aId) {
+    	if (project.client_id == aId) {
     		toastr.info('You have new contract signing!', ''+project.name);
             addNotification(details);
     	}
+        console.log(details);
     });
 } else {
     var pId = document.getElementById("pId").value;
@@ -22,13 +23,14 @@ if (!urlForContract()) {
             toastr.info('You have new contract signing!', ''+project.name);
             addNotification(details);
         }
+        console.log(details);
     });
 }
 socket.on('contract approve', function (details) {
     var contract = details.contract;
     var project = details.project;
 
-    if (contract.client_id == aId) {
+    if (project.client_id == aId) {
         toastr.info('Worker approved to contract!', ''+project.name +'');
         addNotification(details);
     }
@@ -86,6 +88,7 @@ if (!urlForProjects()) {
             toastr.success('Your project updated to '+ status +'!', ''+project.name);
             addNotification(details);
         }
+        //console.log(details);
     });
 }
 

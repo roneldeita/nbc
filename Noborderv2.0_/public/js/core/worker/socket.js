@@ -7,7 +7,6 @@ socket.on('new contract', function (details) {
         addNotification(details);
     }
 });
-
 socket.on('contract approve', function (details) {
     var project = details.project;
     var contract = details.contract;

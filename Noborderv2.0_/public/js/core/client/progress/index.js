@@ -25,6 +25,8 @@ var progress = new Vue({
     methods : {
         SelectDeliverable : function (deliverable) {
             this.selectedDeliverable = deliverable;
+            console.log(this.selectedDeliverable);
+            console.log(this.deliverables);
         },
         SaveComment : function () {
             this.commented = true;

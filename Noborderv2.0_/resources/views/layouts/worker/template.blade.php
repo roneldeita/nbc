@@ -116,6 +116,8 @@
     <script src="{{asset('js/core/general/setup.js')}}"></script>
     <script src="{{asset('js/core/general/namDOM.js')}}"></script>
     <script src="{{asset('js/core/general/checkUrl.js')}}"></script>
+
+    <script src="{{asset('js/core/worker/socket.js')}}"></script>
      @yield('scripts')
 </body>
 </html>

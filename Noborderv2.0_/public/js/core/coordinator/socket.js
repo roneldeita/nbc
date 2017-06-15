@@ -77,12 +77,12 @@ if (urlForContract()) {
                 toastr.info('Worker signed the contract', ''+project.name);
                 $("#worker_approved").addClass("panel-success");
                 $("#worker_approved_text").html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Associate Approved the Contract');
-                contract.$data.worker_approved = 1;
+                //contract.$data.worker_approved = 1;
             } else {
                 toastr.info('Client signed the contract', ''+project.name);
                 $("#client_approved").addClass("panel-success");
                 $('#client_approved_text').html('<i class="pe pe-7s-check" style="font-weight: bold; font-size: 35px"></i> Client Approved the Contract');
-                contract.$data.client_approved = 1;
+                //contract.$data.client_approved = 1;
             }
         }
     });

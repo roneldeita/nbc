@@ -1,5 +1,5 @@
 
-//noborderclub/role/projects/anythingWord 
+//noborderclub/role/projects/anythingWord
 function urlForProjects () {
     var pathArray = window.location.pathname.split("/");
     if (pathArray[2] == "projects" && typeof pathArray[3] != "undefined" && pathArray[3] != "create" && pathArray[3] != "created"){
@@ -42,3 +42,9 @@ function urlForProgress () {
     }
 }
 
+function urlForPrescreening () {
+    var pathArray = window.location.pathname.split("/");
+    if (pathArray[2] == "projects" && pathArray[3] == "pre_screening" ) {
+        return true;
+    }
+}

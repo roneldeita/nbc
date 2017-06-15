@@ -31,7 +31,7 @@ var prescreening = new Vue({
             this.$http.post('/coordinator/projects/contract', { id : this.project.id, contract : this.contract, deliverables : this.deliverables, terms : this.terms}).then(response => {
 
                 var dataToEmit = {
-                    hPId : $("#pHId").val(),
+                    hPId : $("#hPId").val(),
                     project : this.project,
                     contract : this.contract,
                     type : 3
