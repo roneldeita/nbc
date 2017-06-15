@@ -28,7 +28,7 @@
 					<p>{{$project->client->name}}</p>
 					<br>
 					<h4>Budget</h4>
-					<p>${{number_format($budget->budget, 2, ',')}}</p>
+					<p>${{number_format($budget->budget, 2)}}</p>
 					<br>
 					<h4>Project Description</h4>
 					<p>{{$project->description}}</p>
