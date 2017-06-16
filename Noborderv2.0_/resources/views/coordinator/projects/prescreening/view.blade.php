@@ -129,7 +129,7 @@ transform-origin: 50% 50%;
             <div class="panel">
                 <div class="panel-body">
                     <label>Description</label><br>
-                    {{$project->description}} <a href="">Read More</a><br><br>
+                    {{$project->description}}<br><br>
                     <br>
                     <label>Deliverables</label><br>
                     <ul style="padding-left: 15px" class="list-unstyled">

@@ -24,15 +24,11 @@
             <div v-if="selectedDeliverable != null" v-cloak>
             	<div class="panel panel-default" >
             		<div class="panel-heading">
-                        @{{selectedDeliverable.title}} <span class="label" v-bind:class="selectedDeliverable.status == 1 ? 'label-success' : 'label-default' ">
-                             @{{selectedDeliverable.status == 1 ? 'Completed' : 'Incomplete'}}
-                        </span>
+                        @{{selectedDeliverable.title}} <label class="label" v-bind:class="selectedDeliverable.status == 1 ? 'label-success' : 'label-default'" >@{{selectedDeliverable.status == 1 ? 'Completed' : 'Incomplete'}}</label>
 
-                        <label class="switch pull-right" v-if="selectedDeliverable.content != null">
-                            <input type="checkbox" @click="CheckDeliverable(selectedDeliverable.id)" v-bind:disabled="selectedDeliverable.status == 1" v-bind:checked="selectedDeliverable.status">
-                            <div class="slider round"></div>
-                        </label>
-
+                        <button v-if="selectedDeliverable.status == 0"  type="button" @click="CheckDeliverable(selectedDeliverable.id)" class="pull-right btn btn-xs" v-bind:class="selectedDeliverable.status == 1 ? 'btn-success' : 'btn-danger' ">
+                            Change Status
+                        </button>
             		</div>
             		<div class="panel-body">
                         <div class="" v-if="selectedDeliverable.content == null">
@@ -146,6 +142,55 @@
 
     </div>
 </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="rating">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="rating_form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Rate the Associate</h4>
+                </div>
+                <div class="modal-body">
+                    <label>Rating</label><br>
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                    </fieldset>
+                    <br><br>
+                    <label>Comments</label><br>
+                    <textarea rows="8" class="form-control" name="comment"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="rating_btn">Save changes <i class="fa fa-circle-o-notch fa-spin hidden" id="rating_loading"></i></button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="warning">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 @endsection
 
 
@@ -157,5 +202,14 @@
 <script src="{{asset('js/core/client/progress/index.js')}}"></script>
 <script type="text/javascript">
 Message.Seen({role : "client", projectId : pId});
+
+$("#rating_form").on("submit", function (e) {
+    e.preventDefault();
+
+    console.log($(this).serialize());
+
+    $("#rating_btn").attr("disabled", "disabled");
+    $("#rating_loading").removeClass("hidden");
+});
 </script>
 @endsection

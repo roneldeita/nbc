@@ -102,6 +102,7 @@
 
 
         @yield('content')
+
     </div>
 
 

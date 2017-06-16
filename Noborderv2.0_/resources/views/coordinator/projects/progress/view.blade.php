@@ -1,11 +1,9 @@
 @extends('layouts/coordinator/template')
 @section('styles')
-
 <link rel="stylesheet" type="text/css" href="{{asset('/css/toggle-switch.css')}}">
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.css" rel="stylesheet">
 @endsection()
 @section('content')
-<div class="container" id="project_details">
+<div class="container" id="project">
     <input type="hidden" id="pId" value="{{$project->id}}">
     <input type="hidden" id="hPId" value="{{HELPERDoubleEncrypt($project->id)}}">
     <input type="hidden" id="p" value="{{$project}}">
@@ -33,11 +31,6 @@
         			<div id="summernote">What's your update?</div>
         		</div>
         	</div>
-
-        	<div class="well">Basic Well</div>
-            <div class="well">Basic Well</div>
-            <div class="well">Basic Well</div>
-            <div class="well">Basic Well</div>
         </div>
 
         <div class="col-md-4">
@@ -61,7 +54,6 @@
 
 
 @section('scripts')
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
 <script type="text/javascript">
 $(function(){

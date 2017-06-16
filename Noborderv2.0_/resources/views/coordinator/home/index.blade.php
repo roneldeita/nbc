@@ -69,9 +69,9 @@
     });
 
   // Initialize the tour
-  tour.init();
+  //tour.init();
 
   // Start the tour
-  tour.start();
+  //tour.start();
 </script>
 @endsection

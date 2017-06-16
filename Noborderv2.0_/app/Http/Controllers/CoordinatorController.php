@@ -33,7 +33,7 @@ class CoordinatorController extends Controller
         }
         $project = Project::find($projectId);
         if (HCoordinator::identifyStatus($project->status) != $status) {
-            return view('coordinator/projects/outdated');
+            return view('coordinator/projects/outdated')->with('project', $project);
 
         }
         $applicants = DB::table('proposals')
