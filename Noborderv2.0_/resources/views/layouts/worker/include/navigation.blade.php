@@ -27,8 +27,15 @@
                     </li>
                     @elseif ($notification->type == 3)
                     <li id="notification{{$notification->id}}">
-                        <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                        <a href="{{url('worker/contract_signing/'.HELPERDoubleEncrypt($notification->project->contract->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
                             <strong>New Contract </strong>
+                            <br>{{$project->name}}
+                        </a>
+                    </li>
+                    @elseif ($notification->type == 4)
+                    <li id="notification{{$notification->id}}">
+                        <a href="{{url('worker/contract_signing/'.HELPERDoubleEncrypt($notification->project->contract->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
+                            <strong>Contract Approve </strong>
                             <br>{{$project->name}}
                         </a>
                     </li>

@@ -26,7 +26,7 @@ if (!urlForPrescreening()) {
             toastr.info('You have new contract signing!', ''+project.name);
             addNotification(details);
         }
-        console.log(details);
+        //console.log(details);
     });
 }
 socket.on('contract approve', function (details) {
@@ -57,7 +57,7 @@ if (!urlForProjects()) {
             toastr.success('Your project updated to '+ status +'!', ''+project.name);
             addNotification(details);
         }
-        console.log(details);
+        //console.log(details);
     });
 } else {
 	var pId = document.getElementById("pId").value;

@@ -20,6 +20,20 @@
                             <span>{{$project->name}}</span>
                         </a>
                     </li>
+                    @elseif ($notification->type == 11)
+                    <li id="notification{{$notification->id}}">
+                        <a href="{{url('/coordinator/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
+                            <strong>New Applicant </strong> <br>
+                            <span>{{$project->name}}</span>
+                        </a>
+                    </li>
+                    @elseif ($notification->type == 4)
+                    <li id="notification{{$notification->id}}">
+                        <a href="{{url('/coordinator/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}}">
+                            <strong>Contract Approve </strong> <br>
+                            <span>{{$project->name}}</span>
+                        </a>
+                    </li>
                     @endif
 
             @endforeach

@@ -26,6 +26,13 @@
                             <br> {{$project->name}}
                         </a>
                     </li>
+                    @elseif ($notification->type == 4)
+                    <li id="notification{{$notification->id}}">
+                        <a href="{{url('/client/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
+                            <strong>Worker Approved to Contract</strong>
+                            <br> {{$project->name}}
+                        </a>
+                    </li>
                     @elseif ($notification->type == 11)
                     <li id="notification{{$notification->id}}">
                         <a href="{{url('/client/projects/published/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} notif{{$notification->project_id}}">
