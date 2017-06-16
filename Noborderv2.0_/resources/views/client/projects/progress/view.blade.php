@@ -75,9 +75,12 @@
                             @{{DeliverablePercentage}}%
                         </div>
                     </div>
+                    <button type="button" class="btn btn-info" style="width:100%">
+                        <span>Rate Worker</span>
+                    </button>
         		</div>
         		<div class="panel-body">
-        			<div class="btn-group-vertical" aria-label="..." style="width:100%;">
+        			<div class="btn-group-vertical" style="width:100%;">
                         <button v-cloak v-for="deliverable in deliverables" @click='SelectDeliverable(deliverable)'  type="button" class="btn" v-bind:class ="deliverable.status == 0 ? 'btn-default' : 'btn-success'" style="text-align:left" name="button">
                             <span v-cloak>@{{deliverable.title}}</span>
                         </button>
@@ -147,6 +150,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="rating_form">
+                <input type="hidden" name="worker_id" value="{{$project->contract->worker->id}}">
+                <input type="hidden" name="project_id" value="{{$project->id}}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Rate the Associate</h4>
@@ -178,10 +183,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">Update deliverable</h4>
             </div>
             <div class="modal-body">
-                <p>One fine body&hellip;</p>
+                <p>Are you sure to update the deliverable</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

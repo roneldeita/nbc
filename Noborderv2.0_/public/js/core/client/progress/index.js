@@ -63,37 +63,34 @@ var progress = new Vue({
             });
         },
         CheckDeliverable : function (id) {
-
-
-            if (this.deliverables.length == 1) {
-                console.log("what the puck");
-                ///$('#rating').modal('show');
-            } else {
-                var completed = 0;
-
-                for (var i = 0; i < this.deliverables.length; i++) {
-                    if (this.deliverables[i].status) {
-                        completed++;
-                    }
-                }
-                // last one
-                if (completed == (this.deliverables.length - 1) ) {
-                    // open the modal
-                    ///$('#rating').modal('show');
-                    //console.log('this the last');
-                }
-                else {
-                    // this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
-                    //
-                    //     location.reload();
-                    //
-                    // }, response => {
-                    //
-                    //
-                    // });
-                }
-            }
-
+             $('#warning').modal('show');
+            // if (this.deliverables.length == 1) {
+            //     console.log("what the puck");
+            //     $('#rating').modal('show');
+            // } else {
+            //     var completed = 0;
+            //
+            //     for (var i = 0; i < this.deliverables.length; i++) {
+            //         if (this.deliverables[i].status) {
+            //             completed++;
+            //         }
+            //     }
+            //     if (completed == (this.deliverables.length - 1) ) {
+            //         // open the modal
+            //         /$('#rating').modal('show');
+            //         console.log('this the last');
+            //     }
+            //     else {
+            //         this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
+            //
+            //             location.reload();
+            //
+            //         }, response => {
+            //
+            //
+            //         });
+            //     }
+            // }
         }
     }
 

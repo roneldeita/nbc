@@ -115,7 +115,7 @@ class ClientController extends Controller
                 $rate->worker_id = $request->get('worker_id');
                 $rate->project_id = $request->get('project_id');
                 $rate->rate = $request->get('rate');
-                $rate->messae = $request->get('message');
+                $rate->messae = $request->get('comment');
                 $rate->save();
             }
     //x::PROJECT
