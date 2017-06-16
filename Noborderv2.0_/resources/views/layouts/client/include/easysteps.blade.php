@@ -1,62 +1,60 @@
-<div class="section sm" style="background-color: #e6e6e6; margin-top: -22px">
+<div style="background-color: #e6e6e6; margin-top: -22px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-        <!--
-                <a href="#steps" class="collapse_link" >
-                    <h3 class="text-center">Earn money in just 3 easy steps!</h3>
-                </a>
-
-        -->
-            <h3 class="text-center">Get your project done in 3 easy steps!</h3>
-            </div>
-                <div id="steps">
-                    <div class="col-md-4">
-                      <div class="card_s hovercard" style="margin: auto">
-                        <img src="http://placehold.it/300X150" alt="">
-                      <div class="avatar">
-                        <img src="http://placehold.it/80X80/2EADC5/&text=1" alt="" />
-                      </div>
-
-                      <div class="info">
-                        <div class="title" style="padding: 10px 0; font-size:20px">
-                        Create your Project
-                        </div>
-                        </div>
-                      </div>
+          <div class="col-md-12" style="color:#001f31">
+              <h2 class="text-center"><span class="fa fa-check-circle" style="font-size:30px; padding-bottom:10px"></span> Get your project done in 3 easy steps!</h2>
+          </div>
+          </div>
+              <div id="steps">
+                  <div class="col-md-4">
+                    <div class="card_s hovercard" style="margin: auto">
+                      <img class="img" src="{{ asset('images/steps/Create_Your_Project.png') }}" alt="" style="padding:35px 60px 50px 60px; background-color:#dddddd">
+                    <div class="avatar">
+                      <img src="http://placehold.it/80X80/FFFFFF/&text=1" alt="" />
                     </div>
 
-                    <div class="col-md-4">
-                      <div class="card_s hovercard" style="margin: auto">
-                        <img src="http://placehold.it/300X150" alt="">
-                      <div class="avatar">
-                        <img src="http://placehold.it/80X80/1B887D/&text=2" alt="" />
+                    <div class="info">
+                      <div class="title" style="padding: 10px 0; font-size:20px">
+                      Create your Project
                       </div>
-
-                      <div class="info">
-                        <div class="title" style="padding: 10px 0; font-size:20px">
-                        Publish your Project
-                        </div>
-                        </div>
                       </div>
                     </div>
+                  </div>
 
-                    <div class="col-md-4">
-                      <div class="card_s hovercard" style="margin: auto">
-                        <img src="http://placehold.it/300X150" alt="">
-                      <div class="avatar">
-                        <img src="http://placehold.it/80X80/BFB659/&text=3" alt="" />
+                  <div class="col-md-4">
+                    <div class="card_s hovercard" style="margin: auto">
+                      <img class="img" src="{{ asset('images/steps/Publish_Your_Project.png') }}" alt="" style="padding:35px 60px 50px 60px; background-color:#dddddd">
+                    <div class="avatar">
+                      <img src="http://placehold.it/80X80/FFFFFF/&text=2" alt="" />
+                    </div>
+
+                    <div class="info">
+                      <div class="title" style="padding: 10px 0; font-size:20px">
+                      Publish your Project
                       </div>
-
-                      <div class="info">
-                        <div class="title" style="padding: 10px 0; font-size:20px">
-                        Hire a Worker
-                        </div>
-                        </div>
                       </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="card_s hovercard" style="margin: auto">
+                      <img class="img" src="{{ asset('images/steps/Find_Your_worker.png') }}" alt="" style="padding:35px 60px 50px 60px; background-color:#dddddd">
+                    <div class="avatar">
+                      <img src="http://placehold.it/80X80/FFFFFF/&text=3" alt="" />
+                    </div>
+
+                    <div class="info">
+                      <div class="title" style="padding: 10px 0; font-size:20px">
+                      Hire a Worker
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-12 text-center">
+                  <a href="#" class="pe-7s-angle-up toggle" style="font-size:50px; text-decoration:none;"></a>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>

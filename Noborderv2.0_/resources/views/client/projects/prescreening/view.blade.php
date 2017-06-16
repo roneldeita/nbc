@@ -14,8 +14,9 @@
         </h2>
         <br>
             <div class="panel panel-default">
-                <div class="panel-body ">
-                    <h3>Hi ! Your project is now currently on "Pre-Screening Stage" where in your Coordinator will pick an associate to work for this project.</h3>
+                <div class="panel-body text-center">
+                    <!-- <h3>Hi ! Your project is now currently on "Pre-Screening Stage" where in your Coordinator will pick an associate to work for this project.</h3> -->
+                    <h3>Hi your coordinator is now preparing a contract for you and your chosen associate. bla bla bla bla bla bla bla bla bla bla bla bla bla b;la bla bal balba lsab alb ab la</h3>
                 </div>
             </div>
         </div>

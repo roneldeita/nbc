@@ -12,7 +12,7 @@
     <title>NoBorderClub</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/app.css') }}" rel="stylesheet">
     <link href="{{asset('css/pe-icon-7-stroke.css')}}" rel="stylesheet">
     <link href="{{asset('css/helper.css')}}" rel="stylesheet">
 
