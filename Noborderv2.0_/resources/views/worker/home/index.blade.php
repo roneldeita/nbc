@@ -9,7 +9,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h1>{{count($contractProjects)}} <small>Contract Signing</small></h1>
-						<a href="{{url('/worker/projects')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
+						<a href="{{url('/worker/projects#contract')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
 					</div>
 				</div>
         	</div>
@@ -17,7 +17,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h1>{{count($progressProjects)}} <small>In Progress</small></h1>
-						<a href="{{url('/worker/projects')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
+						<a href="{{url('/worker/projects#progress')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
 					</div>
 				</div>
         	</div>
@@ -25,7 +25,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h1>0 <small>Finished</small></h1>
-						<a href="{{url('/worker/projects')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
+						<a href="{{url('/worker/projects#closed')}}">View Details <span class="pull-right fa fa-chevron-circle-right"></span></a>
 					</div>
 				</div>
         	</div>

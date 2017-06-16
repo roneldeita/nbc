@@ -112,5 +112,10 @@
 
 @section('scripts')
 <script type="text/javascript">
+$(document).ready(function() {
+    if (location.hash != '') {
+        $('.nav-tabs a[href="'+location.hash+'"]').tab('show');
+    }
+});
 </script>
 @endsection

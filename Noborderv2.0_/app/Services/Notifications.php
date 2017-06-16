@@ -46,8 +46,15 @@ class Notifications
 		$notification = Notification::where('to', $id)->where('seen', 2)->where('type', 1)->orderBy('id', 'desc')->get();
 		return $notification;
 	}
+	// public function MarkAsRead ($id) {
+	// 	DB::table('notifications')->where('to', Auth::user()->id)->where('project_id', $id)->update(['seen' => 1]);
+	// }
+
 	public function MarkAsRead ($id) {
-		DB::table('notifications')->where('to', Auth::user()->id)->where('project_id', $id)->update(['seen' => 1]);
+		$id = str_replace("notification", "", $id);
+		$id = (int)$id;
+		DB::table('notifications')->where('id', $id)->update(['seen' => 1]);
+		// return Notification::find($id);
 	}
 
 	public function MarkAsReadOld ($id) {

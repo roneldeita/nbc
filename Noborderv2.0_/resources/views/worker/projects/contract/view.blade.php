@@ -62,14 +62,5 @@
 @endsection
 
 @section('scripts')
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
-<script type="text/javascript">
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-</script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/worker/contract/index.js')}}"></script>
-<script type="text/javascript">
-    Notification.Seen({role : "worker", projectId : pId});
-</script>
 @endsection

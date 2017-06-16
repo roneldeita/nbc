@@ -100,6 +100,7 @@
             </div>
         </nav>
 
+
         @yield('content')
     </div>
 
@@ -109,6 +110,13 @@
     <script src="{{asset('js/footable.all.min.js')}}"></script>
     <script src="{{asset('temp/toastr.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+
+    <script src="{{asset('temp/vue.js')}}"></script>
+    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
+    <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
 
     <script src="{{asset('js/core/general/helper.js')}}"></script>
@@ -118,6 +126,8 @@
     <script src="{{asset('js/core/general/checkUrl.js')}}"></script>
 
     <script src="{{asset('js/core/client/socket.js')}}"></script>
+
+    <script src="{{asset('js/core/general/notification.js')}}"></script>
     @yield('scripts')
 </body>
 </html>

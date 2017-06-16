@@ -2,7 +2,9 @@ if (!urlForPrescreening()) {
     socket.on('new contract', function (details) {
         var contract = details.contract;
         var project = details.project;
-    	if (project.client_id == aId) {
+        var by = (!('by' in details)) ? true : false;
+
+    	if (project.client_id == aId && by) {
     		toastr.info('You have new contract signing!', ''+project.name);
             addNotification(details);
     	}
@@ -13,13 +15,14 @@ if (!urlForPrescreening()) {
     socket.on('new contract', function (details) {
         var contract = details.contract;
         var project = details.project;
+        var by = (!('by' in details)) ? true : false;
 
         if (project.id == pId && project.client_id == aId) {
             toastr.success('Youre Project Will Procceed to Contract Signing!');
             setTimeout(function() {
                 window.location = '/client/projects/contract_signing/'+$("#hPId").val();
             }, TIME_INTERVAL);
-        } else if (project.client_id == aId) {
+        } else if (project.client_id == aId && !by) {
             toastr.info('You have new contract signing!', ''+project.name);
             addNotification(details);
         }
@@ -172,8 +175,8 @@ if (!urlForProgress()) {
 
             // toastr.success('Worker Commented', ''+project.name);
             // addNotification(details);
-            //console.log(deliverables[details.index]);
-            deliverables[details.index].comments.push(comment);
+            console.log(progress.deliverables[details.index]);
+            progress.deliverables[details.index]['comments'].push(comment);
         }
         //console.log(details);
     });
@@ -186,7 +189,7 @@ if (!urlForProgress()) {
         if (project.client_id = aId && project.id == pId) {
             // toastr.success('Worker Update', ''+project.name);
             // addNotification(details);
-            deliverables[details.index].content = {content : details.text};
+            progress.deliverables[details.index].content = {content : text};
         }
         //console.log(details);
     });

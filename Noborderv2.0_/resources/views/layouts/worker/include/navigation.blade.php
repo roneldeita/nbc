@@ -17,7 +17,7 @@
                     $project = json_decode($notification->content);
                     ?>
                     @if ($notification->type == 2)
-                    <li id="notif{{strtotime($notification->created_at)}}">
+                    <li id="notification{{$notification->id}}">
                         @if (json_decode($notification->content)->status == 5)
                         <a href="{{url('worker/projects/in_progress/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
                             <strong>Project Development </strong>
@@ -26,7 +26,7 @@
                         @endif
                     </li>
                     @elseif ($notification->type == 3)
-                    <li id="notif{{strtotime($notification->created_at)}}">
+                    <li id="notification{{$notification->id}}">
                         <a href="{{url('worker/projects/contract_signing/'.HELPERDoubleEncrypt($project->id))}}" class="notification {{$notification->seen == 2 ? 'unseen' : ''}} {{$notification->project_id}}">
                             <strong>New Contract </strong>
                             <br>{{$project->name}}

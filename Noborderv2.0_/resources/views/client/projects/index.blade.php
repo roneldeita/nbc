@@ -57,7 +57,7 @@
                                 </tr>
                             </tfoot>
                         </table>
-                        @else 
+                        @else
                             @include('client/projects/empty')
                         @endif
                     </div>
@@ -96,7 +96,7 @@
 
                     <div id="prescreening" class="tab-pane fade" style="padding: 0; min-height : 300px;">
                         @if (count($matchingProjects) > 0)
-                        <div class="input-group" style="width: 100%; padding:20px;">    
+                        <div class="input-group" style="width: 100%; padding:20px;">
                             <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterPrescreening">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
@@ -126,7 +126,7 @@
 
                     <div id="contract" class="tab-pane fade" style="padding: 0; min-height : 300px;">
                         @if (count($contractProjects) > 0)
-                        <div class="input-group" style="width: 100%; padding:20px;">    
+                        <div class="input-group" style="width: 100%; padding:20px;">
                             <input type="text" class="form-control" placeholder="e.g. Project Name" id="filterContract">
                             <span class="input-group-addon"><i class="pe-7s-search" style="font-size: 20px; font-weight: bold"></i></span>
                         </div>
@@ -225,5 +225,11 @@
 @section('scripts')
 <script type="text/javascript">
 $('.footable').footable();
+$(document).ready(function() {
+    if (location.hash != '') {
+        $('.nav-tabs a[href="'+location.hash+'"]').tab('show');
+    }
+});
 </script>
+
 @endsection

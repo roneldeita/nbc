@@ -100,10 +100,15 @@ transform-origin: 50% 50%;
 
                     <div class="row">
                         <div class="col-md-6">
+
                             <label>Cost
                                 <span v-if ="!contract.cost" class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" value="{{$budget->budget}}" v-model="contract.cost" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control" value="{{$budget->budget}}" v-model="contract.cost" disabled>
+                            </div>
+
                             <br>
                         </div>
                         <div class="col-md-6">
@@ -124,7 +129,7 @@ transform-origin: 50% 50%;
             <div class="panel">
                 <div class="panel-body">
                     <label>Description</label><br>
-                    {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br>
+                    {{$project->description}} <a href="">Read More</a><br><br>
                     <br>
                     <label>Deliverables</label><br>
                     <ul style="padding-left: 15px" class="list-unstyled">
@@ -156,13 +161,10 @@ transform-origin: 50% 50%;
 
 
 @section('scripts')
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/coordinator/prescreening/index.js')}}"></script>
 <script type="text/javascript">
 $(function(){
@@ -183,6 +185,5 @@ prescreening.terms = varTermsAndConditions;
 
 
 Message.Seen({role : "coordinator", projectId : pId});
-Notification.Seen({role : "coordinator", projectId : pId});
 </script>
 @endsection

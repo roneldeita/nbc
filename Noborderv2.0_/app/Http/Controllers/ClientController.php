@@ -54,7 +54,7 @@ class ClientController extends Controller
                 }
                 $project = Project::find($projectId);
                 if (HClient::identifyStatus($project->status) != $status || $project->client_id != $request->user()->id) {
-                    return view('client/projects/outdated');
+                    return view('client/projects/outdated')->with('project', $project);
                 }
 
                 return HClient::viewProject($project);
@@ -193,7 +193,7 @@ class ClientController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('projectId'));
+        Notifications::MarkAsRead($request->get('notification_id'));
     }
 
 }

@@ -1,10 +1,12 @@
+Vue.config.devtools = true;
 var progress = new Vue({
     el : '#project',
     data : {
         id : pId,
         user_id : $("#aId").val(),
         textUpdate : null,
-        selectedDeliverable : null,
+        //selectedDeliverable : JSON.parse($("#deliverables").val().replace(/&quot;/g,'"'))[0],
+        selectedDeliverable  : null,
         comment : null,
         commented : false,
         textUpdated : false,
@@ -37,7 +39,6 @@ var progress = new Vue({
             }
 
 
-
             this.$http.post('/client/progress/comment', dataToPost).then(response => {
                 var dataToEmit = {
                     hPId : $('#hPId').val(),
@@ -63,7 +64,7 @@ var progress = new Vue({
             });
         },
         CheckDeliverable : function (id) {
-
+            
             this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
 
                 location.reload();

@@ -73,9 +73,9 @@
                                         <label>Category :</label><br>
                                         {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
                                         <label>Description :</label><br>
-                                        {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br>
+                                        {{$project->description}} <br><br>
                                         <label>Cost :</label><br>
-                                        ${{$budget->budget}}<br>
+                                        ${{$budget->budget}}<br><br>
                                         <label>File Link :</label><br>
                                         {{$project->link}}<br>
                                     </div>
@@ -94,22 +94,16 @@
 
 
 @section('scripts')
-<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
 
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/coordinator/contract/index.js')}}"></script>
 <script type="text/javascript">
 contract.worker_approved = {{$project->contract->worker_approved}};
 contract.client_approved = {{$project->contract->client_approved}};
 
 Message.Seen({role : "coordinator", projectId : pId});
-Notification.Seen({role : "coordinator", projectId : pId});
-
 </script>
 @endsection

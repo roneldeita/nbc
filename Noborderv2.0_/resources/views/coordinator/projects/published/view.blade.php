@@ -87,7 +87,7 @@
                                         <label>Category :</label><br>
                                         {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
                                         <label>Description :</label><br>
-                                        {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br>
+                                        {{$project->description}} <br><br>
                                         <label>Cost :</label><br>
                                         ${{$budget->budget}}<br>
                                     </div>
@@ -128,7 +128,7 @@
 
                                 @component('layouts/general/chat_area')
                                     @slot('name')
-                                        NoBorderClub Coordinator
+                                        {{$project->client->name}}
                                     @endslot
                                     @slot('messages')
                                         <ul class="list-unstyled" id="message_container" style="margin-top: 5px">
@@ -263,13 +263,10 @@
 
 
 @section('scripts')
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/coordinator/published/index.js')}}"></script>
 <script type="text/javascript">
 
@@ -280,6 +277,5 @@ varApplicants = varApplicants == "" ? null : JSON.parse(varApplicants.replace(/&
 published.applicants = varApplicants;
 
 Message.Seen({role : "coordinator", projectId : pId});
-Notification.Seen({role : "coordinator", projectId : pId});
 </script>
 @endsection

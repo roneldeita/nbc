@@ -182,7 +182,7 @@ class CoordinatorController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('projectId'));
+        Notifications::MarkAsRead($request->get('notification_id'));
     }
     public function ViewApplicantProposal (Request $request) {
         $proposal = Proposal::where('worker_id', $request->get('id'))->with('worker', 'worker.skills.skill')->first();

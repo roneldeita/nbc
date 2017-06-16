@@ -62,13 +62,10 @@
 
 @section('scripts')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script type="text/javascript">
 $(function(){
 	$('#summernote').summernote({
@@ -77,6 +74,5 @@ $(function(){
 });
 
 Message.Seen({role : "coordinator", projectId : pId});
-Notification.Seen({role : "coordinator", projectId : pId});
 </script>
 @endsection

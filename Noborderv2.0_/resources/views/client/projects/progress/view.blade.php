@@ -150,19 +150,12 @@
 
 
 @section('scripts')
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/client/progress/index.js')}}"></script>
 <script type="text/javascript">
 Message.Seen({role : "client", projectId : pId});
-Notification.Seen({role : "client", projectId : pId});
-var deliverables = "{{$project->contract->deliverables}}";
-deliverables = deliverables == "" ? null : JSON.parse(deliverables.replace(/&quot;/g,'"'));
-progress.deliverables = deliverables;
 </script>
 @endsection

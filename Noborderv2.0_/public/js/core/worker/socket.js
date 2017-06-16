@@ -1,8 +1,9 @@
 socket.on('new contract', function (details) {
     var project = details.project;
     var contract = details.contract;
+    var by = (!('by' in details)) ? true : false;
 
-    if (contract.worker_id == aId) {
+    if (contract.worker_id == aId && by) {
         toastr.info('You have new contract signing!', ''+project.name);
         addNotification(details);
     }
@@ -79,8 +80,8 @@ if (!urlForProgress()) {
 
             // toastr.success('Worker Commented', ''+project.name);
             // addNotification(details);
-            //console.log(deliverables[details.index]);
-            deliverables[details.index].comments.push(comment);
+            //console.log(progress.deliverables[details.index]);
+            progress.deliverables[details.index]['comments'].push(comment);
         }
     });
 
@@ -89,6 +90,13 @@ if (!urlForProgress()) {
         var deliverable = details.deliverable;
         var text = details.text;
 
+        if (details.worker_id == aId && project.id == $("#pId").val()) {
+
+            // toastr.success('Worker Commented', ''+project.name);
+            // addNotification(details);
+            //console.log(progress.deliverables[details.index]);
+            progress.deliverables[details.index].content = {content : text};
+        }
         // else (project.client_id = aId) {
         //     toastr.success('Worker Update', ''+project.name);
         //     addNotification(details);

@@ -70,53 +70,54 @@
                 <div class="tab-content">
                     <div id="overview" class="tab-pane fade in active" style="padding: 20px;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Project Details
                                     </div>
                                     <div class="panel-body">
-                                        <label>Name :</label><br>
-                                        {{$project->name}}<br><br>
-                                        <label>Category :</label><br>
-                                        {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
-                                        <label>Description :</label><br>
-                                        {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br>
-                                        <label>Cost :</label><br>
-                                        ${{$budget->budget}}<br><br>
-                                        <label>File Link :</label><br>
-                                        ${{$project->link}}<br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name :</label><br>
+                                                {{$project->name}}<br><br>
+                                                <label>Cost :</label><br>
+                                                ${{number_format($budget->budget, 2)}}<br><br>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Category :</label><br>
+                                                {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
+                                                <label>File Link :</label><br>
+                                                {{$project->link}}<br><br>
+                                            </div>
+                                        </div>
 
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Terms And Conditions
-                                    </div>
-                                    <div class="panel-body">
-                                        <ul class="termAndCondition" style="padding-left: 15px">
-                                            @foreach (json_decode($project->terms_condition) as $term)
-                                                <li>
-                                                    {{$term->name}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Deliverables
-                                    </div>
-                                    <div class="panel-body">
-                                        <ul class="deliverable" style="padding-left: 15px">
-                                            @foreach (json_decode($project->deliverables) as $deliverable)
-                                                <li>
-                                                    {{$deliverable->name}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
+
+                                        <label>Description :</label><br>
+                                        <!-- {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br> -->
+                                        {{$project->description}}<br><br>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Deliverables</label>
+                                                <ul>
+                                                    @foreach(json_decode($project->deliverables) as $deliverable)
+                                                    <li>
+                                                        {{$deliverable->name}}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Terms and Conditions</label>
+                                                <ul>
+                                                    @foreach(json_decode($project->terms_condition) as $term)
+                                                    <li>
+                                                        {{$term->name}}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -156,9 +157,9 @@
                     <div id="applicant" class="tab-pane fade" style="padding: 20px 40px">
                         <div class="">
                             <div class="row">
-                                <div class="">
+                                <div class="" >
                                   <div class="col-md-4">
-                                      <ul class="bordered applicant-list">
+                                      <ul class="bordered applicant-list" v-if="applicants != null">
                                         <li v-for="applicant in applicants">
                                           <a @click='ShowApplicantProposal(applicant.id)'>
                                             <div class="row">
@@ -179,6 +180,9 @@
                                           </a>
                                         </li>
                                       </ul>
+                                      <h3 v-else>
+                                          No Applicant Yet...
+                                      </h3>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -206,11 +210,21 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="col-md-12">
+                                              <div class="col-md-12" >
                                                 <hr>
                                                 <h4>Proposal Details</h4>
                                               </div>
-                                              <div class="col-md-3 text-center">
+                                              <div class="col-md-12 text-center">
+                                                <div class="panel panel-info">
+                                                  <div class="panel-heading">
+                                                    Proposal
+                                                  </div>
+                                                  <div class="panel-body">
+                                                    <p>@{{applicantProposal.message}}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-md-6 text-center">
                                                 <div class="panel panel-info">
                                                   <div class="panel-heading">
                                                     Completion
@@ -220,23 +234,13 @@
                                                   </div>
                                                 </div>
                                               </div>
-                                              <div class="col-md-3 text-center">
+                                              <div class="col-md-6 text-center">
                                                 <div class="panel panel-info">
                                                   <div class="panel-heading">
                                                     Bid Amount
                                                   </div>
                                                   <div class="panel-body">
-                                                    <h1>@{{applicantProposal.amount}}</h1>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                              <div class="col-md-6 text-center">
-                                                <div class="panel panel-info">
-                                                  <div class="panel-heading">
-                                                    Proposal
-                                                  </div>
-                                                  <div class="panel-body">
-                                                    <p>@{{applicantProposal.message}}</p>
+                                                    <h1>$ @{{applicantProposal.amount}}</h1>
                                                   </div>
                                                 </div>
                                               </div>
@@ -259,13 +263,10 @@
 
 
 @section('scripts')
-<script src="{{asset('temp/vue.js')}}"></script>
-<script src="{{asset('temp/vue-resource.min.js')}}"></script>
 <script type="text/javascript">
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
 </script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
-<script src="{{asset('js/core/general/notification.js')}}"></script>
 <script src="{{asset('js/core/client/published/index.js')}}"></script>
 <script type="text/javascript">
 
@@ -276,6 +277,5 @@ varApplicants = varApplicants == "" ? null : JSON.parse(varApplicants.replace(/&
 published.applicants = varApplicants;
 
 Message.Seen({role : "client", projectId : pId});
-Notification.Seen({role : "client", projectId : pId});
 </script>
 @endsection

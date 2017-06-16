@@ -14,7 +14,7 @@ var Notification = new Vue({
    			//console.log(notifications.size());
 
             this.$http.post('/'+dataToPost.role+'/notification/read', dataToPost).then(response => {
-
+                window.location = dataToPost.location;
             }, response => {
 
             });

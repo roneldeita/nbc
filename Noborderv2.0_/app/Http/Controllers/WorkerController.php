@@ -191,7 +191,8 @@ class WorkerController extends Controller
     }
 
     public function ReadNotification (Request $request) {
-        Notifications::MarkAsRead($request->get('project_id'));
+        return Notifications::MarkAsRead($request->get('notification_id'));
+        //return $request;
     }
 
     // SHOULD UPDATE

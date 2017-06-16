@@ -12,6 +12,57 @@
             <h2 >PUBLISH YOUR PROJECT</h2>
             <br>
         </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Project Details
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name :</label><br>
+                            {{$project->name}}<br><br>
+                            <label>Cost :</label><br>
+                            ${{number_format($budget->budget, 2)}}<br><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Category :</label><br>
+                            {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
+                            <label>File Link :</label><br>
+                            {{$project->link}}<br><br>
+                        </div>
+                    </div>
+
+
+                    <label>Description :</label><br>
+                    <!-- {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br> -->
+                    {{$project->description}}<br><br>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Deliverables</label>
+                            <ul>
+                                @foreach(json_decode($project->deliverables) as $deliverable)
+                                <li>
+                                    {{$deliverable->name}}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Terms and Conditions</label>
+                            <ul>
+                                @foreach(json_decode($project->terms_condition) as $term)
+                                <li>
+                                    {{$term->name}}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -39,32 +90,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Project Details
-                </div>
-                <div class="panel-body">
-                    <div>
-                        <h3>Project Name : {{$project->name}}</h3>
-                        <p>
-                            <span style="font-size : 24px">Project Details : </span>
-                            {{$project->description}}
-                        </p>
-                        <h3>PROJECT COST : $ {{$budget->budget}}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
 
 
 @section ('scripts')
-    <script src="{{asset('temp/vue.js')}}"></script>
-    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-
     <script src="https://js.braintreegateway.com/js/braintree-2.32.0.min.js"></script>
 
     <script type="text/javascript">
@@ -116,6 +147,10 @@
                 }
             });
 
+        },
+        onError : function () {
+            $('#pay').removeAttr('disabled');
+            $('#loading').addClass('hidden');
         }
     });
 
