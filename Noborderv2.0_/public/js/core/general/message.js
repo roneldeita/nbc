@@ -36,7 +36,7 @@ var Message = new Vue({
 
             // AJAX
             this.$http.post("/"+data.role+"/message/read", data).then(response => {
-                console.log(response);
+                console.log(data);
             }, response => {
 
             });
