@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 var progress = new Vue({
     el : '#project',
     data : {
@@ -64,7 +63,7 @@ var progress = new Vue({
             });
         },
         CheckDeliverable : function (id) {
-            
+
             this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
 
                 location.reload();

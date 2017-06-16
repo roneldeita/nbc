@@ -1,4 +1,3 @@
-Vue.config.devtools = true;
 var progress = new Vue({
     el : '#project',
     data : {

@@ -76,51 +76,54 @@
                 <div class="tab-content">
                     <div id="overview" class="tab-pane fade in active" style="padding: 20px;">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Project Details
                                     </div>
                                     <div class="panel-body">
-                                        <label>Name :</label><br>
-                                        {{$project->name}}<br><br>
-                                        <label>Category :</label><br>
-                                        {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
-                                        <label>Description :</label><br>
-                                        {{$project->description}} <br><br>
-                                        <label>Cost :</label><br>
-                                        ${{$budget->budget}}<br>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name :</label><br>
+                                                {{$project->name}}<br><br>
+                                                <label>Cost :</label><br>
+                                                ${{number_format($budget->budget, 2)}}<br><br>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Category :</label><br>
+                                                {{HELPERIdentifyCategory($project->skill_category_id)}}<br><br>
+                                                <label>File Link :</label><br>
+                                                {{$project->link}}<br><br>
+                                            </div>
+                                        </div>
 
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Terms And Conditions
-                                    </div>
-                                    <div class="panel-body">
-                                        <ul class="termAndCondition" style="padding-left: 15px">
-                                            @foreach (json_decode($project->terms_condition) as $term)
-                                                <li>
-                                                    {{$term->name}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Deliverables
-                                    </div>
-                                    <div class="panel-body">
-                                        <ul class="deliverable" style="padding-left: 15px">
-                                            @foreach (json_decode($project->deliverables) as $deliverable)
-                                                <li>
-                                                    {{$deliverable->name}}
-                                                </li>
-                                            @endforeach
-                                        </ul>
+
+                                        <label>Description :</label><br>
+                                        <!-- {{str_limit($project->description, 100)}} <a href="">Read More</a><br><br> -->
+                                        {{$project->description}}<br><br>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Deliverables</label>
+                                                <ul>
+                                                    @foreach(json_decode($project->deliverables) as $deliverable)
+                                                    <li>
+                                                        {{$deliverable->name}}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Terms and Conditions</label>
+                                                <ul>
+                                                    @foreach(json_decode($project->terms_condition) as $term)
+                                                    <li>
+                                                        {{$term->name}}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
