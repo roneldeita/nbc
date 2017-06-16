@@ -161,9 +161,6 @@ transform-origin: 50% 50%;
 
 
 @section('scripts')
-<script type="text/javascript">
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-</script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
 <script src="{{asset('js/core/coordinator/prescreening/index.js')}}"></script>
 <script type="text/javascript">

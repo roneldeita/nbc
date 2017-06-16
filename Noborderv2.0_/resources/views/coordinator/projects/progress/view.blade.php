@@ -62,9 +62,6 @@
 
 @section('scripts')
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.3/summernote.js"></script>
-<script type="text/javascript">
-    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-</script>
 <script src="{{asset('js/core/general/message.js')}}"></script>
 <script type="text/javascript">
 $(function(){

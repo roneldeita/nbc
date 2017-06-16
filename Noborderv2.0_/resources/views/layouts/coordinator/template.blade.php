@@ -96,18 +96,18 @@
 
         @yield('content')
     </div>
+    <script src="{{asset('temp/vue.js')}}"></script>
+    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
+    <script type="text/javascript">
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    </script>
+
 
     <script src="{{asset('temp/jquery-2.2.4.min.js')}}"></script>
     <script src="{{asset('temp/bootstrap.min.js')}}"></script>
     <script src="{{asset('temp/toastr.min.js')}}"></script>
     <script src="{{asset('temp/socket.io.min.js')}}"></script>
     <script src="{{asset('js/footable.all.min.js')}}"></script>
-
-    <script src="{{asset('temp/vue.js')}}"></script>
-    <script src="{{asset('temp/vue-resource.min.js')}}"></script>
-    <script type="text/javascript">
-        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
-    </script>
 
     <script src="{{asset('js/core/general/helper.js')}}"></script>
     <script src="{{asset('js/core/general/cons.js')}}"></script>
