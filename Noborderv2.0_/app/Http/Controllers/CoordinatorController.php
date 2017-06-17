@@ -36,6 +36,11 @@ class CoordinatorController extends Controller
             return view('coordinator/projects/outdated')->with('project', $project);
 
         }
+        if (HCoordinator::identifyStatus($project->status) == "in_progress") {
+            $project = Project::where('id', $project->id)->with('contract', 'contract.deliverables', 'contract.deliverables.comments', 'contract.deliverables.content', 'contract.deliverables.comments.by')->first();
+            //return view('coordinator/projects/outdated')->with('project', $projectDetails);
+
+        }
         $applicants = DB::table('proposals')
                     ->join('projects', 'proposals.project_id', '=', 'projects.id')
                     ->join('users', 'proposals.worker_id', '=', 'users.id')

@@ -23,6 +23,16 @@ var progress = new Vue({
             }
 
             return Math.floor((100 / this.deliverables.length) * completed);
+        },
+        CanAccessFinalFile : function () {
+            var completed = 0;
+
+            for (var i = 0; i < this.deliverables.length; i++) {
+                if (this.deliverables[i].status) {
+                    completed++;
+                }
+            }
+            return completed == this.deliverables.length;
         }
     },
     methods : {
@@ -62,7 +72,7 @@ var progress = new Vue({
 
             });
         },
-        CheckDeliverable : function (id) {
+        CheckDeliverable : function () {
              $('#warning').modal('show');
             // if (this.deliverables.length == 1) {
             //     console.log("what the puck");
@@ -91,6 +101,25 @@ var progress = new Vue({
             //         });
             //     }
             // }
+            // this.$http.post('/client/progress/deliverable/completed', {deliverable_id : id}).then(response => {
+            //
+            //     location.reload();
+            //
+            // }, response => {
+            //
+            //
+            // });
+            //console.log(this.selectedDeliverable);
+        },
+        UpdateDeliverable : function () {
+            this.$http.post('/client/progress/deliverable/completed', {deliverable_id : this.selectedDeliverable.id}).then(response => {
+
+                location.reload();
+
+            }, response => {
+
+
+            });
         }
     }
 

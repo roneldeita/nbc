@@ -25,10 +25,11 @@
             	<div class="panel panel-default" >
             		<div class="panel-heading">
                         @{{selectedDeliverable.title}} <label class="label" v-bind:class="selectedDeliverable.status == 1 ? 'label-success' : 'label-default'" >@{{selectedDeliverable.status == 1 ? 'Completed' : 'Incomplete'}}</label>
-
-                        <button v-if="selectedDeliverable.status == 0"  type="button" @click="CheckDeliverable(selectedDeliverable.id)" class="pull-right btn btn-xs" v-bind:class="selectedDeliverable.status == 1 ? 'btn-success' : 'btn-danger' ">
-                            Change Status
-                        </button>
+                        <span v-if="selectedDeliverable.content != null">
+                            <button v-if="selectedDeliverable.status == 0"  type="button" @click="CheckDeliverable(selectedDeliverable.id)" class="pull-right btn btn-xs" v-bind:class="selectedDeliverable.status == 1 ? 'btn-success' : 'btn-danger' ">
+                                Change Status
+                            </button>
+                        </span>
             		</div>
             		<div class="panel-body">
                         <div class="" v-if="selectedDeliverable.content == null">
@@ -75,14 +76,17 @@
                             @{{DeliverablePercentage}}%
                         </div>
                     </div>
-                    <button type="button" class="btn btn-info" style="width:100%">
+                    <!-- <button type="button" class="btn btn-info" style="width:100%">
                         <span>Rate Worker</span>
-                    </button>
+                    </button> -->
         		</div>
         		<div class="panel-body">
         			<div class="btn-group-vertical" style="width:100%;">
                         <button v-cloak v-for="deliverable in deliverables" @click='SelectDeliverable(deliverable)'  type="button" class="btn" v-bind:class ="deliverable.status == 0 ? 'btn-default' : 'btn-success'" style="text-align:left" name="button">
                             <span v-cloak>@{{deliverable.title}}</span>
+                        </button>
+                        <button type="button" class="btn btn-default" style="text-align:left" v-bind:disabled="!CanAccessFinalFile">
+                            <span>Final Project Link</span>
                         </button>
         			</div>
         		</div>
@@ -190,7 +194,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" id="update_btn">Save changes</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -215,6 +219,10 @@ $("#rating_form").on("submit", function (e) {
 
     $("#rating_btn").attr("disabled", "disabled");
     $("#rating_loading").removeClass("hidden");
+});
+
+$("#update_btn").on("click", function () {
+    progress.UpdateDeliverable();
 });
 </script>
 @endsection

@@ -127,29 +127,27 @@ if (!urlForProgress()) {
         var project = details.project;
         var deliverable = details.deliverable;
         var comment = details.comment;
-        //console.log(details);
-        // else (project.client_id = aId) {
-        //     toastr.success('Worker Commented', ''+project.name);
-        //     addNotification(details);
-        // }
-        if (project.coordinator_id = aId) {
-            toastr.success('Worker Commented', ''+project.name);
-            addNotification(details);
+
+        if (project.coordinator_id == aId && project.id == pId) {
+
+            // toastr.success('Worker Commented', ''+project.name);
+            // addNotification(details);
+            console.log(progress.deliverables[details.index]);
+            progress.deliverables[details.index]['comments'].push(comment);
         }
+        //console.log(details);
     });
 
     socket.on('progress update', function (details) {
         var project = details.project;
         var deliverable = details.deliverable;
         var text = details.text;
-        //console.log(details);
-        // else (project.client_id = aId) {
-        //     toastr.success('Worker Update', ''+project.name);
-        //     addNotification(details);
-        // }
-        if (project.coordinator_id = aId) {
-            toastr.success('Worker Update', ''+project.name);
-            addNotification(details);
+
+        if (project.coordinator_id = aId && project.id == pId) {
+            // toastr.success('Worker Update', ''+project.name);
+            // addNotification(details);
+            progress.deliverables[details.index].content = {content : text};
         }
+        //console.log(details);
     });
 }
